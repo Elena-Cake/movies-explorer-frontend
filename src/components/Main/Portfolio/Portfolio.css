@@ -1,6 +1,7 @@
 .portfolio {
     max-width: 1280px;
     padding: 0 70px 105px;
+    margin: 0 auto;
 }
 
 .portfolio__link {

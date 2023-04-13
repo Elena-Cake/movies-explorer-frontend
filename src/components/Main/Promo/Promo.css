@@ -1,10 +1,11 @@
 .promo {
     background-color: var(--bg-intro);
-    
+
 }
 
 .promo__container {
     max-width: 1280px;
+    margin: 0 auto;
     min-height: 560px;
     padding: 30px 70px 60px;
     position: relative;
@@ -23,7 +24,7 @@
 
 .promo__image {
     width: 54%;
-    max-width: 722px ;
+    max-width: 722px;
     height: 244px;
     object-fit: cover;
     background-image: url(../../../images/intro.png);
