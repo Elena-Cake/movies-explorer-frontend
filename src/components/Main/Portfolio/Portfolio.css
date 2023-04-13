@@ -1,0 +1,15 @@
+.portfolio {
+    max-width: 1280px;
+    padding: 0 70px 105px;
+}
+
+.portfolio__link {
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--grey-text);
+    text-decoration: none;
+}
+
+.portfolio__container {
+    margin-bottom: 30px;
+}

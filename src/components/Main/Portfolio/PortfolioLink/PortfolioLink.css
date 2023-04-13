@@ -1,0 +1,30 @@
+.portfolio-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--grey-fon);
+}
+
+.portfolio-link:last-of-type {
+    border-bottom: 0;
+}
+
+.portfolio-link__text {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -0.04em;
+    color: var(--black);
+}
+
+.portfolio-link__arrow {
+    width: 29px;
+    height: 29px;
+    background-image: url(../../../../images/portfolio-arrow.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
