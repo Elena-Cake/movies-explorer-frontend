@@ -1,0 +1,18 @@
+.techs-element {
+    width: 90px;
+    height: 60px;
+    background-color: var(--grey-fon);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.techs-element__text {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    padding: 0;
+    margin: 0;
+}

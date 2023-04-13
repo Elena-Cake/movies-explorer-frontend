@@ -1,10 +1,22 @@
 
+import Title from '../Title/Title';
 import './Techs.css';
+import TechsElement from './TechsElement/TechsElement';
 
 function Techs() {
-  return (
-    <div className="main">
+  const techs = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB']
+  const techsElements = techs.map((name) => <TechsElement text={name} />)
 
+  return (
+    <div className="techs">
+      <div className='techs__container'>
+        <Title text={'Технологии'} />
+        <h1 className='techs__title'>7 технологий</h1>
+        <p className='techs__text'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
+        <div className='techs__elements'>
+          {techsElements}
+        </div>
+      </div>
     </div>
   );
 }

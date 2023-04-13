@@ -1,11 +1,18 @@
 .about {
-    max-width: 1140px;
-    padding: 110px 0;
+    max-width: 1280px;
+    padding: 60px 70px;
     margin: 0 auto;
 }
 
 .about__info {
     display: grid;
+    grid-template-columns: repeat(2, 50%);
+    gap: calc(40/1280 *100%);
+    margin-top: 20px;
+}
+
+.about__point {
+    max-width: 550px;
 }
 
 .about__point-title {
@@ -13,7 +20,7 @@
     font-size: 20px;
     line-height: 24px;
     letter-spacing: -0.04em;
-    margin: 0;
+    margin: 0 0 26px;
     padding: 0;
 }
 
@@ -25,12 +32,18 @@
     padding: 0;
 }
 
+.about__shema {
+    margin: 110px 0;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
 .about__shema_text_bold {
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    padding: 9px auto;
+    padding: 9px;
     margin: 0;
 }
 
@@ -40,7 +53,7 @@
     line-height: 17px;
     text-align: center;
     color: var(--grey-text);
-    padding: 14px auto;
+    padding: 14px 0 0 0;
     margin: 0;
 }
 

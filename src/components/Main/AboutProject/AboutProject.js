@@ -18,9 +18,9 @@ function AboutProject() {
       </div>
       <div className='about__shema'>
         <p className='about__shema_text_bold about__shema_back_green'>1 неделя</p>
-        <p className='about__shema_text_transparent about__shema_text_backend'>Back-end</p>
         <p className='about__shema_text_bold about__shema_back_grey'>4 недели</p>
-        <p className='about__shema_text_transparent about__shema_text_frontend'>Front-end</p>
+        <p className='about__shema_text_transparent'>Back-end</p>
+        <p className='about__shema_text_transparent'>Front-end</p>
       </div>
     </div>
   );
