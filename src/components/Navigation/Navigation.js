@@ -21,7 +21,7 @@ function Navigation({ activePath }) {
         </NavLink>
       </div>
 
-      <button className='header__button button'>Войти</button>
+      <button className='navigation__button button'>Аккаунт</button>
     </div>
   );
 }
