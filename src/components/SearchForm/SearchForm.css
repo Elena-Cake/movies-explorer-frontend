@@ -1,0 +1,46 @@
+.search {
+    padding: 70px 0 55px;
+}
+
+.search__row {
+    padding: 10px;
+    border: 1.5px solid rgb(170, 170, 170, .2);
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: auto 100px;
+}
+
+.search__input {
+    font-size: 18px;
+    line-height: 20px;
+    padding: 15px;
+    border: 0;
+}
+
+.search__button {
+    background: var(--green);
+    border-radius: 5px;
+    border: 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--white);
+}
+
+.search__filters {
+    display: flex;
+    margin-top: 26px;
+    align-items: center;
+    gap: 14px;
+}
+
+.filter__icon {
+    width: 36px;
+    height: 20px;
+    background-image: url(../../images/smalltumboff.png);
+    background-size: contain;
+}
+
+.filter__icon_active {
+    background-image: url(../../images/smalltumb.png);
+}
