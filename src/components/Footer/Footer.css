@@ -1,0 +1,49 @@
+.footer {
+    padding: 79px 0 20px 0;
+    background-color: var(--grey-bg-footer);
+}
+
+.footer__container {
+    max-width: 1280px;
+    padding: 0 70px;
+    display: grid;
+    grid-template-areas:
+        'text text text'
+        'year yp git';
+    grid-template-columns: auto 120px 45px;
+    gap: 20px;
+}
+
+.footer__text {
+    grid-area: text;
+    text-align: center;
+    border-bottom: 1px solid var(--grey-fon);
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--grey-text);
+    padding: 0 0 20px;
+}
+
+.footer__year {
+    grid-area: year;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.footer__yp {
+    grid-area: yp;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.footer__git {
+    grid-area: git;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0;
+    margin: 0;
+}
