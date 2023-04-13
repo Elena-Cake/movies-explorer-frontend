@@ -1,4 +1,5 @@
 
+import AboutMe from './AboutMe/AboutMe';
 import AboutProject from './AboutProject/AboutProject';
 import './Main.css';
 import Promo from './Promo/Promo';
@@ -10,6 +11,7 @@ function Main() {
       <Promo />
       <AboutProject />
       <Techs />
+      <AboutMe />
     </div>
   );
 }

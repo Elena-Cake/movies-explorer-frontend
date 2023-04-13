@@ -1,0 +1,62 @@
+.me {
+    padding: 60px 70px 100px;
+    max-width: 1280px;
+}
+
+.me__info {
+    margin-top: 16px;
+    display: grid;
+    justify-content: space-between;
+    grid-template-areas:
+        'name foto'
+        'about foto'
+        'text foto'
+        'git foto';
+    grid-template-columns: minmax(300px, 600px) 270px;
+    grid-template-rows: auto minmax(30px, auto) minmax(170px, auto) auto;
+    row-gap: 18px;
+}
+
+.me__name {
+    font-size: 50px;
+    line-height: 58px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    margin: 0;
+    padding: 0;
+    grid-area: name;
+}
+
+.me__about {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    grid-area: about;
+}
+
+.me__text {
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0;
+    padding: 0;
+    grid-area: text;
+}
+
+.me__git {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+    color: var(--black);
+    cursor: pointer;
+    grid-area: git;
+}
+
+.me__foto {
+    background-image: url(../../../images/me-foto.jpg);
+    width: 270px;
+    height: 327px;
+    grid-area: foto;
+}
