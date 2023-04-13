@@ -1,0 +1,46 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
+
+:root {
+  --black: #000;
+  --white: #FFF;
+  --grey-text: #A0A0A0;
+  --grey-border: #AAAAAA;
+  --grey-fon: #E8E8E8;
+  --grey-bg-tehno: #F5F5F5;
+  --grey-bg-footer: #F9F9F9;
+  --grey-bg-card: #FDFDFD;
+  --bg-intro: #5C5C5C;
+  --green: #2BE080;
+  --red: #EE3465;
+
+}
+
+.page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: var(--black);
+  background-color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.link {
+  cursor: pointer;
+  transition: opacity .5s ease;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
+
+.button {
+  cursor: pointer;
+  transition: opacity .5s ease;
+}
+
+.button:hover {
+  opacity: 0.8;
+}

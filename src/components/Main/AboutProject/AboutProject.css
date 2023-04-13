@@ -1,0 +1,53 @@
+.about {
+    max-width: 1140px;
+    padding: 110px 0;
+    margin: 0 auto;
+}
+
+.about__info {
+    display: grid;
+}
+
+.about__point-title {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    margin: 0;
+    padding: 0;
+}
+
+.about_description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.about__shema_text_bold {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    padding: 9px auto;
+    margin: 0;
+}
+
+.about__shema_text_transparent {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: var(--grey-text);
+    padding: 14px auto;
+    margin: 0;
+}
+
+.about__shema_back_green {
+    background-color: var(--green);
+}
+
+.about__shema_back_grey {
+    background-color: var(--grey-bg-tehno);
+}
