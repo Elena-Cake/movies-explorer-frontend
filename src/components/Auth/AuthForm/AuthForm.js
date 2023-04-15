@@ -1,7 +1,6 @@
 
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './AuthForm.css';
-import FormRow from './FormRow/FormRow';
 
 function AuthForm({ isLoginPage = true, rowsElements }) {
 
