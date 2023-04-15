@@ -21,7 +21,11 @@ function Navigation({ activePath }) {
         </NavLink>
       </div>
 
-      <button className='navigation__button button'>Аккаунт</button>
+      <NavLink
+        to="/profile"
+        className='navigation__button button'>
+        Аккаунт
+      </NavLink>
     </div>
   );
 }
