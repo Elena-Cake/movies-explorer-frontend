@@ -6,6 +6,7 @@ import Main from './Main/Main';
 import Movies from './Movies/Movies';
 import SavedMovies from './SavedMovies/SavedMovies';
 import Profile from './Profile/Profile';
+import NotFound from './NotFound/NotFound';
 
 function App() {
   return (
@@ -23,6 +24,15 @@ function App() {
         } />
         <Route path='/profile' element={
           <Profile />
+        } />
+        <Route path='/signin' element={
+          <Profile />
+        } />
+        <Route path='/signup' element={
+          <Profile />
+        } />
+        <Route path='*' element={
+          <NotFound />
         } />
       </Routes>
     </div>
