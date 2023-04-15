@@ -7,6 +7,8 @@ import Movies from './Movies/Movies';
 import SavedMovies from './SavedMovies/SavedMovies';
 import Profile from './Profile/Profile';
 import NotFound from './NotFound/NotFound';
+import Login from './Auth/Login/Login';
+import Register from './Auth/Register/Register';
 
 function App() {
   return (
@@ -26,10 +28,10 @@ function App() {
           <Profile />
         } />
         <Route path='/signin' element={
-          <Profile />
+          <Login />
         } />
         <Route path='/signup' element={
-          <Profile />
+          <Register />
         } />
         <Route path='*' element={
           <NotFound />

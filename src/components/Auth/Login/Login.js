@@ -1,11 +1,10 @@
 
+import AuthForm from '../AuthForm/AuthForm';
 import './Login.css';
 
 function Login() {
   return (
-    <div className="main">
-
-    </div>
+    <AuthForm />
   );
 }
 
