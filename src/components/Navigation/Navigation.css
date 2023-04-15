@@ -29,6 +29,8 @@
     border-radius: 20px;
     padding: 8px 20px;
     border: 0;
+    text-decoration: none;
+    color: var(--black);
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
