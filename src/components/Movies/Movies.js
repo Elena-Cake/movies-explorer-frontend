@@ -1,6 +1,7 @@
 
 import './Movies.css';
 import MoviesPage from '../MoviesPage/MoviesPage';
+import Footer from '../Footer/Footer';
 
 function Movies() {
   const movies = [
@@ -24,7 +25,11 @@ function Movies() {
 
 
   return (
-    <MoviesPage movies={movies} isButtonVisible={true} />
+    <div>
+      <MoviesPage movies={movies} isButtonVisible={true} />
+
+      <Footer />
+    </div>
   );
 }
 

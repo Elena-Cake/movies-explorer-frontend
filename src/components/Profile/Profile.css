@@ -1,0 +1,35 @@
+.profile {
+    display: block;
+    text-align: center;
+    padding: 30px 0 70px;
+}
+
+.profile__row {
+    margin: 0 auto;
+    max-width: 410px;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--grey-fon);
+}
+
+.profile__row:last-of-type {
+    border-bottom: 0;
+}
+
+.row__title {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    margin: 0;
+    padding: 44px 0 107px;
+}
+
+.row__input {
+    font-size: 11px;
+    line-height: 13px;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}

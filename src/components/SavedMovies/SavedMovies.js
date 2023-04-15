@@ -1,4 +1,5 @@
 
+import Footer from '../Footer/Footer';
 import MoviesPage from '../MoviesPage/MoviesPage';
 import './SavedMovies.css';
 
@@ -23,7 +24,10 @@ function SavedMovies() {
   ];
 
   return (
-    <MoviesPage movies={movies} isButtonVisible={false} />
+    <div>
+      <MoviesPage movies={movies} isButtonVisible={false} />
+      <Footer />
+    </div>
   );
 }
 
