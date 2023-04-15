@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import './Movie.css';
 
 const data = {
@@ -20,14 +21,20 @@ const data = {
 
 function Movie({ data }) {
 
+
   const duration = `${Math.floor(data.duration / 60) > 0 ? `${Math.floor(data.duration / 60)}ч ` : ''}${data.duration % 60}м`
+
+  const [isFlagActive, setIsFlagActive] = useState(false)
+  const toggleFlag = () => {
+    setIsFlagActive(!isFlagActive)
+  }
 
   return (
     <div className="movie">
       <div className='movie__info'>
         <h3 className='movie__name'>{data.nameRU}</h3>
         <p className='movie__duration'>{duration}</p>
-        <button className='movie__flag movie__flag_active button'></button>
+        <button className={`movie__flag button ${isFlagActive && 'movie__flag_active'}`} onClick={toggleFlag}></button>
       </div>
       <div className='movie__foto-container'>
         <img className='movie__foto' src={data.image.previewUrl} alt='скриншот фильма' />
