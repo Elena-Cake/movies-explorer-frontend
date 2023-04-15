@@ -3,9 +3,7 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import './AuthForm.css';
 import FormRow from './FormRow/FormRow';
 
-function AuthForm({ isLoginPage = true }) {
-
-  const RowsElements = <FormRow />
+function AuthForm({ isLoginPage = true, rowsElements }) {
 
   return (
     <div className="auth">
@@ -16,7 +14,7 @@ function AuthForm({ isLoginPage = true }) {
         <h1 className='auth__title'>Добро пожаловать!</h1>
       }
       <div className='auth__rows'>
-        {RowsElements}
+        {rowsElements}
       </div>
       <button className='auth__button button'>Зарегистрироваться</button>
       {isLoginPage ?
