@@ -5,6 +5,7 @@
 }
 
 .movies__container {
+    padding: 70px 0 30px;
     display: grid;
     grid-template-columns: repeat(3, 364px);
     row-gap: 30px;

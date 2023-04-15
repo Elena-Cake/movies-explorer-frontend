@@ -29,7 +29,9 @@ function Movie({ data }) {
         <p className='movie__duration'>{duration}</p>
         <button className='movie__flag movie__flag_active button'></button>
       </div>
-      <img className='movie__foto' src={data.image.previewUrl} alt='скриншот фильма' />
+      <div className='movie__foto-container'>
+        <img className='movie__foto' src={data.image.previewUrl} alt='скриншот фильма' />
+      </div>
     </div>
   );
 }

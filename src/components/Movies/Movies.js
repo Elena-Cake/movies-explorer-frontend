@@ -26,7 +26,7 @@ function Movies() {
   // const movieElements = movies.map((movie) => <Movie data={movie} />)
 
   const movieElements = [];
-  for (let i = 0; i <= 12; i++) {
+  for (let i = 0; i < 12; i++) {
     movieElements.push(movies.map((movie) => <Movie data={movie} />))
   }
 
