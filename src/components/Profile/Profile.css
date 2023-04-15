@@ -4,6 +4,20 @@
     padding: 30px 0 70px;
 }
 
+.profile__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0;
+    padding: 0;
+
+    padding: 44px 0 57px;
+}
+
+.profile__rows {
+    padding: 50px 0 200px;
+}
+
 .profile__row {
     margin: 0 auto;
     max-width: 410px;
@@ -11,6 +25,7 @@
     justify-content: space-between;
     padding: 16px 0;
     border-bottom: 1px solid var(--grey-fon);
+    height: 13px;
 }
 
 .profile__row:last-of-type {
@@ -22,7 +37,7 @@
     font-size: 11px;
     line-height: 13px;
     margin: 0;
-    padding: 44px 0 107px;
+    padding: 0;
 }
 
 .row__input {
@@ -31,5 +46,29 @@
     text-align: right;
     margin: 0;
     padding: 0;
+    border: 0;
+}
+
+.profile__settings {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0 70px;
+}
+
+.profile__edit-button {
+    font-size: 13px;
+    line-height: 16px;
+    background-color: inherit;
+    border: 0;
+    margin-bottom: 16px;
+}
+
+.profile__exit-button {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--red);
+
+    background-color: inherit;
     border: 0;
 }

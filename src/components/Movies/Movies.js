@@ -4,6 +4,8 @@ import MoviesPage from '../MoviesPage/MoviesPage';
 import Footer from '../Footer/Footer';
 
 function Movies() {
+
+  // Тестовые данные для заполнения
   const movies = [
     {
       country: "США",

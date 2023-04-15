@@ -4,6 +4,8 @@ import MoviesPage from '../MoviesPage/MoviesPage';
 import './SavedMovies.css';
 
 function SavedMovies() {
+
+  // Тестовые данные для заполнения
   const movies = [
     {
       country: "США",
