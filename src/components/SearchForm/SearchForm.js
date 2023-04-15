@@ -12,6 +12,7 @@ function SearchForm() {
         <div className='filter__icon filter__icon_active'></div>
         <p className='filter__text'>Короткометражки</p>
       </div>
+      <div className='search__bottom'></div>
     </div>
   );
 }

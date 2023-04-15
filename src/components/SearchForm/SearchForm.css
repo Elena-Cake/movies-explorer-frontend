@@ -1,5 +1,10 @@
 .search {
-    padding: 70px 0 55px;
+    padding: 70px 0 11px;
+}
+
+.search__bottom {
+    height: 1px;
+    background-color: rgba(170, 170, 170, .2);
 }
 
 .search__row {
@@ -29,9 +34,16 @@
 
 .search__filters {
     display: flex;
-    margin-top: 26px;
+    margin: 26px 0 44px;
     align-items: center;
     gap: 14px;
+}
+
+.filter__text {
+    font-size: 13px;
+    line-height: 18px;
+    margin: 0;
+    padding: 0;
 }
 
 .filter__icon {
