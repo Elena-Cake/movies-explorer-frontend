@@ -1,5 +1,5 @@
 .about {
-    max-width: 1280px;
+    max-width: 1140px;
     padding: 60px 70px;
     margin: 0 auto;
 }
@@ -7,7 +7,7 @@
 .about__info {
     display: grid;
     grid-template-columns: repeat(2, 50%);
-    gap: calc(40/1280 *100%);
+    gap: calc(40/1140 *100%);
     margin-top: 20px;
 }
 
