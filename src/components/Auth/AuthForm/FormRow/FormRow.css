@@ -1,0 +1,39 @@
+.row {
+    display: block;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.row__title {
+    font-size: 10px;
+    line-height: 12px;
+    color: var(--grey-text);
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.row__input {
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    background-color: var(--grey-bg-footer);
+    border-radius: 8px;
+    border: 0;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: start;
+}
+
+.row__input_error {
+    color: var(--red);
+}
+
+.row__error {
+    position: absolute;
+    bottom: 0;
+    font-size: 10px;
+    line-height: 12px;
+    color: var(--red);
+}

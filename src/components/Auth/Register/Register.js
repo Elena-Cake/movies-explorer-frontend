@@ -1,11 +1,10 @@
 
+import AuthForm from '../AuthForm/AuthForm';
 import './Register.css';
 
 function Register() {
   return (
-    <div className="main">
-
-    </div>
+    <AuthForm isLoginPage={false} />
   );
 }
 
