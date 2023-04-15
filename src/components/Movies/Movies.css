@@ -11,3 +11,20 @@
     row-gap: 30px;
     column-gap: 24px;
 }
+
+.movies__more {
+    padding: 50px 0 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.movies__more-button {
+    width: 320px;
+    min-height: 36px;
+    background-color: var(--grey-bg-footer);
+    border-radius: 6px;
+    border: 0;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+}

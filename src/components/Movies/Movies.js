@@ -37,6 +37,9 @@ function Movies() {
       <div className='movies__container'>
         {movieElements}
       </div>
+      <div className='movies__more'>
+        <button className='movies__more-button button'>Ещё</button>
+      </div>
     </div>
   );
 }
