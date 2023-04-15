@@ -1,7 +1,6 @@
 
 import './Movies.css';
-import SearchForm from '../SearchForm/SearchForm';
-import Movie from '../Movie/Movie';
+import MoviesPage from '../MoviesPage/MoviesPage';
 
 function Movies() {
   const movies = [
@@ -23,24 +22,9 @@ function Movies() {
     }
   ];
 
-  // const movieElements = movies.map((movie) => <Movie data={movie} />)
-
-  const movieElements = [];
-  for (let i = 0; i < 12; i++) {
-    movieElements.push(movies.map((movie) => <Movie data={movie} />))
-  }
-
 
   return (
-    <div className="movies">
-      <SearchForm />
-      <div className='movies__container'>
-        {movieElements}
-      </div>
-      <div className='movies__more'>
-        <button className='movies__more-button button'>Ещё</button>
-      </div>
-    </div>
+    <MoviesPage movies={movies} isButtonVisible={true} />
   );
 }
 
