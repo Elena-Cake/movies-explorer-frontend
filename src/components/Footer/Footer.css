@@ -1,18 +1,19 @@
 .footer {
-    padding: 79px 0 20px 0;
+    padding: 65px 0 20px 0;
     background-color: var(--grey-bg-footer);
 }
 
 .footer__container {
     margin: 0 auto;
     max-width: 1140px;
-    padding: 0 70px;
+    padding: 0 50px 0 70px;
     display: grid;
     grid-template-areas:
         'text text text'
         'year yp git';
     grid-template-columns: auto 120px 45px;
-    gap: 20px;
+    row-gap: 5px;
+    column-gap: 20px;
 }
 
 .footer__text {

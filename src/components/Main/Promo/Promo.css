@@ -1,13 +1,13 @@
 .promo {
     background-color: var(--bg-intro);
-
+    padding-top: 20px;
 }
 
 .promo__container {
     max-width: 1140px;
     margin: 0 auto;
-    min-height: 560px;
-    padding: 30px 70px 60px;
+    min-height: 450px;
+    padding: 30px 50px 60px 70px;
     position: relative;
 }
 

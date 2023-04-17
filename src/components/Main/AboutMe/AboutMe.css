@@ -1,5 +1,5 @@
 .me {
-    padding: 60px 70px 100px;
+    padding: 60px 50px 100px 70px;
     max-width: 1140px;
     margin: 0 auto;
 }
@@ -61,4 +61,5 @@
     width: 270px;
     height: 327px;
     grid-area: foto;
+    border-radius: 10px;
 }

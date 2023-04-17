@@ -1,6 +1,6 @@
 .about {
     max-width: 1140px;
-    padding: 60px 70px;
+    padding: 60px 50px 60px 70px;
     margin: 0 auto;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .about__shema {
-    margin: 110px 0;
+    margin: 110px 0 50px;
     display: grid;
     grid-template-columns: 20% 80%;
 }
