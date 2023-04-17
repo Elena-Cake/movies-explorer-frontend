@@ -1,6 +1,5 @@
 .me {
-    padding: 60px 50px 100px 70px;
-    max-width: 1140px;
+    padding: 60px 0 100px 0;
     margin: 0 auto;
 }
 
@@ -16,6 +15,7 @@
     grid-template-columns: minmax(300px, 600px) 270px;
     grid-template-rows: auto minmax(30px, auto) minmax(170px, auto) auto;
     row-gap: 18px;
+    column-gap: 10px;
 }
 
 .me__name {
@@ -62,4 +62,31 @@
     height: 327px;
     grid-area: foto;
     border-radius: 10px;
+    margin: 0 0 0 auto;
+}
+
+@media screen and (max-width: 1279px) {
+    .me {
+        padding-bottom: 85px;
+    }
+
+    .me__name {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .me__about {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .me__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .me__foto {
+        width: 255px;
+        height: 307px;
+    }
 }

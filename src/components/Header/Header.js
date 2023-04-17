@@ -9,7 +9,7 @@ function Header() {
       <Routes>
         <Route path='/' element={
           <div className='header__main'>
-            <div className='header__container'>
+            <div className='header__container container'>
               <NavLink to="/" className='header__logo' />
               <NavLink to="/signup" className='header__link_fon_black link'>Регистрация</NavLink>
               <NavLink to="/signin" className='header__button-signin button'>Войти</NavLink>

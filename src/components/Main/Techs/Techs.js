@@ -9,7 +9,7 @@ function Techs() {
 
   return (
     <div className="techs">
-      <div className='techs__container'>
+      <div className='techs__container container'>
         <Title text={'Технологии'} />
         <h2 className='techs__title'>7 технологий</h2>
         <p className='techs__text'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>

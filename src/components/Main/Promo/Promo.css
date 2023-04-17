@@ -7,7 +7,7 @@
     max-width: 1140px;
     margin: 0 auto;
     min-height: 450px;
-    padding: 30px 50px 60px 70px;
+    padding: 30px calc(50/1280 *100%) 60px calc(70/1280 *100%);
     position: relative;
 }
 
@@ -32,4 +32,21 @@
     position: absolute;
     bottom: 60px;
     right: 70px;
+}
+
+@media screen and (max-width: 1279px) {
+    .promo__container {
+        min-height: 735px;
+    }
+
+    .promo__title {
+        width: 100%;
+        text-align: center;
+        margin-top: 250px;
+    }
+
+    .promo__image {
+        width: 95%;
+        right: 20px;
+    }
 }

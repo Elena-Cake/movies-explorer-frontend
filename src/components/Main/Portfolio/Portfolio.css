@@ -1,6 +1,5 @@
 .portfolio {
-    max-width: 1140px;
-    padding: 0 50px 105px 70px;
+    padding: 0 0 105px 0;
     margin: 0 auto;
 }
 
@@ -11,6 +10,12 @@
     text-decoration: none;
 }
 
-.portfolio__container {
+.portfolio__container-link {
     margin-bottom: 30px;
+}
+
+@media screen and (max-width: 1279px) {
+    .portfolio {
+        padding-bottom: 90px;
+    }
 }

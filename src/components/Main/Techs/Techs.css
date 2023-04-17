@@ -6,7 +6,6 @@
 .techs__container {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 0 50px 0 70px;
 }
 
 .techs__title {
@@ -34,4 +33,17 @@
     flex-wrap: wrap;
     gap: 10px;
     margin: 0 auto;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1279px) {
+    .techs {
+        padding: 60px 0 90px;
+    }
+
+    .techs__text {
+        font-size: 12px;
+        line-height: 18px;
+        margin: 20px auto 80px;
+    }
 }

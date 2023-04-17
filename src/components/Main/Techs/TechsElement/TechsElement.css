@@ -16,3 +16,14 @@
     padding: 0;
     margin: 0;
 }
+
+@media screen and (max-width: 1279px) {
+    .techs-element {
+        width: 84px;
+    }
+
+    .techs-element__text {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

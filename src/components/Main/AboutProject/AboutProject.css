@@ -1,6 +1,5 @@
 .about {
-    max-width: 1140px;
-    padding: 60px 50px 60px 70px;
+    padding: 60px 0 60px 0;
     margin: 0 auto;
 }
 
@@ -63,4 +62,14 @@
 
 .about__shema_back_grey {
     background-color: var(--grey-bg-tehno);
+}
+
+@media screen and (max-width: 1279px) {
+    .about {
+        padding-bottom: 40px;
+    }
+
+    .about__shema {
+        margin: 88px 0 50px;
+    }
 }
