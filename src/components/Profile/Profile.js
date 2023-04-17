@@ -11,22 +11,24 @@ function Profile() {
 
   return (
     <div className="profile">
-      <h1 className='profile__title'>Привет, {data.name}!</h1>
-      <div className='profile__rows'>
-        <div className='profile__row'>
-          <p className='row__title'>Имя</p>
-          <input className='row__data' placeholder={data.name} />
+      <div className='profile__window window'>
+        <h1 className='profile__title'>Привет, {data.name}!</h1>
+        <div className='profile__rows'>
+          <div className='profile__row'>
+            <p className='row__title'>Имя</p>
+            <input className='row__data' value={data.name} placeholder='Введите имя' readonly />
+          </div>
+          <div className='profile__row'>
+            <p className='row__title'>E-mail</p>
+            <input className='row__data' value={data.email} placeholder='Введите почту' readonly />
+          </div>
         </div>
-        <div className='profile__row'>
-          <p className='row__title'>E-mail</p>
-          <input className='row__data' placeholder={data.email} />
+        <div className='profile__settings'>
+          <button className='profile__edit-button button'>Редактировать</button>
+          <button className='profile__exit-button button'>Выйти из аккаунта</button>
         </div>
       </div>
-      <div className='profile__settings'>
-        <button className='profile__edit-button button'>Редактировать</button>
-        <button className='profile__exit-button button'>Выйти из аккаунта</button>
-      </div>
-    </div>
+    </div >
   );
 }
 

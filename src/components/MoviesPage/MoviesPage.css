@@ -1,13 +1,13 @@
 .movies {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 0 50px 0 70px;
+    padding: 0 calc(50/1280 *100%) 0 calc(70/1280 *100%);
 }
 
 .movies__container {
     padding: 70px 0 30px;
     display: grid;
-    grid-template-columns: repeat(3, 364px);
+    grid-template-columns: repeat(3, 1fr);
     row-gap: 30px;
     column-gap: 24px;
 }
@@ -27,4 +27,17 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
+}
+
+@media screen and (max-width: 1279px) {
+    .movies {
+        padding: 0 calc(15/768 *100%) 0 calc(30/768 *100%);
+    }
+
+    .movies__container {
+        grid-template-columns: repeat(2, 1fr);
+
+        row-gap: 36px;
+        column-gap: 30px;
+    }
 }

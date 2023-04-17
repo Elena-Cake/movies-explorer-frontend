@@ -6,34 +6,35 @@ function AuthForm({ isLoginPage = true, rowsElements }) {
 
   return (
     <div className="auth">
-      <NavLink className='auth__link-logo link' to='/'>
-        <div className='auth__logo' ></div>
-      </NavLink>
-      {isLoginPage ?
-        <h1 className='auth__title'>Рады видеть!</h1>
-        :
-        <h1 className='auth__title'>Добро пожаловать!</h1>
-      }
-      <div className='auth__rows'>
-        {rowsElements}
+      <div className='auth__window window'>
+        <NavLink className='auth__link-logo link' to='/'>
+          <div className='auth__logo' ></div>
+        </NavLink>
+        {isLoginPage ?
+          <h1 className='auth__title'>Рады видеть!</h1>
+          :
+          <h1 className='auth__title'>Добро пожаловать!</h1>
+        }
+        <div className='auth__rows'>
+          {rowsElements}
+        </div>
+        <button className='auth__button button'>Зарегистрироваться</button>
+        {isLoginPage ?
+          <p className='auth__text'>
+            Ещё не зарегистрированы?
+            <NavLink className='auth__link link' to='/signup'>
+              Регистрация
+            </NavLink>
+          </p>
+          :
+          <p className='auth__text'>
+            Уже зарегистрированы?
+            <NavLink className='auth__link link' to='/signin'>
+              Войти
+            </NavLink>
+          </p>
+        }
       </div>
-      <button className='auth__button button'>Зарегистрироваться</button>
-      {isLoginPage ?
-        <p className='auth__text'>
-          Ещё не зарегистрированы?
-          <NavLink className='auth__link link' to='/signup'>
-            Регистрация
-          </NavLink>
-        </p>
-        :
-        <p className='auth__text'>
-          Уже зарегистрированы?
-          <NavLink className='auth__link link' to='/signin'>
-            Войти
-          </NavLink>
-        </p>
-      }
-
     </div >
   );
 }

@@ -35,3 +35,9 @@
     font-size: 14px;
     line-height: 16px;
 }
+
+@media screen and (max-width: 1279px) {
+    .navigation {
+        padding: 18px 30px 18px 30px;
+    }
+}

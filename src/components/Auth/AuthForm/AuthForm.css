@@ -1,8 +1,13 @@
 .auth {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+.auth_window {
     width: 396px;
     max-width: 80%;
     margin: 0 auto;
-    padding: 70px 0;
 }
 
 .auth__link-logo {

@@ -29,7 +29,6 @@ function Movies() {
   return (
     <div>
       <MoviesPage movies={movies} isButtonVisible={true} />
-
       <Footer />
     </div>
   );
