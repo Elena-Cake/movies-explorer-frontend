@@ -15,11 +15,11 @@ function Profile() {
       <div className='profile__rows'>
         <div className='profile__row'>
           <p className='row__title'>Имя</p>
-          <input className='row__input' placeholder={data.name} />
+          <input className='row__data' placeholder={data.name} />
         </div>
         <div className='profile__row'>
           <p className='row__title'>E-mail</p>
-          <input className='row__input' placeholder={data.email} />
+          <input className='row__data' placeholder={data.email} />
         </div>
       </div>
       <div className='profile__settings'>

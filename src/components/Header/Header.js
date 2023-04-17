@@ -11,8 +11,8 @@ function Header() {
           <div className='header__main'>
             <div className='header__container'>
               <NavLink to="/" className='header__logo' />
-              <NavLink to="/" className='header__link_fon_black link'>Регистрация</NavLink>
-              <button className='header__button button'>Войти</button>
+              <NavLink to="/signup" className='header__link_fon_black link'>Регистрация</NavLink>
+              <NavLink to="/signin" className='header__button-signin button'>Войти</NavLink>
             </div>
           </div>} />
         <Route path='/movies' element={

@@ -15,7 +15,7 @@
 }
 
 .profile__rows {
-    padding: 50px 0 200px;
+    padding: 50px 0 180px;
 }
 
 .profile__row {
@@ -23,7 +23,7 @@
     max-width: 410px;
     display: flex;
     justify-content: space-between;
-    padding: 16px 0;
+    padding: 17px 0;
     border-bottom: 1px solid var(--grey-fon);
     height: 13px;
 }
@@ -40,7 +40,7 @@
     padding: 0;
 }
 
-.row__input {
+.row__data {
     font-size: 11px;
     line-height: 13px;
     text-align: right;
