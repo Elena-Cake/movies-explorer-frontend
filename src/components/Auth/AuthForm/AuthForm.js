@@ -6,7 +6,9 @@ function AuthForm({ isLoginPage = true, rowsElements }) {
 
   return (
     <div className="auth">
-      <div className='auth__logo' ></div>
+      <NavLink className='auth__link-logo link' to='/'>
+        <div className='auth__logo' ></div>
+      </NavLink>
       {isLoginPage ?
         <h1 className='auth__title'>Рады видеть!</h1>
         :
