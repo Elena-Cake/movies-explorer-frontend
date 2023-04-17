@@ -1,7 +1,7 @@
 .movies {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 0 70px;
+    padding: 0 50px 0 70px;
 }
 
 .movies__container {
