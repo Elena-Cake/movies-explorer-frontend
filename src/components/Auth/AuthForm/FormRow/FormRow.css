@@ -39,8 +39,3 @@
     line-height: 12px;
     color: var(--red);
 }
-
-@media screen and (max-width: 767px) {
-    .auth__window {}
-
-}

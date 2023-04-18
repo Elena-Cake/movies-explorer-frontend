@@ -56,3 +56,25 @@
 .filter__icon_active {
     background-image: url(../../images/smalltumb.png);
 }
+
+@media screen and (max-width: 767px) {
+    .search {
+        padding: 50px 0 11px;
+    }
+
+    .search__row {
+        padding: 6px;
+        grid-template-columns: auto 80px;
+    }
+
+    .search__input {
+        width: 100%;
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .filter__text {
+        font-size: 11px;
+        line-height: 18px;
+    }
+}
