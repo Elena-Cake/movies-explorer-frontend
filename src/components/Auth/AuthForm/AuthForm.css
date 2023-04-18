@@ -35,7 +35,7 @@
 }
 
 .auth__button {
-    width: 396px;
+    width: 100%;
     min-height: 45px;
     background-color: var(--green);
     border-radius: 3px;
@@ -64,4 +64,18 @@
     color: var(--green);
     text-decoration: none;
     margin-left: 6px;
+}
+
+@media screen and (max-width: 767px) {
+    .auth__window {
+        max-width: 350px;
+        width: calc(260/320 *100%);
+        justify-content: center;
+        text-align: center;
+    }
+
+    .auth__logo {
+        margin: 0 auto;
+    }
+
 }
