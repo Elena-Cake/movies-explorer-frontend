@@ -60,6 +60,7 @@
 
     .promo__container {
         min-height: 520px;
+        padding: 30px calc(10/320 *100%) 60px;
     }
 
     .promo__image {

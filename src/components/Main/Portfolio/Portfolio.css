@@ -21,6 +21,10 @@
 }
 
 @media screen and (max-width: 1279px) {
+    .portfolio {
+        padding-bottom: 65px;
+    }
+
     .portfolio__container-link {
         margin-bottom: 19px;
     }
