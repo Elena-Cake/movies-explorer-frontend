@@ -126,6 +126,7 @@
 
     .me__foto {
         width: 292px;
+        margin: 0 auto;
         height: 357px;
     }
 }
