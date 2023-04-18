@@ -46,4 +46,32 @@
         line-height: 18px;
         margin: 20px auto 80px;
     }
+
+}
+
+@media screen and (max-width: 767px) {
+    .techs {
+        padding: 20px 0 90px;
+    }
+
+    .techs__title {
+        font-size: 30px;
+        line-height: 36px;
+        margin-top: 60px;
+    }
+
+    .techs__text {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 25px auto 50px;
+    }
+
+    .techs__elements {
+        max-width: 178px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin: 0 auto;
+        justify-content: start;
+        row-gap: 7px;
+    }
 }
