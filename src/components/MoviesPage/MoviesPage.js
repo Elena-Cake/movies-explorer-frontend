@@ -2,7 +2,6 @@
 import './MoviesPage.css';
 import SearchForm from '../SearchForm/SearchForm';
 import Movie from '../Movie/Movie';
-import { useEffect, useState } from 'react';
 
 function MoviesPage({ movies, isButtonVisible }) {
 

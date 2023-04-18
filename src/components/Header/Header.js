@@ -3,7 +3,7 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 
-function Header({ toggleMenu }) {
+function Header({ openMenu }) {
   return (
     <div className="header">
       <Routes>
@@ -16,11 +16,11 @@ function Header({ toggleMenu }) {
             </div>
           </div>} />
         <Route path='/movies' element={
-          <Navigation activePath='movies' toggleMenu={toggleMenu} />} />
+          <Navigation activePath='movies' openMenu={openMenu} />} />
         <Route path='/saved-movies' element={
-          <Navigation activePath='saved-movies' />} />
+          <Navigation activePath='saved-movies' openMenu={openMenu} />} />
         <Route path='/profile' element={
-          <Navigation activePath='profile' toggleMenu={toggleMenu} />} />
+          <Navigation activePath='profile' openMenu={openMenu} />} />
       </Routes>
     </div>
   );

@@ -15,13 +15,17 @@ import { useState } from 'react';
 function App() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
+  const openMenu = () => {
+    setIsMenuOpen(true)
+  }
+
+  const closeMenu = () => {
+    setIsMenuOpen(false)
   }
 
   return (
     <div className="page">
-      <Header toggleMenu={toggleMenu} />
+      <Header openMenu={openMenu} />
       <Routes>
         <Route path='/' element={
           <Main />
@@ -46,7 +50,7 @@ function App() {
         } />
       </Routes>
 
-      <NavigationPopup isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <NavigationPopup isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
 
     </div>
   );

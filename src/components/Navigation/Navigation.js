@@ -1,9 +1,8 @@
 
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
-import { useState } from 'react';
 
-function Navigation({ activePath, toggleMenu }) {
+function Navigation({ activePath, openMenu }) {
 
   return (
     <div className='navigation'>
@@ -29,7 +28,7 @@ function Navigation({ activePath, toggleMenu }) {
         className='navigation__button button'>
         Аккаунт
       </NavLink>
-      <div className='navigation__burger button' onClick={toggleMenu}>
+      <div className='navigation__burger button' onClick={openMenu}>
         <button className='navigation__button-menu button'>
           <div className='navigation__line'></div>
           <div className='navigation__line'></div>
