@@ -28,3 +28,19 @@
     background-size: contain;
     background-position: center;
 }
+
+@media screen and (max-width: 1279px) {
+    .portfolio-link {
+        padding: 20px 0;
+    }
+
+    .portfolio-link__text {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .portfolio-link__arrow {
+        width: 13px;
+        height: 13px;
+    }
+}
