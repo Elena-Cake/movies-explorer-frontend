@@ -77,4 +77,10 @@
         font-size: 11px;
         line-height: 18px;
     }
+
+    .search__filters {
+        margin-bottom: 64px;
+        align-items: center;
+        gap: 14px;
+    }
 }
