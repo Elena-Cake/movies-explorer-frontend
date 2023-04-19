@@ -32,6 +32,9 @@
 
 .auth__rows {
     display: block;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .auth__actions {

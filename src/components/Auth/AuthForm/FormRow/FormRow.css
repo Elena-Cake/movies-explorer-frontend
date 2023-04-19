@@ -38,4 +38,9 @@
     font-size: 10px;
     line-height: 12px;
     color: var(--red);
+    display: none;
+}
+
+.row__error_active {
+    display: block;
 }

@@ -6,9 +6,36 @@ export const textsRegister = {
 }
 
 export const dataRowsRegister = [
-    { title: 'Имя', error: '', name: 'name' },
-    { title: 'E-mail', error: '', name: 'email' },
-    { title: 'Пароль', error: 'Что-то пошло не так...', name: 'pass', value: '1111' }
+    {
+        title: 'Имя',
+        name: 'name',
+        error: '',
+        validation:
+        {
+            required: true
+        }
+    },
+    {
+        title: 'E-mail',
+        name: 'email',
+        error: '',
+        validation:
+        {
+            required: true,
+            type: "email"
+        }
+    },
+    {
+        title: 'Пароль',
+        name: 'pass',
+        error: 'Что-то пошло не так...',
+        value: '1111',
+        validation:
+        {
+            required: true,
+            type: "password"
+        }
+    }
 ];
 
 export const textsLogin = {
@@ -19,8 +46,27 @@ export const textsLogin = {
 }
 
 export const dataRowsLogin = [
-    { title: 'E-mail', error: '', name: 'email' },
-    { title: 'Пароль', error: '', name: 'pass' }
+    {
+        title: 'E-mail',
+        name: 'email',
+        error: '',
+        validation:
+        {
+            required: true,
+            type: "email"
+        }
+    },
+    {
+        title: 'Пароль',
+        name: 'pass',
+        error: 'Что-то пошло не так...',
+        value: '1111',
+        validation:
+        {
+            required: true,
+            type: "password"
+        }
+    }
 ];
 
 export const dataProfile = {
