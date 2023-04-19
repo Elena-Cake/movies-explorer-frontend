@@ -8,7 +8,7 @@ function SavedMovies() {
 
   return (
     <div>
-      <MoviesPage movies={saveMovies} isButtonVisible={false} />
+      <MoviesPage movies={saveMovies} isButtonVisible={false} isSavedPage={true} />
       <Footer />
     </div>
   );

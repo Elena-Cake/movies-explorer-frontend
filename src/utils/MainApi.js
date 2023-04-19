@@ -69,7 +69,6 @@ export const editUserInfo = (dataUser) => {
         })
 }
 
-
 // поставить лайк
 export const sendLike = (idCard) => {
     return fetch(`${this._startRequest}cards/${idCard}/likes`, {

@@ -50,6 +50,15 @@
     background-image: url(../../images/movie-flag-activ.png);
 }
 
+.movie__delete-button {
+    grid-area: flag;
+    background-color: var(--grey-bg-footer);
+    border-radius: 50%;
+    border: 0;
+    width: 30px;
+    height: 30px;
+}
+
 .movie__foto-container {
     width: 100%;
     height: 203px;
