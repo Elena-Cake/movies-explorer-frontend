@@ -9,6 +9,11 @@ export const dataRowsLogin = [
     { title: 'Пароль', error: '', name: 'pass' }
 ];
 
+export const dataProfile = {
+    name: 'ревьюер',
+    email: 'pochta@yandex.ru'
+}
+
 export const techs = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB'];
 
 export const portfolioLinks = [

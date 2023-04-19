@@ -1,4 +1,5 @@
 .movie {
+    max-width: 100%;
     width: 364px;
     margin: 0 auto;
     background: var(--grey-bg-card);
@@ -52,12 +53,12 @@
 .movie__foto-container {
     width: 100%;
     height: 203px;
-    object-fit: cover;
 }
 
 .movie__foto {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 @media screen and (max-width: 1279px) {

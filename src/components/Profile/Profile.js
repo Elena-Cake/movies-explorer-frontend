@@ -2,8 +2,7 @@
 import { useState } from 'react';
 import './Profile.css';
 import { useNavigate } from 'react-router-dom';
-
-
+import { dataProfile } from '../../constans/testConstans';
 
 function Profile() {
   const navigate = useNavigate();
@@ -13,12 +12,6 @@ function Profile() {
     setIsEditActive(!isEditActive)
   }
 
-  // Тестовые данные для заполнения
-  const data = {
-    name: 'ревьюер',
-    email: 'pochta@yandex.ru'
-  }
-
   const logOut = () => {
     navigate("/")
   }
@@ -26,22 +19,22 @@ function Profile() {
   return (
     <div className="profile">
       <div className='profile__window window'>
-        <h1 className='profile__title'>Привет, {data.name}!</h1>
+        <h1 className='profile__title'>Привет, {dataProfile.name}!</h1>
         <div className='profile__rows'>
           <div className='profile__row'>
             <p className='row__title'>Имя</p>
             {!isEditActive ?
-              <p className='row__data'>{data.name}</p>
+              <p className='row__data'>{dataProfile.name}</p>
               :
-              <input className='row__data' placeholder='Введите имя' value={data.name} />
+              <input className='row__data' placeholder='Введите имя' value={dataProfile.name} />
             }
           </div>
           <div className='profile__row'>
             <p className='row__title'>E-mail</p>
             {!isEditActive ?
-              <p className='row__data'>{data.email}</p>
+              <p className='row__data'>{dataProfile.email}</p>
               :
-              <input className='row__data' placeholder='Введите почту' value={data.email} />
+              <input className='row__data' placeholder='Введите почту' value={dataProfile.email} />
             }
           </div>
         </div>
