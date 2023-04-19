@@ -51,6 +51,8 @@
     height: 20px;
     background-image: url(../../images/smalltumboff.png);
     background-size: contain;
+    border: 0;
+    background-color: inherit;
 }
 
 .filter__icon_active {

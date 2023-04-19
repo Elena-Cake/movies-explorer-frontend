@@ -53,6 +53,7 @@
   color: #FF004C;
   display: none;
   justify-content: center;
+  text-align: center;
 }
 
 .span-error_active {
