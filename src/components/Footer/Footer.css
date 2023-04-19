@@ -33,20 +33,22 @@
     line-height: 16px;
 }
 
-.footer__yp {
+.footer__yp-link {
     grid-area: yp;
     font-size: 13px;
     line-height: 16px;
     padding: 0;
     margin: 0;
+    color: var(--black);
 }
 
-.footer__git {
+.footer__git-link {
     grid-area: git;
     font-size: 13px;
     line-height: 16px;
     padding: 0;
     margin: 0;
+    color: var(--black);
 }
 
 @media screen and (max-width: 1279px) {
@@ -85,12 +87,12 @@
         color: var(--grey-text);
     }
 
-    .footer__yp {
+    .footer__yp-link {
         font-size: 12px;
         line-height: 15px;
     }
 
-    .footer__git {
+    .footer__git-link {
         font-size: 12px;
         line-height: 15px;
     }

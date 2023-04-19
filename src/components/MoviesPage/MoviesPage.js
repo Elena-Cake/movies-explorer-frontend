@@ -5,19 +5,10 @@ import Movie from '../Movie/Movie';
 
 function MoviesPage({ movies, isButtonVisible }) {
 
-  // const [isButtonVisible, setIsButtonVisible] = useState(false)
-  // const movieElements = movies.map((movie) => <Movie data={movie} />)
-
   const movieElements = [];
   for (let i = 0; i < 12; i++) {
     movieElements.push(movies.map((movie) => <Movie data={movie} />))
   }
-
-  // useEffect(() => {
-  //   movies.length > movieElements.length ?
-  //     setIsButtonVisible(true) :
-  //     setIsButtonVisible(false)
-  // }, [movies])
 
   return (
     <div className="movies">

@@ -1,10 +1,10 @@
 
+import { techs } from '../../../constans/testConstans';
 import Title from '../Title/Title';
 import './Techs.css';
 import TechsElement from './TechsElement/TechsElement';
 
 function Techs() {
-  const techs = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB']
   const techsElements = techs.map((name) => <TechsElement text={name} />)
 
   return (

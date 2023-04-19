@@ -1,13 +1,9 @@
 
+import { portfolioLinks } from '../../../constans/testConstans';
 import './Portfolio.css';
 import PortfolioLink from './PortfolioLink/PortfolioLink';
 
 function Portfolio() {
-  const portfolioLinks = [
-    { name: 'Статичный сайт', link: 'https://elena-cake.github.io/lubimovka/' },
-    { name: 'Адаптивный сайт', link: 'https://elena-cake.github.io/lubimovka/' },
-    { name: 'Одностраничное приложение', link: 'https://elena-cake.github.io/lubimovka/' }
-  ]
 
   const portfolioElements = portfolioLinks.map(elem => <PortfolioLink data={elem} />)
 
