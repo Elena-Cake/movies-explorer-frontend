@@ -52,7 +52,10 @@ function Profile() {
             <button className='profile__exit-button button' onClick={logOut}>Выйти из аккаунта</button>
           </div>
           :
-          <button className='profile__save-button button' onClick={activateEdit}>Сохранить</button>
+          <div className='profile__button-container button-container'>
+            <span className='profile__span-error span-error'>При обновлении профиля произошла ошибка.</span>
+            <button className='profile__save-button button profile__save-button_disable' onClick={activateEdit}>Сохранить</button>
+          </div>
         }
       </div>
     </div >
