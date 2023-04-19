@@ -8,6 +8,8 @@
     grid-template-columns: repeat(2, 50%);
     gap: calc(40/1140 *100%);
     margin-top: 20px;
+    list-style-type: none;
+    padding: 0;
 }
 
 .about__point {

@@ -37,12 +37,18 @@
     margin: 26px 0 44px;
     align-items: center;
     gap: 14px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.search__filter {
+    display: flex;
 }
 
 .filter__text {
     font-size: 13px;
     line-height: 18px;
-    margin: 0;
+    margin: 0 0 0 13px;
     padding: 0;
 }
 

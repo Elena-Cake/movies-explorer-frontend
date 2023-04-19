@@ -22,9 +22,9 @@ function MoviesPage({ movies, isButtonVisible }) {
   return (
     <div className="movies">
       <SearchForm />
-      <div className='movies__container'>
+      <ul className='movies__container'>
         {movieElements}
-      </div>
+      </ul>
       <div className='movies__more'>
         {isButtonVisible &&
           <button className='movies__more-button button'>Ещё</button>

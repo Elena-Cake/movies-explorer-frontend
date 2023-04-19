@@ -15,10 +15,12 @@ function SearchForm() {
         <input className='search__input' placeholder='Фильм' />
         <button className='search__button button'>Поиск</button>
       </div>
-      <div className='search__filters'>
-        <button className={`filter__icon ${isShortFilmsActive ? 'filter__icon_active' : ''}`} onClick={toggleShortFilm}></button>
-        <p className='filter__text'>Короткометражки</p>
-      </div>
+      <ul className='search__filters'>
+        <li className='search__filter'>
+          <button className={`filter__icon ${isShortFilmsActive ? 'filter__icon_active' : ''}`} onClick={toggleShortFilm}></button>
+          <p className='filter__text'>Короткометражки</p>
+        </li>
+      </ul>
       <div className='search__bottom'></div>
     </div>
   );

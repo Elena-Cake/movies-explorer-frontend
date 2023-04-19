@@ -30,7 +30,7 @@ function Movie({ data }) {
   }
 
   return (
-    <div className="movie">
+    <li className="movie">
       <div className='movie__info'>
         <h3 className='movie__name'>{data.nameRU}</h3>
         <p className='movie__duration'>{duration}</p>
@@ -39,7 +39,7 @@ function Movie({ data }) {
       <div className='movie__foto-container'>
         <img className='movie__foto' src={data.image.previewUrl} alt='скриншот фильма' />
       </div>
-    </div>
+    </li>
   );
 }
 

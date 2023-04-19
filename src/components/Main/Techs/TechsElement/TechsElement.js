@@ -4,9 +4,9 @@ import './TechsElement.css';
 function TechsElement({ text }) {
 
   return (
-    <div className="techs-element">
+    <li className="techs-element">
       <p className='techs-element__text'>{text}</p>
-    </div>
+    </li>
   );
 }
 

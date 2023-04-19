@@ -17,7 +17,9 @@ function Portfolio() {
         <div className='portfolio__container-link'>
           <a className='portfolio__link link' href='https://github.com/Elena-Cake'>Портфолио</a>
         </div>
-        {portfolioElements}
+        <ul className='portfolio__items'>
+          {portfolioElements}
+        </ul>
       </div>
     </div>
   );

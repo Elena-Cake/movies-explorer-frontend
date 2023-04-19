@@ -3,6 +3,12 @@
     margin: 0 auto;
 }
 
+.portfolio__items {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 .portfolio__link {
     font-size: 18px;
     line-height: 20px;
