@@ -1,5 +1,5 @@
 
-import { dataRowsRegister } from '../../../constans/testConstans';
+import { dataRowsRegister, textsRegister } from '../../../constans/testConstans';
 import AuthForm from '../AuthForm/AuthForm';
 import FormRow from '../AuthForm/FormRow/FormRow';
 import './Register.css';
@@ -11,7 +11,11 @@ function Register() {
   })
 
   return (
-    <AuthForm isLoginPage={false} rowsElements={rowsElements} />
+    <AuthForm
+      rowsElements={rowsElements}
+      texts={textsRegister}
+      path='/signin'
+    />
   );
 }
 

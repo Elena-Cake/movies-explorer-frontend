@@ -1,5 +1,5 @@
 
-import { dataRowsLogin } from '../../../constans/testConstans';
+import { dataRowsLogin, textsLogin } from '../../../constans/testConstans';
 import AuthForm from '../AuthForm/AuthForm';
 import FormRow from '../AuthForm/FormRow/FormRow';
 import './Login.css';
@@ -11,7 +11,11 @@ function Login() {
   })
 
   return (
-    <AuthForm rowsElements={rowsElements} />
+    <AuthForm
+      rowsElements={rowsElements}
+      texts={textsLogin}
+      path='/signup'
+    />
   );
 }
 

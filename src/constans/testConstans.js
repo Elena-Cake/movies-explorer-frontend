@@ -1,8 +1,22 @@
+export const textsRegister = {
+    title: "Добро пожаловать!",
+    button: "Зарегистрироваться",
+    question: "Уже зарегистрированы?",
+    navlink: "Войти"
+}
+
 export const dataRowsRegister = [
     { title: 'Имя', error: '', name: 'name' },
     { title: 'E-mail', error: '', name: 'email' },
     { title: 'Пароль', error: 'Что-то пошло не так...', name: 'pass', value: '1111' }
 ];
+
+export const textsLogin = {
+    title: "Рады видеть!",
+    button: "Войти",
+    question: "Ещё не зарегистрированы?",
+    navlink: "Регистрация"
+}
 
 export const dataRowsLogin = [
     { title: 'E-mail', error: '', name: 'email' },
