@@ -13,7 +13,7 @@ function AboutMe() {
           <p className='me__text'>Я живу в Москве. Закончила бакалавриат и магистратуру по направлению "Информационная безопасность" МТУСИ.
             Мое хобби - делать вкусные десерты. С 2019 года работаю в компании АО "АНЦ" программистом. Пройдя курс по веб-разработке поняла, что нашла то направление, которое приносит мне удовольствие.
           </p>
-          <a className='me__git link' href='https://github.com/Elena-Cake'>Github</a>
+          <a className='me__git link' href='https://github.com/Elena-Cake' target="_blank" rel="noreferrer">Github</a>
           <div className='me__foto'></div>
         </div>
       </div>
