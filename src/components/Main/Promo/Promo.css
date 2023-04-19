@@ -47,7 +47,8 @@
 
     .promo__image {
         width: 100%;
-        right: 0;
+        right: 50%;
+        transform: translate(50%, 0);
     }
 }
 
@@ -64,8 +65,6 @@
     }
 
     .promo__image {
-        width: 100%;
-        right: 0;
         bottom: 45px;
         background-size: auto 228px;
         height: 228px;

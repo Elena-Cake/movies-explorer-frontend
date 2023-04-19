@@ -30,6 +30,7 @@
 
 .header__button-signin {
     text-decoration: none;
+    text-align: center;
     padding: 8px 20px;
     background-color: var(--green);
     color: var(--black);

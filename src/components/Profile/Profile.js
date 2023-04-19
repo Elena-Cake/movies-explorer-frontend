@@ -1,9 +1,12 @@
 
 import { useState } from 'react';
 import './Profile.css';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function Profile() {
-
+  const navigate = useNavigate();
   const [isEditActive, setIsEditActive] = useState(false)
 
   const activateEdit = () => {
@@ -14,6 +17,10 @@ function Profile() {
   const data = {
     name: 'ревьюер',
     email: 'pochta@yandex.ru'
+  }
+
+  const logOut = () => {
+    navigate("/")
   }
 
   return (
@@ -42,7 +49,7 @@ function Profile() {
           <div className='profile__settings'>
 
             <button className='profile__edit-button button' onClick={activateEdit}>Редактировать</button>
-            <button className='profile__exit-button button'>Выйти из аккаунта</button>
+            <button className='profile__exit-button button' onClick={logOut}>Выйти из аккаунта</button>
           </div>
           :
           <button className='profile__save-button button' onClick={activateEdit}>Сохранить</button>
