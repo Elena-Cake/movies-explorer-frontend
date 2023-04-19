@@ -16,7 +16,7 @@ function AuthForm({ texts, path, rowsElements, isValid }) {
         </ul>
         <div className='auth__actions'>
           <div className='profile__button-container button-container'>
-            <span className='profile__span-error span-error'>Вы ввели неправильный логин или пароль.</span>
+            <span className={`profile__span-error span-error ${!isValid ? 'span-error_active' : ''}`}>Вы ввели неправильный логин или пароль.</span>
             <button
               className={`auth__button button ${!isValid ? 'auth__button_disable' : ''}`}
               disabled={!isValid}

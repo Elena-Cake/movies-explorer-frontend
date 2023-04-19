@@ -20,6 +20,7 @@
 
 .profile__rows {
     padding: 50px 0 180px;
+    list-style-type: none;
 }
 
 .profile__row {
@@ -30,6 +31,14 @@
     padding: 17px 0;
     border-bottom: 1px solid var(--grey-fon);
     height: 13px;
+    position: relative;
+}
+
+.profile__row .row__error {
+    justify-content: end;
+    text-align: end;
+    left: auto;
+    right: 0;
 }
 
 .profile__row:last-of-type {
@@ -49,7 +58,7 @@
     line-height: 13px;
     text-align: right;
     margin: 0;
-    padding: 0;
+    padding: 0 5px;
     border: 0;
 }
 
