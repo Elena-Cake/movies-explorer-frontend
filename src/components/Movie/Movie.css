@@ -36,7 +36,7 @@
     color: var(--grey--text);
 }
 
-.movie__flag {
+.movie__flag-button {
     grid-area: flag;
     background-image: url(../../images/movie-flag-off.svg);
     width: 30px;
@@ -46,7 +46,7 @@
     background-color: inherit;
 }
 
-.movie__flag_active {
+.movie__flag-button_active {
     background-image: url(../../images/movie-flag-active.svg);
 }
 

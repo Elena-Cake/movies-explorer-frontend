@@ -1,12 +1,19 @@
 
-import './SearchForm.css';
+import Movie from '../Movie/Movie';
+import './MoviesCardList.css';
 
-function SearchForm() {
+function MoviesCardList({ movies, isSavedPage }) {
+
+  const movieElements = [];
+  for (let i = 0; i < 12; i++) {
+    movieElements.push(movies.map((movie) => <Movie data={movie} isSavedPage={isSavedPage} />))
+  }
+
   return (
-    <div className="main">
-
-    </div>
+    <ul className='movies-list'>
+      {movieElements}
+    </ul>
   );
 }
 
-export default SearchForm;
+export default MoviesCardList;

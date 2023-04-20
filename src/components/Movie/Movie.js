@@ -21,7 +21,7 @@ function Movie({ data, isSavedPage }) {
         <h3 className='movie__name'>{data.nameRU}</h3>
         <p className='movie__duration'>{duration}</p>
         {!isSavedPage ?
-          <button className={`movie__flag button ${isFlagActive && 'movie__flag_active'}`} onClick={toggleFlag}></button>
+          <button className={`movie__flag-button button ${isFlagActive && 'movie__flag-button_active'}`} onClick={toggleFlag}></button>
           :
           <button className='movie__delete-button button' onClick={onDeleteMovie}></button>
         }

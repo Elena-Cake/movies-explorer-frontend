@@ -1,21 +1,14 @@
 
 import './MoviesPage.css';
 import SearchForm from '../SearchForm/SearchForm';
-import Movie from '../Movie/Movie';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function MoviesPage({ movies, isSavedPage = false }) {
-
-  const movieElements = [];
-  for (let i = 0; i < 12; i++) {
-    movieElements.push(movies.map((movie) => <Movie data={movie} isSavedPage={isSavedPage} />))
-  }
 
   return (
     <section className="movies">
       <SearchForm />
-      <ul className='movies__container'>
-        {movieElements}
-      </ul>
+      <MoviesCardList movies={movies} isSavedPage={isSavedPage} />
       <div className='movies__more'>
         {!isSavedPage &&
           <button className='movies__more-button button'>Ещё</button>

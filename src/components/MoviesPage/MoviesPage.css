@@ -4,17 +4,6 @@
     padding: 0 calc(50/1280 *100%) 0 calc(70/1280 *100%);
 }
 
-
-.movies__container {
-    padding: 70px 0 30px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: 30px;
-    column-gap: 24px;
-    list-style-type: none;
-    margin: 0;
-}
-
 .movies__more {
     padding: 50px 0 80px;
     display: flex;

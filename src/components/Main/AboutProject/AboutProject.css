@@ -25,7 +25,7 @@
     padding: 0;
 }
 
-.about_description {
+.about__description {
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -39,7 +39,7 @@
     grid-template-columns: 20% 80%;
 }
 
-.about__shema_text_bold {
+.about__text_type_bold {
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -48,7 +48,7 @@
     margin: 0;
 }
 
-.about__shema_text_transparent {
+.about__text_type_transparent {
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -58,11 +58,11 @@
     margin: 0;
 }
 
-.about__shema_back_green {
+.about__back_color_green {
     background-color: var(--green);
 }
 
-.about__shema_back_grey {
+.about__back_color_grey {
     background-color: var(--grey-bg-tehno);
 }
 

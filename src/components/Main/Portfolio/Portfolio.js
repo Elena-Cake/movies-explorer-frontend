@@ -8,7 +8,7 @@ function Portfolio() {
   const portfolioElements = portfolioLinks.map(elem => <PortfolioLink data={elem} />)
 
   return (
-    <div className="portfolio">
+    <section className="portfolio">
       <div className='portfolio__container container'>
         <div className='portfolio__container-link'>
           <a className='portfolio__link link' href='https://github.com/Elena-Cake' target="_blank" rel="noreferrer">Портфолио</a>
@@ -17,7 +17,7 @@ function Portfolio() {
           {portfolioElements}
         </ul>
       </div>
-    </div>
+    </section>
   );
 }
 
