@@ -11,7 +11,7 @@ function checkResponse(res) {
 }
 
 // запрос карточек с сервера
-export const getMovies = () => {
+export const getMoviesAll = () => {
     return fetch(`${MOVIES_BASE_URL}`, {
         method: 'GET',
         headers: headers

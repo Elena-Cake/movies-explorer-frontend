@@ -8,6 +8,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { useNavigate } from 'react-router-dom';
 import { createUser, getProfile, login } from '../utils/MainApi';
 import InfoTooltip from './InfoTooltip/InfoTooltip';
+import { getMoviesAll } from '../utils/MoviesApi';
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
   // данные профиля
   const [currentUser, setCurrentUser] = useState({});
 
+  // фильмы
+  const [movies, setMovies] = useState([]);
+
   // отображение бургера
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const openMenu = (e) => {
@@ -33,7 +37,7 @@ function App() {
   }
 
 
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(true);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const closeInfoTooltip = () => {
     setIsInfoTooltipOpen(false)
   }
@@ -50,8 +54,7 @@ function App() {
       .then((res) => {
         if (res) {
           setIsSignIn(true)
-          // setInfoToolText('Вы успешно зарегистрировались!')
-          // setInfoToolImageType('ok')
+          setInfoToolText('Вы успешно зарегистрировались!')
         }
       })
       .then(() => {
@@ -61,7 +64,7 @@ function App() {
         setIsSignIn(false)
         appointErrInfoTool()
       })
-    // .finally(() => setIsInfoTooltipOpen(true))
+      .finally(() => setIsInfoTooltipOpen(true))
   }
 
   // авторизация
@@ -70,18 +73,16 @@ function App() {
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         setIsSignIn(true);
-        // setInfoToolText('Успешно!')
-        // setInfoToolImageType('ok')
+        setInfoToolText('Успешно!')
         navigate('/movies', { replace: true });
-        // setEmailUser(email)
       })
       // .then(() => pullInitialData())
       .catch((res) => {
-        // setIsInfoTooltipOpen(true);
-        setIsSignIn(false);
         appointErrInfoTool()
+        setIsInfoTooltipOpen(true);
+        setIsSignIn(false);
       })
-    // .finally(() => setIsInfoTooltipOpen(true))
+      .finally(() => setIsInfoTooltipOpen(true))
   }
 
   // проверка токена
@@ -91,8 +92,11 @@ function App() {
         .then((res) => {
           if (res) {
             setIsSignIn(true);
-            // setEmailUser(res.email)
-            // pullInitialData()
+            getMoviesAll()
+              .then((res) => {
+                console.log(res)
+                // setMovies(res)
+              })
             navigate("/movies", { replace: true })
           }
         })
