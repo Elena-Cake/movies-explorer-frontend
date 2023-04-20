@@ -23,7 +23,7 @@ function Movie({ data, isSavedPage }) {
         {!isSavedPage ?
           <button className={`movie__flag button ${isFlagActive && 'movie__flag_active'}`} onClick={toggleFlag}></button>
           :
-          <button className='movie__delete-button button' onClick={onDeleteMovie}>&#x2715;</button>
+          <button className='movie__delete-button button' onClick={onDeleteMovie}></button>
         }
       </div>
       <div className='movie__foto-container'>

@@ -72,9 +72,12 @@
 .menu__button-close {
     background-color: inherit;
     border: 0;
-    width: 50px;
-    font-size: 26px;
-    font-weight: 900;
+    width: 22px;
+    height: 22px;
+    background-image: url(../../images/x-popup.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 22px 22px;
     margin: 0 0 auto auto;
     position: absolute;
     right: 25px;

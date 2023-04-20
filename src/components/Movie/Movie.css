@@ -52,11 +52,15 @@
 
 .movie__delete-button {
     grid-area: flag;
+    width: 30px;
+    height: 30px;
     background-color: var(--grey-bg-footer);
     border-radius: 50%;
     border: 0;
-    width: 30px;
-    height: 30px;
+    background-image: url(../../images/x.svg);
+    background-size: 10px 10px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .movie__foto-container {
