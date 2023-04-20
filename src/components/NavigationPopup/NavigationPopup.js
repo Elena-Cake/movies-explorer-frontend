@@ -5,7 +5,7 @@ import './NavigationPopup.css';
 function NavigationPopup({ isMenuOpen, closeMenu }) {
   return (
     <div className={`popup-wrapper ${isMenuOpen ? 'popup-wrapper_open' : ''}`}>
-      <div className='popup__container'>
+      <div className='popup__container-menu'>
         <button className='menu__button-close button' onClick={closeMenu}></button>
         <ul className='menu__links'>
           <li className='menu__link-li '>

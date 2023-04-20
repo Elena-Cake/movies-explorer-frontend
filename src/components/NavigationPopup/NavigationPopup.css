@@ -1,22 +1,4 @@
-.popup-wrapper {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 1;
-    background: rgba(0, 0, 0, .3);
-    opacity: 0;
-    visibility: hidden;
-    transition: visibility 0.2s, opacity ease 0.2s;
-}
-
-.popup-wrapper_open {
-    visibility: visible;
-    opacity: 1;
-}
-
-.popup__container {
+.popup__container-menu {
     position: relative;
     grid-template-rows: 22px auto 30px;
     max-width: 100%;
