@@ -7,7 +7,7 @@ import { useFormAndValidation } from '../../hooks/useValidationForm';
 
 function Profile() {
 
-  const { values, handleChange, errors, isValid, resetForm, setValues, setIsValid } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormAndValidation();
   const navigate = useNavigate();
   const [isEditActive, setIsEditActive] = useState(false)
 

@@ -4,11 +4,11 @@
     padding: 0 calc(50/1280 *100%) 0 calc(70/1280 *100%);
 }
 
+
 .movies__container {
     padding: 70px 0 30px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
     row-gap: 30px;
     column-gap: 24px;
     list-style-type: none;
@@ -43,6 +43,7 @@
         row-gap: 36px;
         column-gap: 30px;
     }
+
 }
 
 @media screen and (max-width: 767px) {

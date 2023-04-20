@@ -28,6 +28,7 @@
     line-height: 29px;
     margin: 40px 0;
     padding: 0;
+    text-align: left;
 }
 
 .auth__rows {
@@ -88,6 +89,10 @@
 
     .auth__logo {
         margin: 0 auto;
+    }
+
+    .auth__title {
+        text-align: center;
     }
 
 }

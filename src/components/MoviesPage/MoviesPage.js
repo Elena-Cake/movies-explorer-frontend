@@ -11,7 +11,7 @@ function MoviesPage({ movies, isSavedPage = false }) {
   }
 
   return (
-    <div className="movies">
+    <section className="movies">
       <SearchForm />
       <ul className='movies__container'>
         {movieElements}
@@ -21,7 +21,7 @@ function MoviesPage({ movies, isSavedPage = false }) {
           <button className='movies__more-button button'>Ещё</button>
         }
       </div>
-    </div>
+    </section>
   );
 }
 

@@ -67,7 +67,7 @@
     position: relative;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 767px) {
     .navigation {
         padding: 18px 30px 18px 30px;
     }
@@ -87,7 +87,4 @@
     .navigation__button_active {
         display: block;
     }
-
 }
-
-@media screen and (max-width: 767px) {}
