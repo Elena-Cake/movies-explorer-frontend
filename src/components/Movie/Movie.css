@@ -38,7 +38,7 @@
 
 .movie__flag {
     grid-area: flag;
-    background-image: url(../../images/movie-flag-off.png);
+    background-image: url(../../images/movie-flag-off.svg);
     width: 30px;
     height: 30px;
     background-size: contain;
@@ -47,7 +47,7 @@
 }
 
 .movie__flag_active {
-    background-image: url(../../images/movie-flag-activ.png);
+    background-image: url(../../images/movie-flag-active.svg);
 }
 
 .movie__delete-button {

@@ -26,7 +26,7 @@
 .portfolio-link__arrow {
     width: 19px;
     height: 19px;
-    background-image: url(../../../../images/portfolio-arrow.png);
+    background-image: url(../../../../images/arrow.svg);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;

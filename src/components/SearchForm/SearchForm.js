@@ -11,10 +11,10 @@ function SearchForm() {
 
   return (
     <div className="search">
-      <div className='search__row'>
-        <input className='search__input' placeholder='Фильм' />
+      <form className='search__row'>
+        <input className='search__input' placeholder='Фильм' required />
         <button className='search__button button'>Поиск</button>
-      </div>
+      </form>
       <ul className='search__filters'>
         <li className='search__filter'>
           <button className={`filter__icon ${isShortFilmsActive ? 'filter__icon_active' : ''}`} onClick={toggleShortFilm}></button>
