@@ -1,5 +1,5 @@
 
-import { saveMovies } from '../../constans/testConstans';
+import { saveMovies } from '../../constans/movies';
 import MoviesPage from '../MoviesPage/MoviesPage';
 import './SavedMovies.css';
 

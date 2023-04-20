@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import './Profile.css';
 import { useNavigate } from 'react-router-dom';
-import { dataProfile } from '../../constans/testConstans';
 import { useFormAndValidation } from '../../hooks/useValidationForm';
+import { dataProfile } from '../../constans/movies';
 
 function Profile() {
 

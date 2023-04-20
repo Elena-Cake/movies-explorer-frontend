@@ -1,7 +1,7 @@
 
 import './Movies.css';
 import MoviesPage from '../MoviesPage/MoviesPage';
-import { movies } from '../../constans/testConstans';
+import { movies } from '../../constans/movies';
 
 function Movies() {
 

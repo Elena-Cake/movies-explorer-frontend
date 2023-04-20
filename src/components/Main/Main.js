@@ -13,6 +13,7 @@ import Login from '../Auth/Login/Login';
 import Register from '../Auth/Register/Register';
 import NotFound from '../NotFound/NotFound';
 import NavigationPopup from '../NavigationPopup/NavigationPopup';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
 function Main({ isMenuOpen, closeMenu }) {
   return (
@@ -28,12 +29,15 @@ function Main({ isMenuOpen, closeMenu }) {
           </div>
         } />
         <Route path='/movies' element={
+          // <ProtectedRoute component={Movies} />
           <Movies />
         } />
         <Route path='/saved-movies' element={
+          // <ProtectedRoute component={SavedMovies} />
           <SavedMovies />
         } />
         <Route path='/profile' element={
+          // <ProtectedRoute component={Profile} />
           <Profile />
         } />
         <Route path='/signin' element={
