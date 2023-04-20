@@ -2,7 +2,12 @@
 import { NavLink } from 'react-router-dom';
 import './AuthForm.css';
 
-function AuthForm({ texts, path, rowsElements, isValid }) {
+function AuthForm({ texts, path, rowsElements, isValid, onSubmitForm }) {
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault()
+    onSubmitForm()
+  }
 
   return (
     <div className="auth">
@@ -20,6 +25,7 @@ function AuthForm({ texts, path, rowsElements, isValid }) {
             <button
               className={`auth__button button ${!isValid ? 'auth__button_disable' : ''}`}
               disabled={!isValid}
+              onClick={handleSubmitForm}
             >{texts.button}</button>
           </div>
           <p className='auth__text'>

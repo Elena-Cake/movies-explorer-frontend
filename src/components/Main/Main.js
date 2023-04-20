@@ -15,7 +15,7 @@ import NotFound from '../NotFound/NotFound';
 import NavigationPopup from '../NavigationPopup/NavigationPopup';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
-function Main({ isMenuOpen, closeMenu }) {
+function Main({ isMenuOpen, closeMenu, onSubmitLogin, onSubmitRegister }) {
   return (
     <div>
       <Routes>
@@ -41,10 +41,10 @@ function Main({ isMenuOpen, closeMenu }) {
           <Profile />
         } />
         <Route path='/signin' element={
-          <Login />
+          <Login onSubmitForm={onSubmitLogin} />
         } />
         <Route path='/signup' element={
-          <Register />
+          <Register onSubmitForm={onSubmitRegister} />
         } />
         <Route path='*' element={
           <NotFound />

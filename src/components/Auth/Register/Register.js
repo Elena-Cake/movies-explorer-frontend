@@ -5,7 +5,7 @@ import FormRow from '../AuthForm/FormRow/FormRow';
 import './Register.css';
 import { dataRowsRegister, textsRegister } from '../../../constans/inputsData';
 
-function Register() {
+function Register({ onSubmitForm }) {
 
 
   const [IsButtonActive, setIsButtonActive] = useState(true)
@@ -24,6 +24,7 @@ function Register() {
       texts={textsRegister}
       path='/signin'
       isValid={IsButtonActive}
+      onSubmitForm={onSubmitForm}
     />
   );
 }

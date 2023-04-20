@@ -5,7 +5,7 @@ import FormRow from '../AuthForm/FormRow/FormRow';
 import './Login.css';
 import { dataRowsLogin, textsLogin } from '../../../constans/inputsData';
 
-function Login() {
+function Login({ onSubmitForm }) {
   const [IsButtonActive, setIsButtonActive] = useState(true)
 
   const onChangeButtonActive = (isValid) => {
@@ -22,6 +22,7 @@ function Login() {
       texts={textsLogin}
       path='/signup'
       isValid={IsButtonActive}
+      onSubmitForm={onSubmitForm}
     />
   );
 }

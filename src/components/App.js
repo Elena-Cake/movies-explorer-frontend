@@ -49,7 +49,7 @@ function App() {
   }
 
   // регистрация
-  function handleRegisterClick(name, email, password) {
+  function onSubmitRegister(name, email, password) {
     createUser({ name, email, password })
       .then((res) => {
         if (res) {
@@ -58,7 +58,7 @@ function App() {
         }
       })
       .then(() => {
-        handleLoginClick(email, password)
+        onSubmitLogin(email, password)
       })
       .catch(() => {
         setIsSignIn(false)
@@ -68,7 +68,7 @@ function App() {
   }
 
   // авторизация
-  function handleLoginClick(email, password) {
+  function onSubmitLogin(email, password) {
     login({ password, email })
       .then((data) => {
         localStorage.setItem("jwt", data.token);
@@ -121,7 +121,7 @@ function App() {
         <Header openMenu={openMenu} />
         <Main
           isMenuOpen={isMenuOpen} closeMenu={closeMenu}
-          handleLoginClick={handleLoginClick} handleRegisterClick={handleRegisterClick} signOut={signOut}
+          onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister} signOut={signOut}
         />
         <Footer />
 
