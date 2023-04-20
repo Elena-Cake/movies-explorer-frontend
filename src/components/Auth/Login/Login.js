@@ -1,9 +1,9 @@
 
 import { useState } from 'react';
-import { dataRowsLogin, textsLogin } from '../../../constans/testConstans';
 import AuthForm from '../AuthForm/AuthForm';
 import FormRow from '../AuthForm/FormRow/FormRow';
 import './Login.css';
+import { dataRowsLogin, textsLogin } from '../../../constans/inputsData';
 
 function Login() {
   const [IsButtonActive, setIsButtonActive] = useState(true)

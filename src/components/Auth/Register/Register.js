@@ -1,9 +1,9 @@
 
 import { useState } from 'react';
-import { dataRowsRegister, textsRegister } from '../../../constans/testConstans';
 import AuthForm from '../AuthForm/AuthForm';
 import FormRow from '../AuthForm/FormRow/FormRow';
 import './Register.css';
+import { dataRowsRegister, textsRegister } from '../../../constans/inputsData';
 
 function Register() {
 

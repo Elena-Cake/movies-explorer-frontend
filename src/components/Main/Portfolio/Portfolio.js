@@ -1,5 +1,5 @@
 
-import { portfolioLinks } from '../../../constans/testConstans';
+import { portfolioLinks } from '../../../constans/mainPageData';
 import './Portfolio.css';
 import PortfolioLink from './PortfolioLink/PortfolioLink';
 

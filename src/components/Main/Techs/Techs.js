@@ -1,5 +1,5 @@
 
-import { techs } from '../../../constans/testConstans';
+import { techs } from '../../../constans/mainPageData';
 import Title from '../Title/Title';
 import './Techs.css';
 import TechsElement from './TechsElement/TechsElement';
