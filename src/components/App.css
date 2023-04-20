@@ -73,6 +73,7 @@
 .container {
   max-width: 1140px;
   padding: 0 calc(50/1280 *100%) 0 calc(70/1280 *100%);
+  margin: 0 auto;
 }
 
 .window {
