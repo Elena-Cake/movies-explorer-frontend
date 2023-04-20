@@ -8,7 +8,7 @@ function Techs() {
   const techsElements = techs.map((name) => <TechsElement text={name} />)
 
   return (
-    <div className="techs">
+    <section className="techs">
       <div className='techs__container container'>
         <Title text={'Технологии'} />
         <h2 className='techs__title'>7 технологий</h2>
@@ -17,7 +17,7 @@ function Techs() {
           {techsElements}
         </ul>
       </div>
-    </div>
+    </section>
   );
 }
 
