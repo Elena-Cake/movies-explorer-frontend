@@ -6,7 +6,7 @@ import './Register.css';
 import { dataRowsRegister, textsRegister } from '../../../constans/inputsData';
 import { endpoints } from '../../../constans/pathContent';
 
-function Register({ onSubmitForm }) {
+function Register({ onSubmitForm, textErrorAuth, deleteErrorSubmit }) {
   const [IsButtonActive, setIsButtonActive] = useState(true)
   const [inputsValues, setInputsValues] = useState([]);
 
@@ -31,6 +31,8 @@ function Register({ onSubmitForm }) {
       onSendForm={onSubmitForm}
       typeForm={'Register'}
       inputsValues={inputsValues}
+      textErrorAuth={textErrorAuth}
+      deleteErrorSubmit={deleteErrorSubmit}
     />
   );
 }

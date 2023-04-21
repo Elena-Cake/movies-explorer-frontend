@@ -9,14 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import { createUser, getProfile, login } from '../utils/MainApi';
 import InfoTooltip from './InfoTooltip/InfoTooltip';
 import { getMoviesAll } from '../utils/MoviesApi';
-import { CONNECTION, CREATED, OK } from '../constans/statusData';
+import { CONFLICT, CONNECTION, CREATED, NO_VALIDATE, OK } from '../constans/statusData';
 
 function App() {
 
   // авторизация и вход
   const [isSignIn, setIsSignIn] = useState(false);
   const navigate = useNavigate();
-  const [infoToolImageType, setInfoToolImageType] = useState("err");
+  const [textErrorAuth, setTextErrorAuth] = useState("");
   const jwt = localStorage.getItem('jwt');
 
 
@@ -49,8 +49,16 @@ function App() {
     setInfoToolText(CONNECTION.MESSAGE)
   }
 
+  // ________AUTH___________
+
+  // удалить ошибку в форме логина
+  const deleteErrorSubmit = () => {
+    setTextErrorAuth('')
+  }
+
   // регистрация
   function onSubmitRegister(dataForm) {
+    setInfoToolText('')
     const { name, email, password } = dataForm
     createUser({ name, email, password })
       .then((res) => {
@@ -60,17 +68,23 @@ function App() {
         }
       })
       .then(() => {
-        onSubmitLogin(email, password)
+        onSubmitLogin({ email, password })
       })
-      .catch(() => {
+      .catch((res) => {
+        if (res === 400) {
+          setTextErrorAuth(NO_VALIDATE.VALIDATION)
+        } else if (res === 409) {
+          setTextErrorAuth(CONFLICT.MESSAGE)
+        } else {
+          appointErrInfoTool()
+        }
         setIsSignIn(false)
-        appointErrInfoTool()
       })
-      .finally(() => setIsInfoTooltipOpen(true))
   }
 
   // авторизация
   function onSubmitLogin(dataForm) {
+    setInfoToolText('')
     const { email, password } = dataForm
     login({ password, email })
       .then((data) => {
@@ -78,6 +92,9 @@ function App() {
         setIsSignIn(true);
         setInfoToolText(OK.MESSAGE)
         navigate('/movies', { replace: true });
+
+        setIsInfoTooltipOpen(true);
+        setTimeout(setIsInfoTooltipOpen(false), 3000);
       })
       // .then(() => pullInitialData())
       .catch((res) => {
@@ -85,7 +102,6 @@ function App() {
         setIsInfoTooltipOpen(true);
         setIsSignIn(false);
       })
-      .finally(() => setIsInfoTooltipOpen(true))
   }
 
   // проверка токена
@@ -125,6 +141,7 @@ function App() {
         <Main
           isMenuOpen={isMenuOpen} closeMenu={closeMenu}
           onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister} signOut={signOut}
+          textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit}
         />
         <Footer />
 

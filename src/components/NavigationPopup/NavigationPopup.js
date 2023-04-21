@@ -1,6 +1,7 @@
 
 import { NavLink } from 'react-router-dom';
 import './NavigationPopup.css';
+import { endpoints } from '../../constans/pathContent';
 
 function NavigationPopup({ isMenuOpen, closeMenu }) {
   return (
@@ -10,7 +11,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
         <ul className='menu__links'>
           <li className='menu__link-li '>
             <NavLink
-              to="/"
+              to={endpoints.ABOUT}
               className='menu__link link'
               onClick={closeMenu}>
               Главная
@@ -18,7 +19,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
           </li>
           <li className='menu__link-li'>
             <NavLink
-              to="/movies"
+              to={endpoints.MOVIES}
               className='menu__link link menu__link_active'
               onClick={closeMenu}>
               Фильмы
@@ -26,7 +27,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
           </li>
           <li className='menu__link-li'>
             <NavLink
-              to="/saved-movies"
+              to={endpoints.SAVED_MOVIES}
               className='menu__link link'
               onClick={closeMenu}>
               Сохранённые фильмы
@@ -34,7 +35,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
           </li>
         </ul>
         <NavLink
-          to="/profile"
+          to={endpoints.PROFILE}
           className='menu__button button'
           onClick={closeMenu} >
           Аккаунт

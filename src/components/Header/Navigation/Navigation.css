@@ -34,7 +34,7 @@
 .navigation__links {
     width: 100%;
     display: flex;
-
+    list-style-type: none;
 }
 
 .navigation__link {

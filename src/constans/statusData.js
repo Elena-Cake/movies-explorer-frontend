@@ -9,6 +9,7 @@ const CREATED = {
 };
 const NO_VALIDATE = {
     CODE: 400,
+    VALIDATION: 'При регистрации пользователя произошла ошибка.',
     MESSAGE: 'Переданы некорректные данные',
     MAIL_MESSAGE: 'Неправильный формат почты',
 };
@@ -29,14 +30,14 @@ const UNDERFINED = {
 };
 const CONFLICT = {
     CODE: 409,
-    MESSAGE: 'Пользователь с таким email уже существует.',
+    MESSAGE: 'Пользователь с таким E-mail уже существует.',
 };
 const INTERNAL = {
     CODE: 500,
     MESSAGE: 'На сервере произошла ошибка.',
 };
 const CONNECTION = {
-    MESSAGE: "Что-то пошло не так! Попробуйте ещё раз."
+    MESSAGE: 'Что-то пошло не так! Попробуйте ещё раз.'
 };
 
 module.exports = {

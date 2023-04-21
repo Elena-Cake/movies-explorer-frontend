@@ -6,7 +6,8 @@ import './Login.css';
 import { dataRowsLogin, textsLogin } from '../../../constans/inputsData';
 import { endpoints } from '../../../constans/pathContent';
 
-function Login({ onSubmitForm }) {
+function Login({ onSubmitForm, textErrorAuth, deleteErrorSubmit }) {
+
   const [IsButtonActive, setIsButtonActive] = useState(true)
   const [inputsValues, setInputsValues] = useState([]);
 
@@ -31,6 +32,8 @@ function Login({ onSubmitForm }) {
       onSendForm={onSubmitForm}
       typeForm={'Login'}
       inputsValues={inputsValues}
+      textErrorAuth={textErrorAuth}
+      deleteErrorSubmit={deleteErrorSubmit}
     />
   );
 }

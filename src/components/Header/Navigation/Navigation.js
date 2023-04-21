@@ -9,20 +9,22 @@ function Navigation({ activePath, openMenu }) {
     <div className='navigation'>
       <NavLink to={endpoints.ABOUT} className='header__logo' />
       <div className='navigation__menu navigation__menu_open'>
-        <div className='navigation__links-wrapper'>
-          <div className='navigation__links'>
+        <ul className='navigation__links'>
+          <li>
             <NavLink
               to={endpoints.MOVIES}
               className={`navigation__link link ${activePath === 'movies' && 'navigation__link_active'}`}>
               Фильмы
             </NavLink>
+          </li>
+          <li>
             <NavLink
               to={endpoints.SAVED_MOVIES}
               className={`navigation__link link ${activePath === 'saved-movies' && 'navigation__link_active'}`}>
               Сохранённые фильмы
             </NavLink>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
       <NavLink
         to={endpoints.PROFILE}

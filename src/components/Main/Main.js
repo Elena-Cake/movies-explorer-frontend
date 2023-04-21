@@ -16,7 +16,8 @@ import NavigationPopup from '../NavigationPopup/NavigationPopup';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import { endpoints } from '../../constans/pathContent';
 
-function Main({ isMenuOpen, closeMenu, onSubmitLogin, onSubmitRegister }) {
+function Main({ isMenuOpen, closeMenu, onSubmitLogin, onSubmitRegister, textErrorAuth, deleteErrorSubmit }) {
+
   return (
     <main className='main'>
       <Routes>
@@ -42,10 +43,10 @@ function Main({ isMenuOpen, closeMenu, onSubmitLogin, onSubmitRegister }) {
           <Profile />
         } />
         <Route path={endpoints.LOGIN} element={
-          <Login onSubmitForm={onSubmitLogin} />
+          <Login onSubmitForm={onSubmitLogin} textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} />
         } />
         <Route path={endpoints.REGISTER} element={
-          <Register onSubmitForm={onSubmitRegister} />
+          <Register onSubmitForm={onSubmitRegister} textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} />
         } />
         <Route path='*' element={
           <NotFound />

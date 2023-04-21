@@ -2,11 +2,9 @@
 import { NavLink } from 'react-router-dom';
 import './AuthForm.css';
 import { endpoints } from '../../../constans/pathContent';
-import { dataRowsRegister } from '../../../constans/inputsData';
-import { useFormAndValidation } from '../../../hooks/useValidationForm';
+import { useEffect } from 'react';
 
-function AuthForm({ texts, path, rowsElements, isValid, onSendForm, typeForm }) {
-
+function AuthForm({ texts, path, rowsElements, isValid, onSendForm, textErrorAuth, deleteErrorSubmit }) {
   const onSubmitForm = (e) => {
     e.preventDefault()
     // достать значения формы
@@ -22,6 +20,10 @@ function AuthForm({ texts, path, rowsElements, isValid, onSendForm, typeForm }) 
     onSendForm(formData)
   }
 
+  useEffect(() => {
+    deleteErrorSubmit()
+  }, [])
+
   return (
     <div className="auth">
       <form className='auth__window window'>
@@ -34,7 +36,7 @@ function AuthForm({ texts, path, rowsElements, isValid, onSendForm, typeForm }) 
         </ul>
         <div className='auth__actions'>
           <div className='profile__button-container button-container'>
-            <span className={`profile__span-error span-error ${!isValid ? 'span-error_active' : ''}`}>Вы ввели неправильный логин или пароль.</span>
+            <span className={`profile__span-error span-error ${textErrorAuth !== '' ? 'span-error_active' : ''}`}>{textErrorAuth}</span>
             <button
               className={`auth__button button ${!isValid ? 'auth__button_disable' : ''}`}
               disabled={!isValid}
