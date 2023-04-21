@@ -4,6 +4,7 @@ import AuthForm from '../AuthForm/AuthForm';
 import FormRow from '../AuthForm/FormRow/FormRow';
 import './Login.css';
 import { dataRowsLogin, textsLogin } from '../../../constans/inputsData';
+import { endpoints } from '../../../constans/pathContent';
 
 function Login({ onSubmitForm }) {
   const [IsButtonActive, setIsButtonActive] = useState(true)
@@ -20,7 +21,7 @@ function Login({ onSubmitForm }) {
     <AuthForm
       rowsElements={rowsElements}
       texts={textsLogin}
-      path='/signup'
+      path={endpoints.REGISTER}
       isValid={IsButtonActive}
       onSubmitForm={onSubmitForm}
     />

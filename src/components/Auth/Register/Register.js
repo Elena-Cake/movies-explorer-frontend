@@ -4,6 +4,7 @@ import AuthForm from '../AuthForm/AuthForm';
 import FormRow from '../AuthForm/FormRow/FormRow';
 import './Register.css';
 import { dataRowsRegister, textsRegister } from '../../../constans/inputsData';
+import { endpoints } from '../../../constans/pathContent';
 
 function Register({ onSubmitForm }) {
 
@@ -22,7 +23,7 @@ function Register({ onSubmitForm }) {
     <AuthForm
       rowsElements={rowsElements}
       texts={textsRegister}
-      path='/signin'
+      path={endpoints.LOGIN}
       isValid={IsButtonActive}
       onSubmitForm={onSubmitForm}
     />

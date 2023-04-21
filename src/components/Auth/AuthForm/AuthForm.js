@@ -1,6 +1,7 @@
 
 import { NavLink } from 'react-router-dom';
 import './AuthForm.css';
+import { endpoints } from '../../../constans/pathContent';
 
 function AuthForm({ texts, path, rowsElements, isValid, onSubmitForm }) {
 
@@ -12,7 +13,7 @@ function AuthForm({ texts, path, rowsElements, isValid, onSubmitForm }) {
   return (
     <div className="auth">
       <form className='auth__window window'>
-        <NavLink className='auth__link-logo link' to='/'>
+        <NavLink className='auth__link-logo link' to={endpoints.ABOUT}>
           <div className='auth__logo' ></div>
         </NavLink>
         <h1 className='auth__title'>{texts.title}</h1>

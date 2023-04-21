@@ -14,13 +14,14 @@ import Register from '../Auth/Register/Register';
 import NotFound from '../NotFound/NotFound';
 import NavigationPopup from '../NavigationPopup/NavigationPopup';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
+import { endpoints } from '../../constans/pathContent';
 
 function Main({ isMenuOpen, closeMenu, onSubmitLogin, onSubmitRegister }) {
   return (
     <div>
       <Routes>
-        <Route path='/' element={
-          <div className="main">
+        <Route path={endpoints.ABOUT} element={
+          <div className="main-page">
             <Promo />
             <AboutProject />
             <Techs />
@@ -28,22 +29,22 @@ function Main({ isMenuOpen, closeMenu, onSubmitLogin, onSubmitRegister }) {
             <Portfolio />
           </div>
         } />
-        <Route path='/movies' element={
+        <Route path={endpoints.MOVIES} element={
           // <ProtectedRoute component={Movies} />
           <Movies />
         } />
-        <Route path='/saved-movies' element={
+        <Route path={endpoints.SAVED_MOVIES} element={
           // <ProtectedRoute component={SavedMovies} />
           <SavedMovies />
         } />
-        <Route path='/profile' element={
+        <Route path={endpoints.PROFILE} element={
           // <ProtectedRoute component={Profile} />
           <Profile />
         } />
-        <Route path='/signin' element={
+        <Route path={endpoints.LOGIN} element={
           <Login onSubmitForm={onSubmitLogin} />
         } />
-        <Route path='/signup' element={
+        <Route path={endpoints.REGISTER} element={
           <Register onSubmitForm={onSubmitRegister} />
         } />
         <Route path='*' element={
