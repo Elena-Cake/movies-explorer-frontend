@@ -1,6 +1,7 @@
 
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
+import { endpoints } from '../../constans/pathContent';
 
 function Navigation({ activePath, openMenu }) {
 
@@ -11,12 +12,12 @@ function Navigation({ activePath, openMenu }) {
         <div className='navigation__links-wrapper'>
           <div className='navigation__links'>
             <NavLink
-              to="/movies"
+              to={endpoints.MOVIES}
               className={`navigation__link link ${activePath === 'movies' && 'navigation__link_active'}`}>
               Фильмы
             </NavLink>
             <NavLink
-              to="/saved-movies"
+              to={endpoints.SAVED_MOVIES}
               className={`navigation__link link ${activePath === 'saved-movies' && 'navigation__link_active'}`}>
               Сохранённые фильмы
             </NavLink>
@@ -24,7 +25,7 @@ function Navigation({ activePath, openMenu }) {
         </div>
       </div>
       <NavLink
-        to="/profile"
+        to={endpoints.PROFILE}
         className='navigation__button button'>
         Аккаунт
       </NavLink>

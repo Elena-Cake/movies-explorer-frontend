@@ -13,12 +13,13 @@ import Login from '../Auth/Login/Login';
 import Register from '../Auth/Register/Register';
 import NotFound from '../NotFound/NotFound';
 import NavigationPopup from '../NavigationPopup/NavigationPopup';
+import { endpoints } from '../../constans/pathContent';
 
 function Main({ isMenuOpen, closeMenu }) {
   return (
     <main className="main">
       <Routes>
-        <Route path='/' element={
+        <Route path={endpoints.ABOUT} element={
           <div className="main-page">
             <Promo />
             <AboutProject />
@@ -27,19 +28,19 @@ function Main({ isMenuOpen, closeMenu }) {
             <Portfolio />
           </div>
         } />
-        <Route path='/movies' element={
+        <Route path={endpoints.MOVIES} element={
           <Movies />
         } />
-        <Route path='/saved-movies' element={
+        <Route path={endpoints.SAVED_MOVIES} element={
           <SavedMovies />
         } />
-        <Route path='/profile' element={
+        <Route path={endpoints.PROFILE} element={
           <Profile />
         } />
-        <Route path='/signin' element={
+        <Route path={endpoints.LOGIN} element={
           <Login />
         } />
-        <Route path='/signup' element={
+        <Route path={endpoints.REGISTER} element={
           <Register />
         } />
         <Route path='*' element={

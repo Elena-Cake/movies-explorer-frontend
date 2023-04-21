@@ -4,6 +4,7 @@ import { dataRowsLogin, textsLogin } from '../../../constans/testConstans';
 import AuthForm from '../AuthForm/AuthForm';
 import FormRow from '../AuthForm/FormRow/FormRow';
 import './Login.css';
+import { endpoints } from '../../../constans/pathContent';
 
 function Login() {
   const [IsButtonActive, setIsButtonActive] = useState(true)
@@ -20,7 +21,7 @@ function Login() {
     <AuthForm
       rowsElements={rowsElements}
       texts={textsLogin}
-      path='/signup'
+      path={endpoints.REGISTER}
       isValid={IsButtonActive}
     />
   );

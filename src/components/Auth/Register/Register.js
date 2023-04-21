@@ -4,6 +4,7 @@ import { dataRowsRegister, textsRegister } from '../../../constans/testConstans'
 import AuthForm from '../AuthForm/AuthForm';
 import FormRow from '../AuthForm/FormRow/FormRow';
 import './Register.css';
+import { endpoints } from '../../../constans/pathContent';
 
 function Register() {
 
@@ -22,7 +23,7 @@ function Register() {
     <AuthForm
       rowsElements={rowsElements}
       texts={textsRegister}
-      path='/signin'
+      path={endpoints.LOGIN}
       isValid={IsButtonActive}
     />
   );
