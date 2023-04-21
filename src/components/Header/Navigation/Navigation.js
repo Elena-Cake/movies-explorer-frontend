@@ -5,6 +5,8 @@ import { endpoints } from '../../../constans/pathContent';
 
 function Navigation({ activePath, openMenu }) {
 
+  const navlinkClassName = ({ isActive }) => `navigation__link link ${isActive ? 'navigation__link_active' : ''}`;
+
   return (
     <div className='navigation'>
       <NavLink to={endpoints.ABOUT} className='header__logo' />
@@ -13,14 +15,14 @@ function Navigation({ activePath, openMenu }) {
           <li>
             <NavLink
               to={endpoints.MOVIES}
-              className={`navigation__link link ${activePath === 'movies' && 'navigation__link_active'}`}>
+              className={navlinkClassName}>
               Фильмы
             </NavLink>
           </li>
           <li>
             <NavLink
               to={endpoints.SAVED_MOVIES}
-              className={`navigation__link link ${activePath === 'saved-movies' && 'navigation__link_active'}`}>
+              className={navlinkClassName}>
               Сохранённые фильмы
             </NavLink>
           </li>

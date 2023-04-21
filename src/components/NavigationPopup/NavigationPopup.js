@@ -4,6 +4,9 @@ import './NavigationPopup.css';
 import { endpoints } from '../../constans/pathContent';
 
 function NavigationPopup({ isMenuOpen, closeMenu }) {
+
+  const navlinkClassName = ({ isActive }) => `menu__link link ${isActive ? 'menu__link_active' : ''}`;
+
   return (
     <div className={`popup-wrapper ${isMenuOpen ? 'popup-wrapper_open' : ''}`}>
       <div className='popup__container-menu'>
@@ -12,7 +15,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
           <li className='menu__link-li '>
             <NavLink
               to={endpoints.ABOUT}
-              className='menu__link link'
+              className={navlinkClassName}
               onClick={closeMenu}>
               Главная
             </NavLink>
@@ -20,7 +23,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
           <li className='menu__link-li'>
             <NavLink
               to={endpoints.MOVIES}
-              className='menu__link link menu__link_active'
+              className={navlinkClassName}
               onClick={closeMenu}>
               Фильмы
             </NavLink>
@@ -28,7 +31,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
           <li className='menu__link-li'>
             <NavLink
               to={endpoints.SAVED_MOVIES}
-              className='menu__link link'
+              className={navlinkClassName}
               onClick={closeMenu}>
               Сохранённые фильмы
             </NavLink>
