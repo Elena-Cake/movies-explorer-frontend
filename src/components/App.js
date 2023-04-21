@@ -105,26 +105,26 @@ function App() {
   }
 
   // проверка токена
-  useEffect(() => {
-    if (jwt) {
-      getProfile()
-        .then((res) => {
-          if (res) {
-            setIsSignIn(true);
-            getMoviesAll()
-              .then((res) => {
-                console.log(res)
-                // setMovies(res)
-              })
-            navigate("/movies", { replace: true })
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          navigate("/", { replace: true })
-        })
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (jwt) {
+  //     getProfile()
+  //       .then((res) => {
+  //         if (res) {
+  //           setIsSignIn(true);
+  //           getMoviesAll()
+  //             .then((res) => {
+  //               console.log(res)
+  //               // setMovies(res)
+  //             })
+  //           navigate("/movies", { replace: true })
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         navigate("/", { replace: true })
+  //       })
+  //   }
+  // }, [])
 
   // удаление токена при выходе из аккаунта
   function signOut(e) {
