@@ -51,7 +51,7 @@ export const getProfile = () => {
 export const updateProfile = (dataUser) => {
     return fetch(`${MAIN_BASE_URL}users/me`, {
         method: 'PATCH',
-        headers: this._headers,
+        headers: headers,
         body: JSON.stringify(dataUser)
     })
         .then((res) => {

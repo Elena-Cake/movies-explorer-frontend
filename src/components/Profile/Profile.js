@@ -1,13 +1,16 @@
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Profile.css';
 import { useNavigate } from 'react-router-dom';
 import { useFormAndValidation } from '../../hooks/useValidationForm';
 import { dataProfile } from '../../constans/movies';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile() {
+function Profile({ logOut, onUpdateUser, textErrorAuth }) {
 
-  const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormAndValidation();
+  const currentUserData = useContext(CurrentUserContext);
+
+  const { values, handleChange, errors, isValid, setValues, setIsValid, resetForm } = useFormAndValidation();
   const navigate = useNavigate();
   const [isEditActive, setIsEditActive] = useState(false)
 
@@ -15,14 +18,21 @@ function Profile() {
     setIsEditActive(!isEditActive)
   }
 
-  const logOut = () => {
-    navigate("/")
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onUpdateUser(
+      {
+        values: values,
+        resetForm: resetForm,
+      }
+    );
   }
 
   //заполненные поля при открытии
   useEffect(() => {
     if (isEditActive) {
-      setValues({ ...values, 'name': dataProfile.name, 'email': dataProfile.email })
+      setValues({ ...values, 'name': currentUserData.name, 'email': currentUserData.email })
       setIsValid(true)
     }
   }, [isEditActive]);
@@ -31,15 +41,15 @@ function Profile() {
     <div className="profile">
       {!isEditActive ?
         <div className='profile__window window'>
-          <h1 className='profile__title'>Привет, {dataProfile.name}!</h1>
+          <h1 className='profile__title'>Привет, {currentUserData.name}!</h1>
           <ul className='profile__rows'>
             <li className='profile__row'>
               <p className='row__title'>Имя</p>
-              <p className='row__data'>{dataProfile.name}</p>
+              <p className='row__data'>{currentUserData.name}</p>
             </li>
             <li className='profile__row'>
               <p className='row__title'>E-mail</p>
-              <p className='row__data'>{dataProfile.email}</p>
+              <p className='row__data'>{currentUserData.email}</p>
             </li>
           </ul>
           <div className='profile__settings'>
@@ -48,8 +58,8 @@ function Profile() {
           </div>
         </div>
         :
-        <form className='profile__window window'>
-          <h1 className='profile__title'>Привет, {dataProfile.name}!</h1>
+        <form className='profile__window window' onSubmit={handleSubmit}>
+          <h1 className='profile__title'>Привет, {currentUserData.name}!</h1>
           <ul className='profile__rows'>
             <li className='profile__row'>
               <p className='row__title'>Имя</p>
@@ -76,10 +86,9 @@ function Profile() {
             </li>
           </ul>
           <div className='profile__button-container button-container'>
-            <span className={`profile__span-error span-error ${!isValid ? 'span-error_active' : ''}`}>При обновлении профиля произошла ошибка.</span>
+            <span className={`profile__span-error span-error ${textErrorAuth !== '' ? 'span-error_active' : ''}`}>{textErrorAuth}</span>
             <button
               className={`profile__save-button button ${!isValid ? 'profile__save-button_disable' : ''}`}
-              onClick={activateEdit}
               disabled={!isValid}
             >Сохранить</button>
           </div>

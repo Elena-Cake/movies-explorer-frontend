@@ -20,9 +20,10 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
     navigate(endpoints.SAVED_MOVIES);
     closeMenu()
   }
-  const goProfile = () => {
+  const goProfile = (e) => {
+    e.preventDefault()
     navigate(endpoints.PROFILE);
-    closeMenu()
+    closeMenu(e)
   }
 
   const navlinkClassName = ({ isActive }) => `menu__link link ${isActive ? 'menu__link_active' : ''}`;

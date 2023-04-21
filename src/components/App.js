@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Footer from './Footer/Footer';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { useNavigate } from 'react-router-dom';
-import { createUser, getProfile, login } from '../utils/MainApi';
+import { createUser, getProfile, login, updateProfile } from '../utils/MainApi';
 import InfoTooltip from './InfoTooltip/InfoTooltip';
 import { getMoviesAll } from '../utils/MoviesApi';
 import { CONFLICT, CONNECTION, CREATED, NO_VALIDATE, OK } from '../constans/statusData';
@@ -96,7 +96,7 @@ function App() {
         setIsInfoTooltipOpen(true);
         setTimeout(setIsInfoTooltipOpen(false), 3000);
       })
-      // .then(() => pullInitialData())
+      .then(() => pullInitialData())
       .catch((res) => {
         appointErrInfoTool()
         setIsInfoTooltipOpen(true);
@@ -105,34 +105,63 @@ function App() {
   }
 
   // проверка токена
-  // useEffect(() => {
-  //   if (jwt) {
-  //     getProfile()
-  //       .then((res) => {
-  //         if (res) {
-  //           setIsSignIn(true);
-  //           getMoviesAll()
-  //             .then((res) => {
-  //               console.log(res)
-  //               // setMovies(res)
-  //             })
-  //           navigate("/movies", { replace: true })
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         navigate("/", { replace: true })
-  //       })
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (jwt) {
+      getProfile()
+        .then((res) => {
+          if (res) {
+            setIsSignIn(true);
+            pullInitialData()
+            navigate("/movies", { replace: true })
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          navigate("/", { replace: true })
+        })
+    }
+  }, [])
 
   // удаление токена при выходе из аккаунта
-  function signOut(e) {
+  function logOut(e) {
     e.preventDefault();
     localStorage.removeItem("jwt");
     navigate("/", { replace: false })
   }
 
+
+  // _____загрузка данных____
+  const pullInitialData = () => {
+    Promise.all([getMoviesAll(), getProfile()])
+      .then(([movies, user]) => {
+        setCurrentUser(user)
+        setMovies(movies)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  // обновление профиля
+  function onUpdateUser({ values, resetForm }) {
+    updateProfile(values)
+      .then((user) => {
+        console.log(user)
+        setCurrentUser(user)
+        setTextErrorAuth('')
+        resetForm()
+      })
+      .catch((res) => {
+        console.log(res)
+        if (res === 400) {
+          setTextErrorAuth(NO_VALIDATE.VALIDATION)
+        } else if (res === 409) {
+          setTextErrorAuth(CONFLICT.MESSAGE)
+        } else {
+          setTextErrorAuth(CONNECTION.MESSAGE)
+        }
+      })
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -140,8 +169,9 @@ function App() {
         <Header openMenu={openMenu} />
         <Main
           isMenuOpen={isMenuOpen} closeMenu={closeMenu}
-          onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister} signOut={signOut}
-          textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit}
+          onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
+          textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
+          onUpdateUser={onUpdateUser}
         />
         <Footer />
 
