@@ -1,7 +1,7 @@
 
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
-import { endpoints } from '../../constans/pathContent';
+import { endpoints } from '../../../constans/pathContent';
 
 function Navigation({ activePath, openMenu }) {
 

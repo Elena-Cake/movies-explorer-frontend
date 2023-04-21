@@ -1,4 +1,4 @@
-.footer {
+.footer-content {
     padding: 65px 0 20px 0;
     background-color: var(--grey-bg-footer);
 }
@@ -52,13 +52,13 @@
 }
 
 @media screen and (max-width: 1279px) {
-    .footer {
+    .footer-content {
         padding-top: 50px;
     }
 }
 
 @media screen and (max-width: 767px) {
-    .footer {
+    .footer-content {
         padding-top: 50px;
     }
 

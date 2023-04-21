@@ -1,12 +1,12 @@
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 import './Header.css';
-import Navigation from '../Navigation/Navigation';
 import { endpoints } from '../../constans/pathContent';
+import Navigation from './Navigation/Navigation';
 
 function Header({ openMenu }) {
   return (
-    <div className="header">
+    <header className="header">
       <Routes>
         <Route path={endpoints.ABOUT} element={
           <div className='header__main'>
@@ -23,7 +23,7 @@ function Header({ openMenu }) {
         <Route path={endpoints.PROFILE} element={
           <Navigation activePath='profile' openMenu={openMenu} />} />
       </Routes>
-    </div>
+    </header>
   );
 }
 

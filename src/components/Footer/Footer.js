@@ -7,17 +7,19 @@ import { endpoints } from '../../constans/pathContent';
 
 function Footer() {
   return (
-    <Routes>
-      <Route path={endpoints.ABOUT} element={
-        <FooterContent />
-      } />
-      <Route path={endpoints.MOVIES} element={
-        <FooterContent />
-      } />
-      <Route path={endpoints.SAVED_MOVIES} element={
-        <FooterContent />
-      } />
-    </Routes>
+    <footer className='footer'>
+      <Routes>
+        <Route path={endpoints.ABOUT} element={
+          <FooterContent />
+        } />
+        <Route path={endpoints.MOVIES} element={
+          <FooterContent />
+        } />
+        <Route path={endpoints.SAVED_MOVIES} element={
+          <FooterContent />
+        } />
+      </Routes>
+    </footer>
   );
 }
 
