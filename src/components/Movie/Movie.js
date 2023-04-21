@@ -24,14 +24,14 @@ function Movie({ data, isSavedPage }) {
     window.open(data.trailerLink, '_blank')
   }
 
-  useEffect(() => {
-    if (isFlagActive) {
-      console.log('delete')
-    } else {
-      console.log('add')
+  // useEffect(() => {
+  //   if (isFlagActive) {
+  //     console.log('delete')
+  //   } else {
+  //     console.log('add')
 
-    }
-  }, [isFlagActive])
+  //   }
+  // }, [isFlagActive])
 
   return (
     <li className="movie">
