@@ -16,10 +16,10 @@ import NavigationPopup from '../NavigationPopup/NavigationPopup';
 
 function Main({ isMenuOpen, closeMenu }) {
   return (
-    <div>
+    <main className="main">
       <Routes>
         <Route path='/' element={
-          <div className="main">
+          <div className="main-page">
             <Promo />
             <AboutProject />
             <Techs />
@@ -48,7 +48,7 @@ function Main({ isMenuOpen, closeMenu }) {
       </Routes>
 
       <NavigationPopup isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
-    </div>
+    </main>
   );
 }
 

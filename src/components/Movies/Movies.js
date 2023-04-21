@@ -6,9 +6,7 @@ import { movies } from '../../constans/testConstans';
 function Movies() {
 
   return (
-    <div>
-      <MoviesPage movies={movies} isButtonVisible={true} />
-    </div>
+    <MoviesPage movies={movies} isButtonVisible={true} />
   );
 }
 

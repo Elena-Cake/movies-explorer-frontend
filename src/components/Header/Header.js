@@ -5,7 +5,7 @@ import Navigation from '../Navigation/Navigation';
 
 function Header({ openMenu }) {
   return (
-    <div className="header">
+    <header className="header">
       <Routes>
         <Route path='/' element={
           <div className='header__main'>
@@ -22,7 +22,7 @@ function Header({ openMenu }) {
         <Route path='/profile' element={
           <Navigation activePath='profile' openMenu={openMenu} />} />
       </Routes>
-    </div>
+    </header>
   );
 }
 

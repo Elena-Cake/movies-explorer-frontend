@@ -6,17 +6,19 @@ import FooterContent from './FooterContent/FooterContent';
 
 function Footer() {
   return (
-    <Routes>
-      <Route path='/' element={
-        <FooterContent />
-      } />
-      <Route path='/movies' element={
-        <FooterContent />
-      } />
-      <Route path='/saved-movies' element={
-        <FooterContent />
-      } />
-    </Routes>
+    <footer className='footer'>
+      <Routes>
+        <Route path='/' element={
+          <FooterContent />
+        } />
+        <Route path='/movies' element={
+          <FooterContent />
+        } />
+        <Route path='/saved-movies' element={
+          <FooterContent />
+        } />
+      </Routes>
+    </footer>
   );
 }
 
