@@ -27,7 +27,7 @@ export const dataRowsRegister = [
     },
     {
         title: 'Пароль',
-        name: 'pass',
+        name: 'password',
         error: 'Что-то пошло не так...',
         value: '1111',
         validation:
@@ -58,7 +58,7 @@ export const dataRowsLogin = [
     },
     {
         title: 'Пароль',
-        name: 'pass',
+        name: 'password',
         error: 'Что-то пошло не так...',
         value: '1111',
         validation:

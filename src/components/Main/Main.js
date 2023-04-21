@@ -18,7 +18,7 @@ import { endpoints } from '../../constans/pathContent';
 
 function Main({ isMenuOpen, closeMenu, onSubmitLogin, onSubmitRegister }) {
   return (
-    <div>
+    <main className='main'>
       <Routes>
         <Route path={endpoints.ABOUT} element={
           <div className="main-page">
@@ -53,7 +53,7 @@ function Main({ isMenuOpen, closeMenu, onSubmitLogin, onSubmitRegister }) {
       </Routes>
 
       <NavigationPopup isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
-    </div>
+    </main>
   );
 }
 

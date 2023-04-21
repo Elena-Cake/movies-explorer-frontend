@@ -1,10 +1,10 @@
 const OK = {
     CODE: 200,
-    MESSAGE: 'Успешно',
+    MESSAGE: 'Успешно!',
 };
 const CREATED = {
     CODE: 201,
-    USER_MESSAGE: 'Пользователь зарегестрирован',
+    USER_MESSAGE: 'Вы успешно зарегистрировались!',
     FILM_MESSAGE: 'Фильм добавлен',
 };
 const NO_VALIDATE = {
@@ -25,8 +25,7 @@ const UNDERFINED = {
     CODE: 404,
     USER_MESSAGE: 'Пользователь не найден',
     FILM_MESSAGE: 'Фильм не найден',
-    PATH_MESSAGE: 'Страница по указанному маршруту не найдена.',
-    TEAPOT_MESSAGE: 'я - чайник!',
+    PATH_MESSAGE: 'Страница по указанному маршруту не найдена.'
 };
 const CONFLICT = {
     CODE: 409,
@@ -36,5 +35,12 @@ const INTERNAL = {
     CODE: 500,
     MESSAGE: 'На сервере произошла ошибка.',
 };
+const CONNECTION = {
+    MESSAGE: "Что-то пошло не так! Попробуйте ещё раз."
+};
 
-module.exports = { OK, CREATED, NO_VALIDATE, UNAUTHORIZED, FORBIDDEN, UNDERFINED, CONFLICT, INTERNAL };
+module.exports = {
+    OK, CREATED, NO_VALIDATE,
+    UNAUTHORIZED, FORBIDDEN, UNDERFINED,
+    CONFLICT, INTERNAL, CONNECTION
+};

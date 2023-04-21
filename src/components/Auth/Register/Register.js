@@ -7,16 +7,19 @@ import { dataRowsRegister, textsRegister } from '../../../constans/inputsData';
 import { endpoints } from '../../../constans/pathContent';
 
 function Register({ onSubmitForm }) {
-
-
   const [IsButtonActive, setIsButtonActive] = useState(true)
+  const [inputsValues, setInputsValues] = useState([]);
+
+  const onSetValues = (values) => {
+    setInputsValues(values)
+  }
 
   const onChangeButtonActive = (isValid) => {
     setIsButtonActive(isValid);
   }
 
   const rowsElements = dataRowsRegister.map((row) => {
-    return <FormRow data={row} onChangeButtonActive={onChangeButtonActive} />
+    return <FormRow data={row} onChangeButtonActive={onChangeButtonActive} onSetValues={onSetValues} />
   })
 
   return (
@@ -25,7 +28,9 @@ function Register({ onSubmitForm }) {
       texts={textsRegister}
       path={endpoints.LOGIN}
       isValid={IsButtonActive}
-      onSubmitForm={onSubmitForm}
+      onSendForm={onSubmitForm}
+      typeForm={'Register'}
+      inputsValues={inputsValues}
     />
   );
 }

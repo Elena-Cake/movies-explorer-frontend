@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { createUser, getProfile, login } from '../utils/MainApi';
 import InfoTooltip from './InfoTooltip/InfoTooltip';
 import { getMoviesAll } from '../utils/MoviesApi';
+import { CONNECTION, CREATED, OK } from '../constans/statusData';
 
 function App() {
 
@@ -45,16 +46,17 @@ function App() {
   const [infoToolText, setInfoToolText] = useState("Info");
   // ошибка для InfoTooltip
   function appointErrInfoTool() {
-    setInfoToolText("Что-то пошло не так! Попробуйте ещё раз.")
+    setInfoToolText(CONNECTION.MESSAGE)
   }
 
   // регистрация
-  function onSubmitRegister(name, email, password) {
+  function onSubmitRegister(dataForm) {
+    const { name, email, password } = dataForm
     createUser({ name, email, password })
       .then((res) => {
         if (res) {
           setIsSignIn(true)
-          setInfoToolText('Вы успешно зарегистрировались!')
+          setInfoToolText(CREATED.USER_MESSAGE)
         }
       })
       .then(() => {
@@ -68,12 +70,13 @@ function App() {
   }
 
   // авторизация
-  function onSubmitLogin(email, password) {
+  function onSubmitLogin(dataForm) {
+    const { email, password } = dataForm
     login({ password, email })
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         setIsSignIn(true);
-        setInfoToolText('Успешно!')
+        setInfoToolText(OK.MESSAGE)
         navigate('/movies', { replace: true });
       })
       // .then(() => pullInitialData())

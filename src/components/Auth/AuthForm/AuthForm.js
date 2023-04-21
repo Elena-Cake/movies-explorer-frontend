@@ -2,12 +2,24 @@
 import { NavLink } from 'react-router-dom';
 import './AuthForm.css';
 import { endpoints } from '../../../constans/pathContent';
+import { dataRowsRegister } from '../../../constans/inputsData';
+import { useFormAndValidation } from '../../../hooks/useValidationForm';
 
-function AuthForm({ texts, path, rowsElements, isValid, onSubmitForm }) {
+function AuthForm({ texts, path, rowsElements, isValid, onSendForm, typeForm }) {
 
-  const handleSubmitForm = (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault()
-    onSubmitForm()
+    // достать значения формы
+    const formInputs = Array.from(e.target.closest('form').elements).filter((item) => !!item.name).map(el => {
+      const { name, value } = el;
+      return { name, value }
+    })
+    // объединить в объект
+    const formData = {}
+    for (let input of formInputs) {
+      formData[input.name] = input.value
+    }
+    onSendForm(formData)
   }
 
   return (
@@ -26,7 +38,7 @@ function AuthForm({ texts, path, rowsElements, isValid, onSubmitForm }) {
             <button
               className={`auth__button button ${!isValid ? 'auth__button_disable' : ''}`}
               disabled={!isValid}
-              onClick={handleSubmitForm}
+              onClick={onSubmitForm}
             >{texts.button}</button>
           </div>
           <p className='auth__text'>

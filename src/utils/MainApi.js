@@ -13,6 +13,7 @@ function checkResponse(res) {
 
 // запрос регистрации (name, email, password)
 export const createUser = (dataUser) => {
+
     return fetch(`${MAIN_BASE_URL}signup`, {
         method: 'POST',
         headers: headers,

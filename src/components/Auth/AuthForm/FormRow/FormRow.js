@@ -3,7 +3,7 @@ import './FormRow.css';
 import { useFormAndValidation } from '../../../../hooks/useValidationForm'
 import { useEffect } from 'react';
 
-function FormRow({ data, onChangeButtonActive }) {
+function FormRow({ data, onChangeButtonActive, onSetValues }) {
 
   const { values, handleChange, errors, isValid } = useFormAndValidation();
   const nameInput = data.name;
