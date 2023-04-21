@@ -8,17 +8,17 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
 
   // !!!КОСТЫЛЬ!!!
   const navigate = useNavigate();
-  const goAbout = () => {
+  const goAbout = (e) => {
     navigate(endpoints.ABOUT);
-    closeMenu()
+    closeMenu(e)
   }
-  const goMovies = () => {
+  const goMovies = (e) => {
     navigate(endpoints.MOVIES);
-    closeMenu()
+    closeMenu(e)
   }
-  const goSavedMovies = () => {
+  const goSavedMovies = (e) => {
     navigate(endpoints.SAVED_MOVIES);
-    closeMenu()
+    closeMenu(e)
   }
   const goProfile = (e) => {
     e.preventDefault()

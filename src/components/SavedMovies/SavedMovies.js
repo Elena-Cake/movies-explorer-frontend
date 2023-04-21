@@ -3,10 +3,10 @@ import { saveMovies } from '../../constans/movies';
 import MoviesPage from '../MoviesPage/MoviesPage';
 import './SavedMovies.css';
 
-function SavedMovies() {
+function SavedMovies({ movies }) {
 
   return (
-    <MoviesPage movies={saveMovies} isButtonVisible={false} isSavedPage={true} />
+    <MoviesPage movies={movies} isButtonVisible={false} isSavedPage={true} />
   );
 }
 

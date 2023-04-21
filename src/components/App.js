@@ -10,6 +10,7 @@ import { createUser, getProfile, login, updateProfile } from '../utils/MainApi';
 import InfoTooltip from './InfoTooltip/InfoTooltip';
 import { getMoviesAll } from '../utils/MoviesApi';
 import { CONFLICT, CONNECTION, CREATED, NO_VALIDATE, OK } from '../constans/statusData';
+import Preloader from './Preloader/Preloader';
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
   const [textErrorAuth, setTextErrorAuth] = useState("");
   const jwt = localStorage.getItem('jwt');
 
+  // прелоадер
+  const [isPreloaderActive, setIsPreloaderActive] = useState(false)
 
   // данные профиля
   const [currentUser, setCurrentUser] = useState({});
@@ -37,7 +40,6 @@ function App() {
     e.preventDefault()
     setIsMenuOpen(false)
   }
-
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const closeInfoTooltip = () => {
@@ -59,6 +61,7 @@ function App() {
 
   // регистрация
   function onSubmitRegister(dataForm) {
+    setIsPreloaderActive(true)
     setInfoToolText('')
     const { name, email, password } = dataForm
     createUser({ name, email, password })
@@ -81,10 +84,12 @@ function App() {
         }
         setIsSignIn(false)
       })
+      .finally(() => setIsPreloaderActive(false))
   }
 
   // авторизация
   function onSubmitLogin(dataForm) {
+    setIsPreloaderActive(true)
     setInfoToolText('')
     const { email, password } = dataForm
     login({ password, email })
@@ -103,6 +108,7 @@ function App() {
         setIsInfoTooltipOpen(true);
         setIsSignIn(false);
       })
+      .finally(() => setIsPreloaderActive(false))
   }
 
   // проверка токена
@@ -133,6 +139,7 @@ function App() {
 
   // _____загрузка данных____
   const pullInitialData = () => {
+    setIsPreloaderActive(true)
     Promise.all([getMoviesAll(), getProfile()])
       .then(([movies, user]) => {
         setCurrentUser(user)
@@ -141,12 +148,14 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
+      .finally(() => setIsPreloaderActive(false))
   }
 
   const handleEditMode = () => setIsEditMode(true)
 
   // обновление профиля
-  function onUpdateUser({ values, resetForm }) {
+  function onUpdateUser({ values }) {
+    setIsPreloaderActive(true)
     updateProfile(values)
       .then((user) => {
         setCurrentUser(user)
@@ -163,6 +172,7 @@ function App() {
           setTextErrorAuth(CONNECTION.MESSAGE)
         }
       })
+      .finally(() => setIsPreloaderActive(false))
   }
 
   return (
@@ -174,6 +184,7 @@ function App() {
           onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
           textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
           onUpdateUser={onUpdateUser} isEditMode={isEditMode} handleEditMode={handleEditMode}
+          movies={movies}
         />
         <Footer />
 
@@ -182,6 +193,8 @@ function App() {
           onClose={closeInfoTooltip}
           isSignIn={isSignIn}
           text={infoToolText} />
+
+        <Preloader isActive={isPreloaderActive} />
       </div>
     </CurrentUserContext.Provider>
   );

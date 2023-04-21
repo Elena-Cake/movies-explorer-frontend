@@ -19,7 +19,8 @@ import { endpoints } from '../../constans/pathContent';
 function Main({
   isMenuOpen, closeMenu, onSubmitLogin,
   onSubmitRegister, textErrorAuth, deleteErrorSubmit,
-  logOut, onUpdateUser, isEditMode, handleEditMode
+  logOut, onUpdateUser, isEditMode, handleEditMode,
+  movies
 }) {
 
   return (
@@ -36,11 +37,11 @@ function Main({
         } />
         <Route path={endpoints.MOVIES} element={
           // <ProtectedRoute component={Movies} />
-          <Movies />
+          <Movies movies={movies} />
         } />
         <Route path={endpoints.SAVED_MOVIES} element={
           // <ProtectedRoute component={SavedMovies} />
-          <SavedMovies />
+          <SavedMovies movies={movies} />
         } />
         <Route path={endpoints.PROFILE} element={
           // <ProtectedRoute component={Profile} />
