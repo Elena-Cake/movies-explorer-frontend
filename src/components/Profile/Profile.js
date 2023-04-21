@@ -6,17 +6,12 @@ import { useFormAndValidation } from '../../hooks/useValidationForm';
 import { dataProfile } from '../../constans/movies';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ logOut, onUpdateUser, textErrorAuth }) {
+function Profile({ logOut, onUpdateUser, textErrorAuth, isEditMode, handleEditMode }) {
 
   const currentUserData = useContext(CurrentUserContext);
 
   const { values, handleChange, errors, isValid, setValues, setIsValid, resetForm } = useFormAndValidation();
   const navigate = useNavigate();
-  const [isEditActive, setIsEditActive] = useState(false)
-
-  const activateEdit = () => {
-    setIsEditActive(!isEditActive)
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,15 +26,15 @@ function Profile({ logOut, onUpdateUser, textErrorAuth }) {
 
   //заполненные поля при открытии
   useEffect(() => {
-    if (isEditActive) {
+    if (isEditMode) {
       setValues({ ...values, 'name': currentUserData.name, 'email': currentUserData.email })
       setIsValid(true)
     }
-  }, [isEditActive]);
+  }, [isEditMode]);
 
   return (
     <div className="profile">
-      {!isEditActive ?
+      {!isEditMode ?
         <div className='profile__window window'>
           <h1 className='profile__title'>Привет, {currentUserData.name}!</h1>
           <ul className='profile__rows'>
@@ -53,7 +48,7 @@ function Profile({ logOut, onUpdateUser, textErrorAuth }) {
             </li>
           </ul>
           <div className='profile__settings'>
-            <button className='profile__edit-button button' onClick={activateEdit}>Редактировать</button>
+            <button className='profile__edit-button button' onClick={handleEditMode}>Редактировать</button>
             <button className='profile__exit-button button' onClick={logOut}>Выйти из аккаунта</button>
           </div>
         </div>

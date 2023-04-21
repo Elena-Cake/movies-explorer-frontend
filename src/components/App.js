@@ -22,6 +22,7 @@ function App() {
 
   // данные профиля
   const [currentUser, setCurrentUser] = useState({});
+  const [isEditMode, setIsEditMode] = useState(false)
 
   // фильмы
   const [movies, setMovies] = useState([]);
@@ -142,14 +143,15 @@ function App() {
       })
   }
 
+  const handleEditMode = () => setIsEditMode(true)
+
   // обновление профиля
   function onUpdateUser({ values, resetForm }) {
     updateProfile(values)
       .then((user) => {
-        console.log(user)
         setCurrentUser(user)
         setTextErrorAuth('')
-        resetForm()
+        setIsEditMode(false)
       })
       .catch((res) => {
         console.log(res)
@@ -171,7 +173,7 @@ function App() {
           isMenuOpen={isMenuOpen} closeMenu={closeMenu}
           onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
           textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
-          onUpdateUser={onUpdateUser}
+          onUpdateUser={onUpdateUser} isEditMode={isEditMode} handleEditMode={handleEditMode}
         />
         <Footer />
 
