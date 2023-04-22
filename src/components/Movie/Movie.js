@@ -8,14 +8,13 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
   const min = dataMovie.duration % 60;
   const duration = `${hours > 0 ? `${hours}ч ` : ''}${min === 0 ? '' : min + 'м'}`;
 
-  const src = 'https://api.nomoreparties.co/' + dataMovie.image.url
 
   const onClickLike = () => {
     handleLike(dataMovie)
   }
 
   const onDeleteMovie = () => {
-    handleDelete(dataMovie.id)
+    handleDelete(dataMovie.coumovieId)
   }
 
   const handleCardClick = () => {
@@ -34,7 +33,7 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
         }
       </div>
       <div className='movie__foto-container' onClick={handleCardClick}>
-        <img className='movie__foto' src={src} alt='скриншот фильма' />
+        <img className='movie__foto' src={dataMovie.image} alt='скриншот фильма' />
       </div>
     </li>
   );

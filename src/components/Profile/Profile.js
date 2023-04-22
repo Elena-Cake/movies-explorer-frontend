@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from 'react';
 import './Profile.css';
 import { useNavigate } from 'react-router-dom';
 import { useFormAndValidation } from '../../hooks/useValidationForm';
-import { dataProfile } from '../../constans/movies';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Profile({ logOut, onUpdateUser, textErrorAuth, isEditMode, handleEditMode }) {
