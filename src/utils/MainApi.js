@@ -1,4 +1,9 @@
-import { MAIN_BASE_URL } from "../constans/apiConstans";
+import { MAIN_BASE_LOCAL, MAIN_BASE_URL } from "../constans/apiConstans";
+// const URL_BASE = MAIN_BASE_URL;
+
+// для локального тестирования
+const URL_BASE = MAIN_BASE_LOCAL;
+
 const headers = {
     'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
@@ -14,7 +19,7 @@ function checkResponse(res) {
 // запрос регистрации (name, email, password)
 export const createUser = (dataUser) => {
 
-    return fetch(`${MAIN_BASE_URL}signup`, {
+    return fetch(`${URL_BASE}signup`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(dataUser)
@@ -26,7 +31,7 @@ export const createUser = (dataUser) => {
 
 // запрос авторизации (email, password)
 export const login = (dataUser) => {
-    return fetch(`${MAIN_BASE_URL}signin`, {
+    return fetch(`${URL_BASE}signin`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(dataUser)
@@ -38,7 +43,7 @@ export const login = (dataUser) => {
 
 // получение данных пользователя 
 export const getProfile = () => {
-    return fetch(`${MAIN_BASE_URL}users/me`, {
+    return fetch(`${URL_BASE}users/me`, {
         method: 'GET',
         headers: headers,
     })
@@ -49,7 +54,7 @@ export const getProfile = () => {
 
 // изменение профайла (name, email)
 export const updateProfile = (dataUser) => {
-    return fetch(`${MAIN_BASE_URL}users/me`, {
+    return fetch(`${URL_BASE}users/me`, {
         method: 'PATCH',
         headers: headers,
         body: JSON.stringify(dataUser)
@@ -61,7 +66,7 @@ export const updateProfile = (dataUser) => {
 
 // получение сохраненных фильмов
 export const getMovies = () => {
-    return fetch(`${MAIN_BASE_URL}movies`, {
+    return fetch(`${URL_BASE}movies`, {
         method: 'GET',
         headers: headers,
     })
@@ -74,25 +79,26 @@ export const getMovies = () => {
 // (country, director, duration, year, description, image, 
 //  trailerLink, thumbnail, coumovieId, movieId, nameRU, nameEN)
 export const createMovie = (dataCard) => {
-    return fetch(`${MAIN_BASE_URL}movies`, {
+    return fetch(`${URL_BASE}movies`, {
         method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-            'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify(dataCard)
     })
-        .then(this._checkRes)
+        .then((res) => {
+            return checkResponse(res)
+        })
 }
 
 // удалить фильм (movieId)
 export const deleteMovie = (movieId) => {
-    return fetch(`${MAIN_BASE_URL}movies/${movieId}`, {
+    return fetch(`${URL_BASE}movies/${movieId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
             'Content-Type': 'application/json'
         }
     })
-        .then(this._checkRes)
+        .then((res) => {
+            return checkResponse(res)
+        })
 }

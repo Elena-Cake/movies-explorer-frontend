@@ -1,12 +1,12 @@
 
 import './Movies.css';
 import MoviesPage from '../MoviesPage/MoviesPage';
-import { movies } from '../../constans/movies';
 
-function Movies({ movies }) {
+function Movies({ movies, handleLike, handleDelete }) {
   return (
     <div>
-      <MoviesPage movies={movies} isButtonVisible={true} />
+      <MoviesPage movies={movies} isButtonVisible={true}
+        handleLike={handleLike} handleDelete={handleDelete} />
     </div>
   );
 }

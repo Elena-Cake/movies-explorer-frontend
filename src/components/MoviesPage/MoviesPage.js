@@ -4,10 +4,10 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useEffect, useState } from 'react';
 
-function MoviesPage({ movies, isSavedPage = false }) {
-
+function MoviesPage({ movies = [], isSavedPage = false, handleLike, handleDelete }) {
+  // console.log(movies)
   const [windowWidth, setWindowWidth] = useState(undefined);
-  const [moviesVisible, setMoviesVisible] = useState([]);
+  const [moviesVisible, setMoviesVisible] = useState(movies);
   const [countMoviesVisible, setCountMoviesVisible] = useState(0);
   const [stepMoviesMore, setStepMoviesMore] = useState(1);
   const [isTimeAddMovies, setIsTimeAddMovies] = useState(false);
@@ -35,29 +35,52 @@ function MoviesPage({ movies, isSavedPage = false }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // переворот экрана
   useEffect(() => {
-    if (moviesVisible.length === 0) {
-      if (windowWidth >= 1280) {
-        setMoviesVisible(movies.slice(0, 12))
-        setStepMoviesMore(3)
-      }
-      else if (windowWidth >= 768) {
-        setMoviesVisible(movies.slice(0, 8))
-        setStepMoviesMore(2)
-      }
-      else {
-        setMoviesVisible(movies.slice(0, 5))
-        setStepMoviesMore(2)
+    if (windowWidth >= 1280) {
+      setStepMoviesMore(3)
+      // дополняю фильмы до целой полоски
+      if (countMoviesVisible % 3 !== 0) {
+        setMoviesVisible(movies.slice(0, (Math.floor(countMoviesVisible / 3) + 1) * 3))
       }
     }
+    else if (windowWidth >= 768) {
+      setStepMoviesMore(2)
+      if (countMoviesVisible % 2 !== 0) {
+        setMoviesVisible(movies.slice(0, (Math.floor(countMoviesVisible / 2) + 1) * 2))
+      }
+    }
+    else {
+      setStepMoviesMore(2)
+    }
   }, [windowWidth])
+
+
+  // // первое отображение фильмов
+  // useEffect(() => {
+  //   if (moviesVisible.length === 0 && !isSavedPage) {
+  //     if (windowWidth >= 1280) {
+  //       setMoviesVisible(movies.slice(0, 12))
+  //       setStepMoviesMore(3)
+  //     }
+  //     else if (windowWidth >= 768) {
+  //       setMoviesVisible(movies.slice(0, 8))
+  //       setStepMoviesMore(2)
+  //     }
+  //     else {
+  //       setMoviesVisible(movies.slice(0, 5))
+  //       setStepMoviesMore(2)
+  //     }
+  //   }
+  // }, [movies])
 
   return (
     <section className="movies">
       <SearchForm />
-      <MoviesCardList movies={moviesVisible} isSavedPage={isSavedPage} />
+      <MoviesCardList movies={moviesVisible} isSavedPage={isSavedPage}
+        handleLike={handleLike} handleDelete={handleDelete} />
       <div className='movies__more'>
-        {!isSavedPage && countMoviesVisible < movies.length &&
+        {!isSavedPage && countMoviesVisible <= movies.length &&
           <button className='movies__more-button button' onClick={onAddMovies}>Ещё</button>
         }
       </div>

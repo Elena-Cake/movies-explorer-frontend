@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Footer from './Footer/Footer';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { useNavigate } from 'react-router-dom';
-import { createUser, getProfile, login, updateProfile } from '../utils/MainApi';
+import { createUser, getProfile, login, updateProfile, getMovies, createMovie, deleteMovie } from '../utils/MainApi';
 import InfoTooltip from './InfoTooltip/InfoTooltip';
 import { getMoviesAll } from '../utils/MoviesApi';
 import { CONFLICT, CONNECTION, CREATED, NO_VALIDATE, OK } from '../constans/statusData';
@@ -29,6 +29,7 @@ function App() {
 
   // фильмы
   const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   // отображение бургера
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -140,10 +141,15 @@ function App() {
   // _____загрузка данных____
   const pullInitialData = () => {
     setIsPreloaderActive(true)
-    Promise.all([getMoviesAll(), getProfile()])
-      .then(([movies, user]) => {
+    Promise.all([getMoviesAll(), getProfile(), getMovies()])
+      .then(([movies, user, savedMoves]) => {
         setCurrentUser(user)
-        setMovies(movies)
+        const idsSavedMovies = savedMoves.map((movie) => movie.movieId)
+        setMovies(movies.map(movie => {
+          return { ...movie, isSaved: idsSavedMovies.includes(movie.id) }
+        })
+        )
+        setSavedMovies(movies.filter(movie => idsSavedMovies.includes(movie.id)))
       })
       .catch((err) => {
         console.log(err);
@@ -175,6 +181,53 @@ function App() {
       .finally(() => setIsPreloaderActive(false))
   }
 
+  // добавление фильма в сохраненные
+  const handleLike = (dataMovie) => {
+    dataMovie.isSaved ?
+      handleDeleteMovie(dataMovie.id) :
+      handleAddMovie(dataMovie)
+  }
+
+  // добавление фильма в сохраненные
+  const handleAddMovie = (dataMovie) => {
+    const newMovie = {
+      country: dataMovie.country,
+      director: dataMovie.director,
+      duration: dataMovie.duration,
+      year: dataMovie.year,
+      description: dataMovie.description,
+      image: 'https://api.nomoreparties.co' + dataMovie.image.url,
+      trailerLink: dataMovie.trailerLink,
+      thumbnail: 'https://api.nomoreparties.co' + dataMovie.image.url,
+      movieId: dataMovie.id,
+      nameRU: dataMovie.nameRU,
+      nameEN: dataMovie.nameEN
+    }
+    console.log('add', newMovie)
+    createMovie(newMovie)
+      .then((res) => {
+        getMovies()
+          .then((savedMoves) => {
+            setSavedMovies(savedMoves)
+          })
+      })
+      .catch((res) => {
+        console.log(res)
+      })
+  }
+
+  // удаление фильма из сохраненных
+  const handleDeleteMovie = (movieId) => {
+    console.log('delete', movieId)
+    deleteMovie(movieId)
+      .then(res => {
+        console.log(res)
+      })
+      .catch((res) => {
+        console.log(res)
+      })
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -184,7 +237,8 @@ function App() {
           onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
           textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
           onUpdateUser={onUpdateUser} isEditMode={isEditMode} handleEditMode={handleEditMode}
-          movies={movies}
+          movies={movies} savedMovies={savedMovies}
+          handleLike={handleLike} handleDelete={handleDeleteMovie}
         />
         <Footer />
 
