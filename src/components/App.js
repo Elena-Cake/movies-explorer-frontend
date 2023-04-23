@@ -120,7 +120,6 @@ function App() {
           if (res) {
             setIsSignIn(true);
             pullInitialData()
-            navigate("/movies", { replace: true })
           }
         })
         .catch((err) => {
@@ -159,7 +158,6 @@ function App() {
     setIsPreloaderActive(true)
     Promise.all([getMoviesAll(), getProfile(), getMovies()])
       .then(([movies, user, savedMoves]) => {
-        console.log(savedMoves)
         setCurrentUser(user)
         const idsSavedMovies = savedMoves.map((movie) => movie.movieId)
         setMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))

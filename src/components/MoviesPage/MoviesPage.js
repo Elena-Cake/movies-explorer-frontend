@@ -4,8 +4,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useEffect, useState } from 'react';
 
-function MoviesPage({ movies = [], isSavedPage = false, handleLike, handleDelete }) {
-  // console.log(movies)
+function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
+
   const [windowWidth, setWindowWidth] = useState(undefined);
   const [moviesVisible, setMoviesVisible] = useState(movies);
   const [countMoviesVisible, setCountMoviesVisible] = useState(0);
@@ -14,22 +14,27 @@ function MoviesPage({ movies = [], isSavedPage = false, handleLike, handleDelete
 
   // добавить фильмы на экран
   const onAddMovies = () => {
-    setIsTimeAddMovies(!isTimeAddMovies)
+    setIsTimeAddMovies(true)
   }
 
   useEffect(() => {
-    setMoviesVisible(movies.slice(0, countMoviesVisible + stepMoviesMore))
+    if (isTimeAddMovies) {
+      setMoviesVisible(movies.slice(0, countMoviesVisible + stepMoviesMore))
+      setIsTimeAddMovies(false)
+    }
   }, [isTimeAddMovies]);
 
   useEffect(() => {
     setCountMoviesVisible(moviesVisible.length)
   }, [moviesVisible]);
 
+
+  function handleResize() {
+    setWindowWidth(window.innerWidth);
+  }
   // прослушка изменения ширины экрана
   useEffect(() => {
-    function handleResize() {
-      setWindowWidth(window.innerWidth);
-    }
+
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
@@ -37,42 +42,54 @@ function MoviesPage({ movies = [], isSavedPage = false, handleLike, handleDelete
 
   // переворот экрана
   useEffect(() => {
-    if (windowWidth >= 1280) {
-      setStepMoviesMore(3)
-      // дополняю фильмы до целой полоски
-      if (countMoviesVisible % 3 !== 0) {
-        setMoviesVisible(movies.slice(0, (Math.floor(countMoviesVisible / 3) + 1) * 3))
+    if (!isSavedPage) {
+      if (windowWidth >= 1279) {
+        setStepMoviesMore(3)
+        // дополняю фильмы до целой полоски
+        if (countMoviesVisible % 3 !== 0) {
+          setMoviesVisible(movies.slice(0, (Math.floor(countMoviesVisible / 3) + 1) * 3))
+        }
       }
-    }
-    else if (windowWidth >= 768) {
-      setStepMoviesMore(2)
-      if (countMoviesVisible % 2 !== 0) {
-        setMoviesVisible(movies.slice(0, (Math.floor(countMoviesVisible / 2) + 1) * 2))
+      else if (windowWidth >= 768) {
+        setStepMoviesMore(2)
+        if (countMoviesVisible % 2 !== 0) {
+          setMoviesVisible(movies.slice(0, (Math.floor(countMoviesVisible / 2) + 1) * 2))
+        }
       }
-    }
-    else {
-      setStepMoviesMore(2)
+      else {
+        setStepMoviesMore(2)
+      }
     }
   }, [windowWidth])
 
+  const updateMovieList = () => {
+    console.log(windowWidth)
+    if (!isSavedPage) {
+      if (windowWidth >= 1280) {
+        setMoviesVisible(movies.slice(0, 12))
+        setStepMoviesMore(3)
+      }
+      else if (windowWidth >= 768) {
+        setMoviesVisible(movies.slice(0, 8))
+        setStepMoviesMore(2)
+      }
+      else {
+        setMoviesVisible(movies.slice(0, 5))
+        setStepMoviesMore(2)
+      }
+    } else {
+      setMoviesVisible(movies)
+    }
+  }
 
-  // // первое отображение фильмов
-  // useEffect(() => {
-  //   if (moviesVisible.length === 0 && !isSavedPage) {
-  //     if (windowWidth >= 1280) {
-  //       setMoviesVisible(movies.slice(0, 12))
-  //       setStepMoviesMore(3)
-  //     }
-  //     else if (windowWidth >= 768) {
-  //       setMoviesVisible(movies.slice(0, 8))
-  //       setStepMoviesMore(2)
-  //     }
-  //     else {
-  //       setMoviesVisible(movies.slice(0, 5))
-  //       setStepMoviesMore(2)
-  //     }
-  //   }
-  // }, [movies])
+  // первое отображение фильмов
+  useEffect(() => {
+    updateMovieList()
+  }, [movies])
+
+  useEffect(() => {
+    updateMovieList()
+  }, [])
 
   return (
     <section className="movies">
