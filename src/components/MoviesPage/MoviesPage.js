@@ -63,7 +63,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
   }, [windowWidth])
 
   const updateMovieList = () => {
-    console.log(windowWidth)
+    // console.log(windowWidth)
     if (!isSavedPage) {
       if (windowWidth >= 1280) {
         setMoviesVisible(movies.slice(0, 12))

@@ -138,17 +138,17 @@ function App() {
 
   const createMovieDTO = (movie, idsSavedMovies) => {
     return {
-      country: movie.country,
-      director: movie.director,
+      country: movie.country || 'unknow',
+      director: movie.director || 'unknow',
       duration: movie.duration,
       year: movie.year,
-      description: movie.description,
+      description: movie.description || 'unknow',
       image: 'https://api.nomoreparties.co' + movie.image.url,
       trailerLink: movie.trailerLink,
       thumbnail: 'https://api.nomoreparties.co' + movie.image.url,
       movieId: movie.id,
-      nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
+      nameRU: movie.nameRU || 'unknow',
+      nameEN: movie.nameEN || 'unknow',
       isSaved: idsSavedMovies.includes(movie.id)
     }
   }
@@ -194,19 +194,39 @@ function App() {
       .finally(() => setIsPreloaderActive(false))
   }
 
-  // добавление фильма в сохраненные
+  const [timeGetIdToDelete, setTimeGetIdToDelete] = useState(false)
+  const [currentMovie, setCurrentMovie] = useState({})
+  // нажатие лайка
   const handleLike = (dataMovie) => {
-    dataMovie.isSaved ?
-      handleDeleteMovie(dataMovie.id) :
+    if (dataMovie.isSaved) {
+      setCurrentMovie(dataMovie)
+      setTimeGetIdToDelete(true)
+    }
+    else {
       handleAddMovie(dataMovie)
+    }
   }
+
+  useEffect(() => {
+    if (timeGetIdToDelete) {
+      let idSavedMovie = 0
+      savedMovies.forEach((movie) => {
+        if (currentMovie.movieId === movie.movieId) {
+          idSavedMovie = movie.coumovieId
+        }
+      })
+      handleDeleteMovie(idSavedMovie)
+      setTimeGetIdToDelete(false)
+    }
+  }, [timeGetIdToDelete])
 
   // добавление фильма в сохраненные
   const handleAddMovie = (dataMovie) => {
-    console.log('add', dataMovie)
     delete dataMovie.isSaved
     createMovie(dataMovie)
       .then((res) => {
+        console.log('add', res)
+        setMovies(movies.map(movie => movie.movieId === res.movieId ? { ...movie, isSaved: true } : movie))
         getMovies()
           .then((savedMoves) => {
             setSavedMovies(savedMoves)
@@ -219,13 +239,11 @@ function App() {
 
   // удаление фильма из сохраненных
   const handleDeleteMovie = (movieId) => {
-    console.log('delete', movieId)
     deleteMovie(movieId)
       .then(res => {
-        console.log(res.movie.movieId)
-        // setMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
-        console.log(res)
+        setMovies(movies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
+        console.log('delete', res)
       })
       .catch((res) => {
         console.log(res)
