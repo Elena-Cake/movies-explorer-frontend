@@ -13,7 +13,7 @@ function SearchForm({ onChangeFilter, onSearchMovie }) {
 
   const onSubmitForm = (e) => {
     e.preventDafault()
-    // onSearchMovie('row', 'filter')
+    // onSearchMovie(formData)
   }
 
   useEffect(() => {

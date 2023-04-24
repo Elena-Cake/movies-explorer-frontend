@@ -107,7 +107,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
     handleResize()
   }, [])
 
-  // фильтер
+  // нажатие фильтра
   const changeFilter = (nameFilter, isActive) => {
     if (nameFilter === 'shortFilms') {
       isActive ?
@@ -117,9 +117,14 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
     }
   }
 
+  // 
+  const onSearchMovie = (formData) => {
+    console.log(formData)
+  }
+
   return (
     <section className="movies">
-      <SearchForm onChangeFilter={changeFilter} />
+      <SearchForm onChangeFilter={changeFilter} onSearchMovie={onSearchMovie} />
       <MoviesCardList movies={moviesVisible} isSavedPage={isSavedPage}
         handleLike={handleLike} handleDelete={handleDelete} />
       <div className='movies__more'>
