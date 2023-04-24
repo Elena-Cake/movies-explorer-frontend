@@ -20,7 +20,8 @@ function Main({
   isMenuOpen, closeMenu, onSubmitLogin,
   onSubmitRegister, textErrorAuth, deleteErrorSubmit,
   logOut, onUpdateUser, isEditMode, handleEditMode,
-  movies, savedMovies, savedMoviesIds, handleLike, handleDelete
+  movies, moviesVisible, savedMovies, savedMoviesVisible,
+  savedMoviesIds, handleLike, handleDelete
 }) {
 
   return (
@@ -42,7 +43,7 @@ function Main({
         } />
         <Route path={endpoints.SAVED_MOVIES} element={
           // <ProtectedRoute component={SavedMovies} />
-          <SavedMovies movies={savedMovies}
+          <SavedMovies movies={savedMoviesVisible}
             handleLike={handleLike} handleDelete={handleDelete} />
         } />
         <Route path={endpoints.PROFILE} element={

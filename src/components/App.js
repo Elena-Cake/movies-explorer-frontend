@@ -28,8 +28,12 @@ function App() {
   const [isEditMode, setIsEditMode] = useState(false)
 
   // фильмы
-  const [movies, setMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState([]);
+
+  const [moviesVisible, setMoviesVisible] = useState([]);
+
   const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMoviesVisible, setSavedMoviesVisible] = useState([]);
 
   // фильм
   const [timeGetIdToDelete, setTimeGetIdToDelete] = useState(false)
@@ -140,39 +144,7 @@ function App() {
     navigate("/", { replace: false })
   }
 
-  const createMovieDTO = (movie, idsSavedMovies) => {
-    return {
-      country: movie.country || 'unknow',
-      director: movie.director || 'unknow',
-      duration: movie.duration,
-      year: movie.year,
-      description: movie.description || 'unknow',
-      image: 'https://api.nomoreparties.co' + movie.image.url,
-      trailerLink: movie.trailerLink,
-      thumbnail: 'https://api.nomoreparties.co' + movie.image.url,
-      movieId: movie.id,
-      nameRU: movie.nameRU || 'unknow',
-      nameEN: movie.nameEN || 'unknow',
-      isSaved: idsSavedMovies.includes(movie.id)
-    }
-  }
-
-  // _____загрузка данных____
-  const pullInitialData = () => {
-    setIsPreloaderActive(true)
-    Promise.all([getMoviesAll(), getProfile(), getMovies()])
-      .then(([movies, user, savedMoves]) => {
-        setCurrentUser(user)
-        const idsSavedMovies = savedMoves.map((movie) => movie.movieId)
-        setMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
-        )
-        setSavedMovies(savedMoves)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setIsPreloaderActive(false))
-  }
+  // ____Profile____
 
   const handleEditMode = () => setIsEditMode(true)
 
@@ -197,6 +169,45 @@ function App() {
       })
       .finally(() => setIsPreloaderActive(false))
   }
+
+  // _____Pull movies_____
+
+  const createMovieDTO = (movie, idsSavedMovies) => {
+    return {
+      country: movie.country || 'unknow',
+      director: movie.director || 'unknow',
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description || 'unknow',
+      image: 'https://api.nomoreparties.co' + movie.image.url,
+      trailerLink: movie.trailerLink,
+      thumbnail: 'https://api.nomoreparties.co' + movie.image.url,
+      movieId: movie.id,
+      nameRU: movie.nameRU || 'unknow',
+      nameEN: movie.nameEN || 'unknow',
+      isSaved: idsSavedMovies.includes(movie.id)
+    }
+  }
+
+  // _____загрузка данных____
+  const pullInitialData = () => {
+    setIsPreloaderActive(true)
+    Promise.all([getMoviesAll(), getProfile(), getMovies()])
+      .then(([movies, user, savedMoves]) => {
+        setCurrentUser(user)
+        const idsSavedMovies = savedMoves.map((movie) => movie.movieId)
+        setAllMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
+        )
+        setSavedMovies(savedMoves)
+        setSavedMoviesVisible(savedMoves)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setIsPreloaderActive(false))
+  }
+
+  // _____Ations (movies): like and delete_____
 
   // нажатие лайка
   const handleLike = (dataMovie) => {
@@ -230,7 +241,7 @@ function App() {
     createMovie(dataMovie)
       .then((res) => {
         // console.log('add', res)
-        setMovies(movies.map(movie => movie.movieId === res.movieId ? { ...movie, isSaved: true } : movie))
+        setMoviesVisible(moviesVisible.map(movie => movie.movieId === res.movieId ? { ...movie, isSaved: true } : movie))
         getMovies()
           .then((savedMoves) => {
             setSavedMovies(savedMoves)
@@ -248,13 +259,19 @@ function App() {
     deleteMovie(movieId)
       .then(res => {
         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
-        setMovies(movies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
+        setMoviesVisible(moviesVisible.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
         // console.log('delete', res)
       })
       .catch((res) => {
         console.log(res)
       })
       .finally(setIsPreloaderActive(false))
+  }
+
+  // _____Sort movies_____
+
+  const filterFilms = (seachRow, isSavedPage) => {
+    console.log(seachRow)
   }
 
   return (
@@ -265,9 +282,13 @@ function App() {
           isMenuOpen={isMenuOpen} closeMenu={closeMenu}
           onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
           textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
+
           onUpdateUser={onUpdateUser} isEditMode={isEditMode} handleEditMode={handleEditMode}
-          movies={movies} savedMovies={savedMovies}
+
+          movies={allMovies} moviesVisible={moviesVisible}
           handleLike={handleLike} handleDelete={handleDeleteMovie}
+
+          savedMovies={savedMovies} savedMoviesVisible={savedMoviesVisible}
         />
         <Footer />
 

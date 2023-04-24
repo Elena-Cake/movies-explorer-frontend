@@ -9,8 +9,10 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
   const [windowWidth, setWindowWidth] = useState(undefined);
   const [moviesVisible, setMoviesVisible] = useState(movies);
   const [countMoviesVisible, setCountMoviesVisible] = useState(0);
-  const [stepMoviesMore, setStepMoviesMore] = useState(1);
+  const [stepMoviesMore, setStepMoviesMore] = useState(0);
   const [isTimeAddMovies, setIsTimeAddMovies] = useState(false);
+  const [isTimeUpdateMovies, setIsTimeUpdateMovies] = useState(false);
+
 
   // добавить фильмы на экран
   const onAddMovies = () => {
@@ -30,7 +32,6 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
 
 
   function handleResize() {
-    console.log(window.innerWidth)
     setWindowWidth(window.innerWidth);
   }
   // прослушка изменения ширины экрана
@@ -41,6 +42,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // возвращение на страницу...запомнить фильмы...
   // переворот экрана
   useEffect(() => {
     if (!isSavedPage) {
@@ -63,41 +65,49 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
     }
   }, [windowWidth])
 
-  const updateMovieList = () => {
-    // console.log(windowWidth)
-    if (!isSavedPage) {
-      if (windowWidth >= 1280) {
-        setMoviesVisible(movies.slice(0, 12))
-        setStepMoviesMore(3)
-      }
-      else if (windowWidth >= 768) {
-        setMoviesVisible(movies.slice(0, 8))
-        setStepMoviesMore(2)
-      }
-      else {
-        setMoviesVisible(movies.slice(0, 5))
-        setStepMoviesMore(2)
-      }
-    } else {
-      setMoviesVisible(movies)
-    }
-  }
-
   // первое отображение фильмов
   useEffect(() => {
-    // updateMovieList()
-
-    handleResize()
+    setIsTimeUpdateMovies(true)
   }, [movies])
 
   useEffect(() => {
-    // updateMovieList()
+    if (isTimeUpdateMovies) {
+      if (!isSavedPage) {
+        if (windowWidth >= 1279) {
+          setMoviesVisible(movies.slice(0, 12))
+          setStepMoviesMore(3)
+        }
+        else if (windowWidth >= 768) {
+          setMoviesVisible(movies.slice(0, 8))
+          setStepMoviesMore(2)
+        }
+        else {
+          setMoviesVisible(movies.slice(0, 5))
+          setStepMoviesMore(2)
+        }
+      } else {
+        setMoviesVisible(movies)
+      }
+      setIsTimeUpdateMovies(false)
+    }
+  }, [isTimeUpdateMovies])
+
+  useEffect(() => {
     handleResize()
   }, [])
 
+  const changeFilter = (nameFilter, isActive) => {
+    if (nameFilter === 'shortFilms') {
+      isActive ?
+        setMoviesVisible(moviesVisible.filter((movie) => movie.duration < 41))
+        :
+        setIsTimeUpdateMovies(true)
+    }
+  }
+
   return (
     <section className="movies">
-      <SearchForm />
+      <SearchForm onChangeFilter={changeFilter} />
       <MoviesCardList movies={moviesVisible} isSavedPage={isSavedPage}
         handleLike={handleLike} handleDelete={handleDelete} />
       <div className='movies__more'>

@@ -1,13 +1,23 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './SearchForm.css';
 
-function SearchForm() {
+function SearchForm({ onChangeFilter }) {
 
   const [isShortFilmsActive, setIsShortFilmsActive] = useState(false);
+  const [isShortFilmsChanged, setIsShortFilmsChanged] = useState(false);
   const toggleShortFilm = () => {
     setIsShortFilmsActive(!isShortFilmsActive)
+    setIsShortFilmsChanged(true)
   }
+
+  useEffect(() => {
+    if (isShortFilmsChanged) {
+      onChangeFilter("shortFilms", isShortFilmsActive)
+      setIsShortFilmsChanged(false)
+    }
+  }, [isShortFilmsChanged])
+
 
   return (
     <div className="search">
