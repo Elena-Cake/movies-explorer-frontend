@@ -7,7 +7,9 @@ import { useEffect, useState } from 'react';
 function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
 
   const [windowWidth, setWindowWidth] = useState(undefined);
-  const [moviesVisible, setMoviesVisible] = useState(movies);
+
+  const [moviesFiltered, setMoviesFiltered] = useState(movies);
+  const [moviesVisible, setMoviesVisible] = useState([]);
   const [countMoviesVisible, setCountMoviesVisible] = useState(0);
   const [stepMoviesMore, setStepMoviesMore] = useState(0);
   const [isTimeAddMovies, setIsTimeAddMovies] = useState(false);
@@ -21,7 +23,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
 
   useEffect(() => {
     if (isTimeAddMovies) {
-      setMoviesVisible(movies.slice(0, countMoviesVisible + stepMoviesMore))
+      setMoviesVisible(moviesFiltered.slice(0, countMoviesVisible + stepMoviesMore))
       setIsTimeAddMovies(false)
     }
   }, [isTimeAddMovies]);
@@ -50,13 +52,13 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
         setStepMoviesMore(3)
         // дополняю фильмы до целой полоски
         if (countMoviesVisible % 3 !== 0) {
-          setMoviesVisible(movies.slice(0, (Math.floor(countMoviesVisible / 3) + 1) * 3))
+          setMoviesVisible(moviesFiltered.slice(0, (Math.floor(countMoviesVisible / 3) + 1) * 3))
         }
       }
       else if (windowWidth >= 768) {
         setStepMoviesMore(2)
         if (countMoviesVisible % 2 !== 0) {
-          setMoviesVisible(movies.slice(0, (Math.floor(countMoviesVisible / 2) + 1) * 2))
+          setMoviesVisible(moviesFiltered.slice(0, (Math.floor(countMoviesVisible / 2) + 1) * 2))
         }
       }
       else {
@@ -72,34 +74,44 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
 
   useEffect(() => {
     if (isTimeUpdateMovies) {
-      if (!isSavedPage) {
-        if (windowWidth >= 1279) {
-          setMoviesVisible(movies.slice(0, 12))
-          setStepMoviesMore(3)
-        }
-        else if (windowWidth >= 768) {
-          setMoviesVisible(movies.slice(0, 8))
-          setStepMoviesMore(2)
-        }
-        else {
-          setMoviesVisible(movies.slice(0, 5))
-          setStepMoviesMore(2)
-        }
-      } else {
-        setMoviesVisible(movies)
-      }
+      setMovies(movies)
       setIsTimeUpdateMovies(false)
     }
   }, [isTimeUpdateMovies])
+
+  const setMovies = (allMovies) => {
+    if (!isSavedPage) {
+      if (windowWidth >= 1279) {
+        setMoviesVisible(movies.slice(0, 12))
+        setStepMoviesMore(3)
+      }
+      else if (windowWidth >= 768) {
+        setMoviesVisible(allMovies.slice(0, 8))
+        setStepMoviesMore(2)
+      }
+      else {
+        setMoviesVisible(allMovies.slice(0, 5))
+        setStepMoviesMore(2)
+      }
+    } else {
+      setMoviesVisible(allMovies)
+    }
+  }
+
+  // изменение фильтра
+  useEffect(() => {
+    setMovies(moviesFiltered)
+  }, [moviesFiltered])
 
   useEffect(() => {
     handleResize()
   }, [])
 
+  // фильтер
   const changeFilter = (nameFilter, isActive) => {
     if (nameFilter === 'shortFilms') {
       isActive ?
-        setMoviesVisible(moviesVisible.filter((movie) => movie.duration < 41))
+        setMoviesFiltered(movies.filter((movie) => movie.duration < 41))
         :
         setIsTimeUpdateMovies(true)
     }
@@ -111,7 +123,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
       <MoviesCardList movies={moviesVisible} isSavedPage={isSavedPage}
         handleLike={handleLike} handleDelete={handleDelete} />
       <div className='movies__more'>
-        {!isSavedPage && countMoviesVisible <= movies.length &&
+        {!isSavedPage && moviesVisible.length < moviesFiltered.length - 1 &&
           <button className='movies__more-button button' onClick={onAddMovies}>Ещё</button>
         }
       </div>
