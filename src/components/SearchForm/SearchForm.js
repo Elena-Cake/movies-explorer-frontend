@@ -16,7 +16,7 @@ function SearchForm() {
         <button className='search__button button'>Поиск</button>
       </form>
       <ul className='search__filters'>
-        <li className='search__filter'>
+        <li className='search__filter' key={0}>
           <button className={`filter__icon ${isShortFilmsActive ? 'filter__icon_active' : ''}`} onClick={toggleShortFilm}></button>
           <p className='filter__text'>Короткометражки</p>
         </li>

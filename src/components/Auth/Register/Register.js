@@ -18,8 +18,8 @@ function Register({ onSubmitForm, textErrorAuth, deleteErrorSubmit }) {
     setIsButtonActive(isValid);
   }
 
-  const rowsElements = dataRowsRegister.map((row) => {
-    return <FormRow data={row} onChangeButtonActive={onChangeButtonActive} onSetValues={onSetValues} />
+  const rowsElements = dataRowsRegister.map((row, i) => {
+    return <FormRow key={i} data={row} onChangeButtonActive={onChangeButtonActive} onSetValues={onSetValues} />
   })
 
   return (

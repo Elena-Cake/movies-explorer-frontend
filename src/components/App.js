@@ -31,6 +31,10 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
 
+  // фильм
+  const [timeGetIdToDelete, setTimeGetIdToDelete] = useState(false)
+  const [currentMovie, setCurrentMovie] = useState({})
+
   // отображение бургера
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const openMenu = (e) => {
@@ -194,8 +198,6 @@ function App() {
       .finally(() => setIsPreloaderActive(false))
   }
 
-  const [timeGetIdToDelete, setTimeGetIdToDelete] = useState(false)
-  const [currentMovie, setCurrentMovie] = useState({})
   // нажатие лайка
   const handleLike = (dataMovie) => {
     if (dataMovie.isSaved) {
@@ -207,6 +209,7 @@ function App() {
     }
   }
 
+  // достать айди для удаления лайка
   useEffect(() => {
     if (timeGetIdToDelete) {
       let idSavedMovie = 0
@@ -223,9 +226,10 @@ function App() {
   // добавление фильма в сохраненные
   const handleAddMovie = (dataMovie) => {
     delete dataMovie.isSaved
+    setIsPreloaderActive(true)
     createMovie(dataMovie)
       .then((res) => {
-        console.log('add', res)
+        // console.log('add', res)
         setMovies(movies.map(movie => movie.movieId === res.movieId ? { ...movie, isSaved: true } : movie))
         getMovies()
           .then((savedMoves) => {
@@ -235,19 +239,22 @@ function App() {
       .catch((res) => {
         console.log(res)
       })
+      .finally(setIsPreloaderActive(false))
   }
 
   // удаление фильма из сохраненных
   const handleDeleteMovie = (movieId) => {
+    setIsPreloaderActive(true)
     deleteMovie(movieId)
       .then(res => {
         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
         setMovies(movies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
-        console.log('delete', res)
+        // console.log('delete', res)
       })
       .catch((res) => {
         console.log(res)
       })
+      .finally(setIsPreloaderActive(false))
   }
 
   return (

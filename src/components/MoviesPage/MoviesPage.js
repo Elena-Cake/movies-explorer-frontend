@@ -30,6 +30,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
 
 
   function handleResize() {
+    console.log(window.innerWidth)
     setWindowWidth(window.innerWidth);
   }
   // прослушка изменения ширины экрана
@@ -84,11 +85,14 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
 
   // первое отображение фильмов
   useEffect(() => {
-    updateMovieList()
+    // updateMovieList()
+
+    handleResize()
   }, [movies])
 
   useEffect(() => {
-    updateMovieList()
+    // updateMovieList()
+    handleResize()
   }, [])
 
   return (

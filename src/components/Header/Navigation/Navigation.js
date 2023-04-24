@@ -12,14 +12,14 @@ function Navigation({ activePath, openMenu }) {
       <NavLink to={endpoints.ABOUT} className='header__logo' />
       <div className='navigation__menu navigation__menu_open'>
         <ul className='navigation__links'>
-          <li>
+          <li key={0}>
             <NavLink
               to={endpoints.MOVIES}
               className={navlinkClassName}>
               Фильмы
             </NavLink>
           </li>
-          <li>
+          <li key={1}>
             <NavLink
               to={endpoints.SAVED_MOVIES}
               className={navlinkClassName}>

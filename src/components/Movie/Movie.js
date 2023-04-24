@@ -22,7 +22,7 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
   }
 
   return (
-    <li className="movie">
+    <li className="movie" >
       <div className='movie__info'>
         <h3 className='movie__name'>{dataMovie.nameRU}</h3>
         <p className='movie__duration'>{duration}</p>

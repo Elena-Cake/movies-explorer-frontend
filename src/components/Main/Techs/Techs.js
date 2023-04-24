@@ -5,7 +5,7 @@ import './Techs.css';
 import TechsElement from './TechsElement/TechsElement';
 
 function Techs() {
-  const techsElements = techs.map((name) => <TechsElement text={name} />)
+  const techsElements = techs.map((name, i) => <TechsElement key={i} text={name} />)
 
   return (
     <section className="techs">

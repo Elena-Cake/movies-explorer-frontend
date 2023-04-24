@@ -6,9 +6,9 @@ import './MoviesCardList.css';
 function MoviesCardList({ movies, isSavedPage, handleLike, handleDelete }) {
   // console.log('list', movies)
   const movieElements = [];
-  movieElements.push(movies.map((movie) => {
+  movieElements.push(movies.map((movie, i) => {
     // (savedMoviesIds.include(movie.id)) ? setIsSaved(true) : setIsSaved(false)
-    return < Movie key={movie.id} dataMovie={movie} isSavedPage={isSavedPage} handleLike={handleLike} handleDelete={handleDelete} />
+    return < Movie key={i} dataMovie={movie} isSavedPage={isSavedPage} handleLike={handleLike} handleDelete={handleDelete} />
   }))
 
   return (

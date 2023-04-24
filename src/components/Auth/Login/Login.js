@@ -19,8 +19,8 @@ function Login({ onSubmitForm, textErrorAuth, deleteErrorSubmit }) {
     setIsButtonActive(isValid);
   }
 
-  const rowsElements = dataRowsLogin.map((row) => {
-    return <FormRow data={row} onChangeButtonActive={onChangeButtonActive} onSetValues={onSetValues} />
+  const rowsElements = dataRowsLogin.map((row, i) => {
+    return <FormRow key={i} data={row} onChangeButtonActive={onChangeButtonActive} onSetValues={onSetValues} />
   })
 
   return (

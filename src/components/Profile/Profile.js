@@ -55,7 +55,7 @@ function Profile({ logOut, onUpdateUser, textErrorAuth, isEditMode, handleEditMo
         <form className='profile__window window' onSubmit={handleSubmit}>
           <h1 className='profile__title'>Привет, {currentUserData.name}!</h1>
           <ul className='profile__rows'>
-            <li className='profile__row'>
+            <li className='profile__row' key={0}>
               <p className='row__title'>Имя</p>
               <input
                 className='row__data'
@@ -66,7 +66,7 @@ function Profile({ logOut, onUpdateUser, textErrorAuth, isEditMode, handleEditMo
                 required />
               <span className={`row__error ${errors.name ? 'row__error_active' : ''}`}>{errors.name}</span>
             </li>
-            <li className='profile__row'>
+            <li className='profile__row' key={1}>
               <p className='row__title'>E-mail</p>
               <input
                 className='row__data'

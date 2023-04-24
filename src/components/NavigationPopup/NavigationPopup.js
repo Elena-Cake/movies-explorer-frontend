@@ -33,7 +33,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
       <div className='popup__container-menu'>
         <button className='menu__button-close button' onClick={closeMenu}></button>
         <ul className='menu__links'>
-          <li className='menu__link-li'>
+          <li className='menu__link-li' key={0}>
             <NavLink
               to={endpoints.ABOUT}
               className={navlinkClassName}
@@ -41,7 +41,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
               Главная
             </NavLink>
           </li>
-          <li className='menu__link-li'>
+          <li className='menu__link-li' key={1}>
             <NavLink
               to={endpoints.MOVIES}
               className={navlinkClassName}
@@ -49,7 +49,7 @@ function NavigationPopup({ isMenuOpen, closeMenu }) {
               Фильмы
             </NavLink>
           </li>
-          <li className='menu__link-li'>
+          <li className='menu__link-li' key={2}>
             <NavLink
               to={endpoints.SAVED_MOVIES}
               className={navlinkClassName}
