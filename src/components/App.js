@@ -11,6 +11,12 @@ import InfoTooltip from './InfoTooltip/InfoTooltip';
 import { getMoviesAll } from '../utils/MoviesApi';
 import { CONFLICT, CONNECTION, CREATED, NO_VALIDATE, OK } from '../constans/statusData';
 import Preloader from './Preloader/Preloader';
+import {
+  AllMoviesContext,
+  AllMoviesFiltersContext,
+  SavedMoviesContext,
+  SavedMoviesFiltersContext
+} from '../contexts/MoviesContext';
 
 function App() {
 
@@ -29,11 +35,14 @@ function App() {
 
   // фильмы
   const [allMovies, setAllMovies] = useState([]);
+  const [allMoviesFilters, setAllMoviesFilters] = useState({});
 
-  const [moviesVisible, setMoviesVisible] = useState([]);
+  // const [moviesVisible, setMoviesVisible] = useState([]);
 
   const [savedMovies, setSavedMovies] = useState([]);
-  const [savedMoviesVisible, setSavedMoviesVisible] = useState([]);
+  // const [savedMoviesVisible, setSavedMoviesVisible] = useState([]);
+  const [savedMoviesFilters, setSavedMoviesFilters] = useState({});
+
 
   // фильм
   const [timeGetIdToDelete, setTimeGetIdToDelete] = useState(false)
@@ -199,7 +208,6 @@ function App() {
         setAllMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
         )
         setSavedMovies(savedMoves)
-        setSavedMoviesVisible(savedMoves)
       })
       .catch((err) => {
         console.log(err);
@@ -241,7 +249,7 @@ function App() {
     createMovie(dataMovie)
       .then((res) => {
         // console.log('add', res)
-        setMoviesVisible(moviesVisible.map(movie => movie.movieId === res.movieId ? { ...movie, isSaved: true } : movie))
+        setAllMovies(allMovies.map(movie => movie.movieId === res.movieId ? { ...movie, isSaved: true } : movie))
         getMovies()
           .then((savedMoves) => {
             setSavedMovies(savedMoves)
@@ -259,7 +267,7 @@ function App() {
     deleteMovie(movieId)
       .then(res => {
         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
-        setMoviesVisible(moviesVisible.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
+        setAllMovies(allMovies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
         // console.log('delete', res)
       })
       .catch((res) => {
@@ -276,30 +284,39 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <Header openMenu={openMenu} />
-        <Main
-          isMenuOpen={isMenuOpen} closeMenu={closeMenu}
-          onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
-          textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
+      <AllMoviesContext.Provider value={allMovies}>
+        <AllMoviesFiltersContext.Provider value={allMoviesFilters}>
+          <SavedMoviesContext.Provider value={savedMovies}>
+            <SavedMoviesFiltersContext.Provider value={savedMoviesFilters}>
+              <div className="page">
+                <Header openMenu={openMenu} />
+                <Main
+                  isMenuOpen={isMenuOpen} closeMenu={closeMenu}
+                  onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
+                  textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
 
-          onUpdateUser={onUpdateUser} isEditMode={isEditMode} handleEditMode={handleEditMode}
+                  onUpdateUser={onUpdateUser} isEditMode={isEditMode} handleEditMode={handleEditMode}
 
-          movies={allMovies} moviesVisible={moviesVisible}
-          handleLike={handleLike} handleDelete={handleDeleteMovie}
+                  movies={allMovies}
+                  // moviesVisible={moviesVisible} savedMoviesVisible={savedMoviesVisible}
+                  handleLike={handleLike} handleDelete={handleDeleteMovie}
 
-          savedMovies={savedMovies} savedMoviesVisible={savedMoviesVisible}
-        />
-        <Footer />
+                  savedMovies={savedMovies}
+                />
+                <Footer />
 
-        <InfoTooltip
-          isOpen={isInfoTooltipOpen}
-          onClose={closeInfoTooltip}
-          isSignIn={isSignIn}
-          text={infoToolText} />
+                <InfoTooltip
+                  isOpen={isInfoTooltipOpen}
+                  onClose={closeInfoTooltip}
+                  isSignIn={isSignIn}
+                  text={infoToolText} />
 
-        <Preloader isActive={isPreloaderActive} />
-      </div>
+                <Preloader isActive={isPreloaderActive} />
+              </div>
+            </SavedMoviesFiltersContext.Provider>
+          </SavedMoviesContext.Provider>
+        </AllMoviesFiltersContext.Provider>
+      </AllMoviesContext.Provider>
     </CurrentUserContext.Provider>
   );
 }

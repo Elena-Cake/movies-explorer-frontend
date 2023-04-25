@@ -82,7 +82,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
   const setMovies = (allMovies) => {
     if (!isSavedPage) {
       if (windowWidth >= 1279) {
-        setMoviesVisible(movies.slice(0, 12))
+        setMoviesVisible(allMovies.slice(0, 12))
         setStepMoviesMore(3)
       }
       else if (windowWidth >= 768) {
@@ -113,7 +113,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
       isActive ?
         setMoviesFiltered(movies.filter((movie) => movie.duration < 41))
         :
-        setIsTimeUpdateMovies(true)
+        setMoviesFiltered(movies)
     }
   }
 

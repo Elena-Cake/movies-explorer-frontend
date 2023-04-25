@@ -1,8 +1,8 @@
 import { MAIN_BASE_LOCAL, MAIN_BASE_URL } from "../constans/apiConstans";
-// const URL_BASE = MAIN_BASE_URL;
+const URL_BASE = MAIN_BASE_URL;
 
 // для локального тестирования
-const URL_BASE = MAIN_BASE_LOCAL;
+// const URL_BASE = MAIN_BASE_LOCAL;
 
 const headers = {
     'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
