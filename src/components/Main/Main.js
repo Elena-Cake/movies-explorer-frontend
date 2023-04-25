@@ -48,7 +48,7 @@ function Main({
         } />
         <Route path={endpoints.PROFILE} element={
           // <ProtectedRoute component={Profile} />
-          <Profile logOut={logOut} onUpdateUser={onUpdateUser} textErrorAuth={textErrorAuth}
+          <Profile logOut={logOut} textErrorAuth={textErrorAuth}
             isEditMode={isEditMode} handleEditMode={handleEditMode} />
         } />
         <Route path={endpoints.LOGIN} element={
