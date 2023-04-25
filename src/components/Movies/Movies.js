@@ -2,18 +2,15 @@
 import './Movies.css';
 import MoviesPage from '../MoviesPage/MoviesPage';
 import { useState, useContext, useEffect } from 'react';
-import { AllMoviesContext } from '../../contexts/MoviesContext';
+import { MoviesContext } from '../../contexts/MoviesContext';
 
 function Movies({ handleLike, handleDelete }) {
 
-  const movies = useContext(AllMoviesContext);
-  useEffect(() => {
-    console.log(movies)
-  }, [movies])
+  const { allMovies } = useContext(MoviesContext);
 
   return (
     <div>
-      <MoviesPage movies={movies} isButtonVisible={true}
+      <MoviesPage movies={allMovies} isButtonVisible={true}
         handleLike={handleLike} handleDelete={handleDelete} />
     </div>
   );

@@ -103,10 +103,6 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
     setMovies(moviesFiltered)
   }, [moviesFiltered])
 
-  useEffect(() => {
-    handleResize()
-    console.log(moviesVisible)
-  }, [])
 
   // нажатие фильтра
   const changeFilter = (nameFilter, isActive) => {

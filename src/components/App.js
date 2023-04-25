@@ -11,12 +11,7 @@ import InfoTooltip from './InfoTooltip/InfoTooltip';
 import { getMoviesAll } from '../utils/MoviesApi';
 import { CONFLICT, CONNECTION, CREATED, NO_VALIDATE, OK } from '../constans/statusData';
 import Preloader from './Preloader/Preloader';
-import {
-  AllMoviesContext,
-  AllMoviesFiltersContext,
-  SavedMoviesContext,
-  SavedMoviesFiltersContext
-} from '../contexts/MoviesContext';
+import { MoviesContext } from '../contexts/MoviesContext';
 
 function App() {
 
@@ -35,14 +30,43 @@ function App() {
 
   // фильмы
   const [allMovies, setAllMovies] = useState([]);
-  const [allMoviesFilters, setAllMoviesFilters] = useState({});
-
-  // const [moviesVisible, setMoviesVisible] = useState([]);
-
   const [savedMovies, setSavedMovies] = useState([]);
-  // const [savedMoviesVisible, setSavedMoviesVisible] = useState([]);
-  const [savedMoviesFilters, setSavedMoviesFilters] = useState({});
 
+  const [savedMoviesFilters, setSavedMoviesFilters] = useState({ row: '', short: false });
+  const [allMoviesFilters, setAllMoviesFilters] = useState({ row: '', short: false });
+
+  const [isTimeSetFiltersMovies, setIsTimeSetFiltersMovies] = useState(false);
+  const [isTimeSetFiltersSavedMovies, setIsTimeSetFiltersSavedMovies] = useState(false);
+
+  const [isShortMovie, setIsShortMovie] = useState(false);
+  const [valueSearchRow, setValueSearchRow] = useState('');
+  // const [moviesVisible, setMoviesVisible] = useState([]);
+  // const [savedMoviesVisible, setSavedMoviesVisible] = useState([]);
+
+  const onChangeFilter = (namePage, rowValue, isShortFilterActive) => {
+    setValueSearchRow(rowValue);
+    setIsShortMovie(isShortFilterActive);
+    if (namePage === 'movies') {
+      setIsTimeSetFiltersMovies(true)
+    }
+    if (namePage === 'saved-movies') {
+      setIsTimeSetFiltersSavedMovies(true)
+    }
+  }
+
+  useEffect(() => {
+    if (isTimeSetFiltersMovies) {
+      setAllMoviesFilters({ row: valueSearchRow, short: isShortMovie })
+      setIsTimeSetFiltersMovies(false)
+    }
+  }, [isTimeSetFiltersMovies])
+
+  useEffect(() => {
+    if (isTimeSetFiltersSavedMovies) {
+      setSavedMoviesFilters({ row: valueSearchRow, short: isShortMovie })
+      setIsTimeSetFiltersSavedMovies(false)
+    }
+  }, [isTimeSetFiltersSavedMovies])
 
   // фильм
   const [timeGetIdToDelete, setTimeGetIdToDelete] = useState(false)
@@ -284,41 +308,42 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
-      <AllMoviesContext.Provider value={allMovies}>
-        <AllMoviesFiltersContext.Provider value={allMoviesFilters}>
-          <SavedMoviesContext.Provider value={savedMovies}>
-            <SavedMoviesFiltersContext.Provider value={savedMoviesFilters}>
-              <div className="page">
-                <Header openMenu={openMenu} />
-                <Main
-                  isMenuOpen={isMenuOpen} closeMenu={closeMenu}
-                  onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
-                  textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
+      <MoviesContext.Provider
+        value={{
+          allMovies,
+          allMoviesFilters,
+          savedMovies,
+          savedMoviesFilters,
+          onChangeFilter
+        }}>
+        <div className="page">
+          <Header openMenu={openMenu} />
+          <Main
+            isMenuOpen={isMenuOpen} closeMenu={closeMenu}
+            onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
+            textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
 
-                  // onUpdateUser={onUpdateUser}
-                  isEditMode={isEditMode} handleEditMode={handleEditMode}
+            // onUpdateUser={onUpdateUser}
+            isEditMode={isEditMode} handleEditMode={handleEditMode}
 
-                  // movies={allMovies}
-                  // moviesVisible={moviesVisible} 
-                  savedMoviesVisible={savedMovies}
-                  handleLike={handleLike} handleDelete={handleDeleteMovie}
+            // movies={allMovies}
+            // moviesVisible={moviesVisible} 
+            savedMoviesVisible={savedMovies}
+            handleLike={handleLike} handleDelete={handleDeleteMovie}
 
-                  savedMovies={savedMovies}
-                />
-                <Footer />
+            savedMovies={savedMovies}
+          />
+          <Footer />
 
-                <InfoTooltip
-                  isOpen={isInfoTooltipOpen}
-                  onClose={closeInfoTooltip}
-                  isSignIn={isSignIn}
-                  text={infoToolText} />
+          <InfoTooltip
+            isOpen={isInfoTooltipOpen}
+            onClose={closeInfoTooltip}
+            isSignIn={isSignIn}
+            text={infoToolText} />
 
-                <Preloader isActive={isPreloaderActive} />
-              </div>
-            </SavedMoviesFiltersContext.Provider>
-          </SavedMoviesContext.Provider>
-        </AllMoviesFiltersContext.Provider>
-      </AllMoviesContext.Provider>
+          <Preloader isActive={isPreloaderActive} />
+        </div>
+      </MoviesContext.Provider>
     </CurrentUserContext.Provider>
   );
 }
