@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { useFormAndValidation } from '../../hooks/useValidationForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ logOut, onUpdateUser, textErrorAuth, isEditMode, handleEditMode }) {
+function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode }) {
 
-  const currentUserData = useContext(CurrentUserContext);
+  const { currentUser, onUpdateUser } = useContext(CurrentUserContext);
 
   const { values, handleChange, errors, isValid, setValues, setIsValid, resetForm } = useFormAndValidation();
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Profile({ logOut, onUpdateUser, textErrorAuth, isEditMode, handleEditMo
   //заполненные поля при открытии
   useEffect(() => {
     if (isEditMode) {
-      setValues({ ...values, 'name': currentUserData.name, 'email': currentUserData.email })
+      setValues({ ...values, 'name': currentUser.name, 'email': currentUser.email })
       setIsValid(true)
     }
   }, [isEditMode]);
@@ -35,15 +35,15 @@ function Profile({ logOut, onUpdateUser, textErrorAuth, isEditMode, handleEditMo
     <div className="profile">
       {!isEditMode ?
         <div className='profile__window window'>
-          <h1 className='profile__title'>Привет, {currentUserData.name}!</h1>
+          <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
           <ul className='profile__rows'>
             <li className='profile__row'>
               <p className='row__title'>Имя</p>
-              <p className='row__data'>{currentUserData.name}</p>
+              <p className='row__data'>{currentUser.name}</p>
             </li>
             <li className='profile__row'>
               <p className='row__title'>E-mail</p>
-              <p className='row__data'>{currentUserData.email}</p>
+              <p className='row__data'>{currentUser.email}</p>
             </li>
           </ul>
           <div className='profile__settings'>
@@ -53,7 +53,7 @@ function Profile({ logOut, onUpdateUser, textErrorAuth, isEditMode, handleEditMo
         </div>
         :
         <form className='profile__window window' onSubmit={handleSubmit}>
-          <h1 className='profile__title'>Привет, {currentUserData.name}!</h1>
+          <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
           <ul className='profile__rows'>
             <li className='profile__row' key={0}>
               <p className='row__title'>Имя</p>

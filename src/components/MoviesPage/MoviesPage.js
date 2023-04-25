@@ -105,6 +105,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
 
   useEffect(() => {
     handleResize()
+    console.log(moviesVisible)
   }, [])
 
   // нажатие фильтра
@@ -128,9 +129,9 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
       <MoviesCardList movies={moviesVisible} isSavedPage={isSavedPage}
         handleLike={handleLike} handleDelete={handleDelete} />
       <div className='movies__more'>
-        {!isSavedPage && moviesVisible.length < moviesFiltered.length - 1 &&
-          <button className='movies__more-button button' onClick={onAddMovies}>Ещё</button>
-        }
+        {/* {!isSavedPage && moviesVisible.length < moviesFiltered.length - 1 && */}
+        <button className='movies__more-button button' onClick={onAddMovies}>Ещё</button>
+        {/* } */}
       </div>
     </section>
   );

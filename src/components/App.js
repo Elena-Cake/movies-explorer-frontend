@@ -283,7 +283,7 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
       <AllMoviesContext.Provider value={allMovies}>
         <AllMoviesFiltersContext.Provider value={allMoviesFilters}>
           <SavedMoviesContext.Provider value={savedMovies}>
@@ -295,10 +295,12 @@ function App() {
                   onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
                   textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
 
-                  onUpdateUser={onUpdateUser} isEditMode={isEditMode} handleEditMode={handleEditMode}
+                  // onUpdateUser={onUpdateUser}
+                  isEditMode={isEditMode} handleEditMode={handleEditMode}
 
-                  movies={allMovies}
-                  // moviesVisible={moviesVisible} savedMoviesVisible={savedMoviesVisible}
+                  // movies={allMovies}
+                  // moviesVisible={moviesVisible} 
+                  savedMoviesVisible={savedMovies}
                   handleLike={handleLike} handleDelete={handleDeleteMovie}
 
                   savedMovies={savedMovies}
