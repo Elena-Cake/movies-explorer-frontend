@@ -2,9 +2,9 @@
 import { useEffect, useState } from 'react';
 import './SearchForm.css';
 
-function SearchForm({ onChangeFilter, onSearchMovie }) {
+function SearchForm({ onChangeFilter, onSearchMovie, rowValue, isShortMovies }) {
 
-  const [isShortFilmsActive, setIsShortFilmsActive] = useState(false);
+  const [isShortFilmsActive, setIsShortFilmsActive] = useState(isShortMovies);
   const [isShortFilmsChanged, setIsShortFilmsChanged] = useState(false);
   const toggleShortFilm = () => {
     setIsShortFilmsActive(!isShortFilmsActive)

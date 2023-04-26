@@ -2,9 +2,14 @@
 import './MoviesPage.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { MoviesContext } from '../../contexts/MoviesContext';
 
-function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
+function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
+  rowValue, isShortMovies }) {
+
+
+  const { onChangeFilter } = useContext(MoviesContext);
 
   const [windowWidth, setWindowWidth] = useState(undefined);
 
@@ -98,30 +103,37 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete }) {
     }
   }
 
-  // изменение фильтра
-  useEffect(() => {
-    setMovies(moviesFiltered)
-  }, [moviesFiltered])
+  // // изменение фильтра
+  // useEffect(() => {
+  //   setMovies(moviesFiltered)
+  // }, [moviesFiltered])
 
 
-  // нажатие фильтра
-  const changeFilter = (nameFilter, isActive) => {
-    if (nameFilter === 'shortFilms') {
-      isActive ?
-        setMoviesFiltered(movies.filter((movie) => movie.duration < 41))
-        :
-        setMoviesFiltered(movies)
-    }
-  }
+  // // нажатие фильтра
+  // const changeFilter = (nameFilter, isActive) => {
+  //   if (nameFilter === 'shortFilms') {
+  //     isActive ?
+  //       setMoviesFiltered(movies.filter((movie) => movie.duration < 41))
+  //       :
+  //       setMoviesFiltered(movies)
+  //   }
+  // }
 
-  // 
-  const onSearchMovie = (formData) => {
-    console.log(formData)
+  // // 
+  // const onSearchMovie = (formData) => {
+  //   console.log(formData)
+  // }
+
+
+  // изменение фильтров
+  const onSubmitSearch = (rowValue, isShortActive) => {
+    const namePage = isSavedPage ? 'saved-movies' : 'movies'
+    onChangeFilter(namePage, rowValue, isShortActive)
   }
 
   return (
     <section className="movies">
-      <SearchForm onChangeFilter={changeFilter} onSearchMovie={onSearchMovie} />
+      <SearchForm onChangeFilter={onSubmitSearch} rowValue={rowValue} isShortMovies={isShortMovies} />
       <MoviesCardList movies={moviesVisible} isSavedPage={isSavedPage}
         handleLike={handleLike} handleDelete={handleDelete} />
       <div className='movies__more'>

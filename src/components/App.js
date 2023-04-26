@@ -227,11 +227,12 @@ function App() {
     setIsPreloaderActive(true)
     Promise.all([getMoviesAll(), getProfile(), getMovies()])
       .then(([movies, user, savedMoves]) => {
+        console.log(savedMoves)
         setCurrentUser(user)
         const idsSavedMovies = savedMoves.map((movie) => movie.movieId)
         setAllMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
         )
-        setSavedMovies(savedMoves)
+        setSavedMovies(savedMoves.map((movie) => { return { ...movie, isSaved: true } }))
       })
       .catch((err) => {
         console.log(err);
@@ -312,8 +313,10 @@ function App() {
         value={{
           allMovies,
           allMoviesFilters,
+          isTimeSetFiltersMovies,
           savedMovies,
           savedMoviesFilters,
+          isTimeSetFiltersSavedMovies,
           onChangeFilter
         }}>
         <div className="page">
