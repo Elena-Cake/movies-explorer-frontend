@@ -1,13 +1,25 @@
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './SearchForm.css';
 
-function SearchForm({ onChangeFilter, onSearchMovie, rowValue, isShortMovies, isSavedPage }) {
+function SearchForm({ onChangeFilter, isSavedPage }) {
 
   const nameLocalStorigeFilters = isSavedPage ? 'filters-movie-saved' : 'filters-movie'
+  const [valueSearchRow, setValueSearchRow] = useState('')
+  const [isShortFilmsActive, setIsShortFilmsActive] = useState(false)
 
-  const [valueSearchRow, setValueSearchRow] = useState(rowValue);
-  const [isShortFilmsActive, setIsShortFilmsActive] = useState(isShortMovies);
+  const checkLocalFilters = () => {
+    if (localStorage.getItem(nameLocalStorigeFilters)) {
+      setValueSearchRow(JSON.parse(localStorage.getItem(nameLocalStorigeFilters)).row)
+      setIsShortFilmsActive(JSON.parse(localStorage.getItem(nameLocalStorigeFilters)).short)
+    }
+  }
+
+  useEffect(() => {
+    checkLocalFilters()
+  }, [])
+
+
   const [isShortFilmsChanged, setIsShortFilmsChanged] = useState(false);
   const [isTimeSubmit, setIsTimeSubmit] = useState(false);
 
@@ -23,7 +35,7 @@ function SearchForm({ onChangeFilter, onSearchMovie, rowValue, isShortMovies, is
   const onSubmitForm = (e) => {
     e.preventDefault()
     localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: valueSearchRow, short: isShortFilmsActive }))
-    onChangeFilter(nameLocalStorigeFilters)
+    onChangeFilter()
   }
 
   useEffect(() => {
@@ -36,7 +48,7 @@ function SearchForm({ onChangeFilter, onSearchMovie, rowValue, isShortMovies, is
 
   useEffect(() => {
     if (isShortFilmsChanged) {
-      localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: rowValue, short: isShortFilmsActive }))
+      localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: valueSearchRow, short: isShortFilmsActive }))
       onChangeFilter(nameLocalStorigeFilters)
       setIsShortFilmsChanged(false)
     }

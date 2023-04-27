@@ -13,7 +13,6 @@ function Movies({ handleLike, handleDelete }) {
 
   const checkLocalFilters = () => {
     if (localStorage.getItem('filters-movie')) {
-      console.log('check')
       setRowFilter(JSON.parse(localStorage.getItem('filters-movie')).row)
       setIsShortMovies(JSON.parse(localStorage.getItem('filters-movie')).short)
     }
@@ -23,22 +22,22 @@ function Movies({ handleLike, handleDelete }) {
     checkLocalFilters()
   }, [])
 
-  const onChangeFilter = (namelocalStorageFilter) => {
-    setRowFilter(JSON.parse(localStorage.getItem(namelocalStorageFilter)).row)
-    setIsShortMovies(JSON.parse(localStorage.getItem(namelocalStorageFilter)).short)
+  const onChangeFilter = () => {
     checkLocalFilters()
   }
 
+  // фильтрация
   useEffect(() => {
-    let filteredMovies = allMovies
-    if (isShortMovies) {
-      filteredMovies = filteredMovies.filter((movie) => (movie.duration <= 40))
+    if (localStorage.getItem('filters-movie')) {
+      let filteredMovies = allMovies
+      if (isShortMovies) {
+        filteredMovies = filteredMovies.filter((movie) => (movie.duration <= 40))
+      }
+      if (rowFilter !== '') {
+        filteredMovies = filteredMovies.filter((movie) => (movie.nameRU.includes(rowFilter)))
+      }
+      setAllowedMovies(filteredMovies)
     }
-    if (rowFilter !== '') {
-      filteredMovies = filteredMovies.filter((movie) => (movie.nameRU.includes(rowFilter)))
-    }
-    setAllowedMovies(filteredMovies)
-
   }, [isShortMovies, rowFilter, allMovies])
 
   return (
