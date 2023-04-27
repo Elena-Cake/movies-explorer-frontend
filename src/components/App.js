@@ -273,13 +273,9 @@ function App() {
     delete dataMovie.isSaved
     setIsPreloaderActive(true)
     createMovie(dataMovie)
-      .then((res) => {
-        // console.log('add', res)
-        setAllMovies(allMovies.map(movie => movie.movieId === res.movieId ? { ...movie, isSaved: true } : movie))
-        getMovies()
-          .then((savedMoves) => {
-            setSavedMovies(savedMoves)
-          })
+      .then((newMovie) => {
+        setAllMovies(allMovies.map(movie => movie.movieId === newMovie.movieId ? { ...movie, isSaved: true } : movie))
+        setSavedMovies([...savedMovies, newMovie])
       })
       .catch((res) => {
         console.log(res)
@@ -294,13 +290,13 @@ function App() {
       .then(res => {
         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
         setAllMovies(allMovies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
-        // console.log('delete', res)
       })
       .catch((res) => {
         console.log(res)
       })
       .finally(setIsPreloaderActive(false))
   }
+
 
 
   return (

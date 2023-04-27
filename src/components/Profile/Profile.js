@@ -27,7 +27,7 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode }) {
   useEffect(() => {
     if (isEditMode) {
       setValues({ ...values, 'name': currentUser.name, 'email': currentUser.email })
-      setIsValid(true)
+      setIsValid(false)
     }
   }, [isEditMode]);
 
@@ -37,11 +37,11 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode }) {
         <div className='profile__window window'>
           <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
           <ul className='profile__rows'>
-            <li className='profile__row'>
+            <li className='profile__row' key={0}>
               <p className='row__title'>Имя</p>
               <p className='row__data'>{currentUser.name}</p>
             </li>
-            <li className='profile__row'>
+            <li className='profile__row' key={1}>
               <p className='row__title'>E-mail</p>
               <p className='row__data'>{currentUser.email}</p>
             </li>

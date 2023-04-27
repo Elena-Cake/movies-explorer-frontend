@@ -14,7 +14,6 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
   const [countMoviesVisible, setCountMoviesVisible] = useState(0);
   const [stepMoviesMore, setStepMoviesMore] = useState(0);
   const [isTimeAddMovies, setIsTimeAddMovies] = useState(false);
-  const [isTimeUpdateMovies, setIsTimeUpdateMovies] = useState(false);
 
   const movieElements = [];
   movieElements.push(moviesVisible.map((movie, i) => {

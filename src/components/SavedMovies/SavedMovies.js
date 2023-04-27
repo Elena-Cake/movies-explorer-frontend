@@ -35,7 +35,7 @@ function SavedMovies({ handleLike, handleDelete }) {
       filteredMovies = filteredMovies.filter((movie) => (movie.duration <= 40))
     }
     if (rowFilter !== '') {
-      filteredMovies = filteredMovies.filter((movie) => (movie.nameRU.includes(rowFilter)))
+      filteredMovies = filteredMovies.filter((movie) => (movie.nameRU.toLowerCase().includes(rowFilter.toLowerCase())))
     }
     setAllowedMovies(filteredMovies)
 
