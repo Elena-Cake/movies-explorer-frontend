@@ -140,8 +140,6 @@ function App() {
         setIsSignIn(true);
         setInfoToolText(OK.MESSAGE)
         navigate('/movies', { replace: true });
-
-        localStorage.removeItem('filters-movie')
         setIsInfoTooltipOpen(true);
         setTimeout(setIsInfoTooltipOpen(false), 3000);
       })
@@ -175,6 +173,8 @@ function App() {
   function logOut(e) {
     e.preventDefault();
     localStorage.removeItem("jwt");
+    localStorage.removeItem("filters-movie-saved");
+    localStorage.removeItem("filters-movie");
     navigate("/", { replace: false })
   }
 
@@ -228,7 +228,7 @@ function App() {
     setIsPreloaderActive(true)
     Promise.all([getMoviesAll(), getProfile(), getMovies()])
       .then(([movies, user, savedMoves]) => {
-        console.log(savedMoves)
+        console.log(user)
         setCurrentUser(user)
         const idsSavedMovies = savedMoves.map((movie) => movie.movieId)
         setAllMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))

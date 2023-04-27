@@ -17,8 +17,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
   const [isTimeUpdateMovies, setIsTimeUpdateMovies] = useState(false);
 
   const movieElements = [];
-  movieElements.push(movies.map((movie, i) => {
-    // (savedMoviesIds.include(movie.id)) ? setIsSaved(true) : setIsSaved(false)
+  movieElements.push(moviesVisible.map((movie, i) => {
     return < Movie key={i} dataMovie={movie} isSavedPage={isSavedPage} handleLike={handleLike} handleDelete={handleDelete} />
   }))
 
@@ -88,14 +87,18 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
     } else {
       setMoviesVisible(movies)
     }
-  }, [])
+  }, [movies])
 
   return (
     <section className="movies">
       <SearchForm onChangeFilter={onChangeFilter} rowValue={rowValue} isShortMovies={isShortMovies} isSavedPage={isSavedPage} />
-      <ul className='movies-list'>
-        {movieElements}
-      </ul>
+      {moviesVisible.length === 0 ?
+        <p>Ничего не найдено</p>
+        :
+        <ul className='movies-list'>
+          {movieElements}
+        </ul>
+      }
       <div className='movies__more'>
         {!isSavedPage && moviesVisible.length < movies.length - 1 &&
           <button className='movies__more-button button' onClick={onAddMovies}>Ещё</button>
