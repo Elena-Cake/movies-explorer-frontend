@@ -228,7 +228,6 @@ function App() {
     setIsPreloaderActive(true)
     Promise.all([getMoviesAll(), getProfile(), getMovies()])
       .then(([movies, user, savedMoves]) => {
-        console.log(user)
         setCurrentUser(user)
         const idsSavedMovies = savedMoves.map((movie) => movie.movieId)
         setAllMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
