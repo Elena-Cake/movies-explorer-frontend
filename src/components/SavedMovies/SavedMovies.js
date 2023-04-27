@@ -23,9 +23,9 @@ function SavedMovies({ handleLike, handleDelete }) {
     checkLocalFilters()
   }, [])
 
-  const onChangeFilter = (namelocalStorageFilter) => {
-    setRowFilter(JSON.parse(localStorage.getItem(namelocalStorageFilter)).row)
-    setIsShortMovies(JSON.parse(localStorage.getItem(namelocalStorageFilter)).short)
+  const onChangeFilter = () => {
+    setRowFilter(JSON.parse(localStorage.getItem('filters-movie-saved')).row)
+    setIsShortMovies(JSON.parse(localStorage.getItem('filters-movie-saved')).short)
     checkLocalFilters()
   }
 

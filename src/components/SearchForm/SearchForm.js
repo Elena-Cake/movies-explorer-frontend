@@ -7,6 +7,8 @@ function SearchForm({ onChangeFilter, isSavedPage }) {
   const nameLocalStorigeFilters = isSavedPage ? 'filters-movie-saved' : 'filters-movie'
   const [valueSearchRow, setValueSearchRow] = useState('')
   const [isShortFilmsActive, setIsShortFilmsActive] = useState(false)
+  const [isShortFilmsChanged, setIsShortFilmsChanged] = useState(false);
+  const [isTimeSubmit, setIsTimeSubmit] = useState(false);
 
   const checkLocalFilters = () => {
     if (localStorage.getItem(nameLocalStorigeFilters)) {
@@ -18,10 +20,6 @@ function SearchForm({ onChangeFilter, isSavedPage }) {
   useEffect(() => {
     checkLocalFilters()
   }, [])
-
-
-  const [isShortFilmsChanged, setIsShortFilmsChanged] = useState(false);
-  const [isTimeSubmit, setIsTimeSubmit] = useState(false);
 
   const toggleShortFilm = () => {
     setIsShortFilmsActive(!isShortFilmsActive)
@@ -57,7 +55,7 @@ function SearchForm({ onChangeFilter, isSavedPage }) {
   return (
     <div className="search" >
       <form className='search__row' onSubmit={onSubmitForm}>
-        <input className='search__input' placeholder='Фильм' required name='searchRow' value={valueSearchRow || ''} onChange={changeInputSearch} />
+        <input className='search__input' placeholder='Фильм' name='searchRow' value={valueSearchRow || ''} onChange={changeInputSearch} />
         <button type='submit' className='search__button button'>Поиск</button>
       </form>
       <ul className='search__filters'>
