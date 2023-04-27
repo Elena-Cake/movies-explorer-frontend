@@ -141,6 +141,7 @@ function App() {
         setInfoToolText(OK.MESSAGE)
         navigate('/movies', { replace: true });
 
+        localStorage.removeItem('filters-movie')
         setIsInfoTooltipOpen(true);
         setTimeout(setIsInfoTooltipOpen(false), 3000);
       })
@@ -301,24 +302,10 @@ function App() {
       .finally(setIsPreloaderActive(false))
   }
 
-  // _____Sort movies_____
-
-  const filterFilms = (seachRow, isSavedPage) => {
-    console.log(seachRow)
-  }
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
-      <MoviesContext.Provider
-        value={{
-          allMovies,
-          allMoviesFilters,
-          isTimeSetFiltersMovies,
-          savedMovies,
-          savedMoviesFilters,
-          isTimeSetFiltersSavedMovies,
-          onChangeFilter
-        }}>
+      <MoviesContext.Provider value={{ allMovies, savedMovies, onChangeFilter }}>
         <div className="page">
           <Header openMenu={openMenu} />
           <Main

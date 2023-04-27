@@ -6,23 +6,46 @@ import { MoviesContext } from '../../contexts/MoviesContext';
 
 function Movies({ handleLike, handleDelete }) {
 
-  const { allMovies, allMoviesFilters, isTimeSetFiltersMovies } = useContext(MoviesContext);
-  const [rowValue, setRowValue] = useState(allMoviesFilters.row)
-  const [isShortMovies, setIsShortMovies] = useState(allMoviesFilters.short)
+  const { allMovies } = useContext(MoviesContext);
+  const [rowFilter, setRowFilter] = useState('')
+  const [isShortMovies, setIsShortMovies] = useState(false)
+  const [allowedMovies, setAllowedMovies] = useState([])
+
+  const checkLocalFilters = () => {
+    if (localStorage.getItem('filters-movie')) {
+      console.log('check')
+      setRowFilter(JSON.parse(localStorage.getItem('filters-movie')).row)
+      setIsShortMovies(JSON.parse(localStorage.getItem('filters-movie')).short)
+    }
+  }
 
   useEffect(() => {
-    if (isTimeSetFiltersMovies) {
-      console.log('filters', allMoviesFilters)
-      setRowValue(allMoviesFilters.row)
-      setIsShortMovies(allMoviesFilters.short)
+    checkLocalFilters()
+  }, [])
+
+  const onChangeFilter = (namelocalStorageFilter) => {
+    setRowFilter(JSON.parse(localStorage.getItem(namelocalStorageFilter)).row)
+    setIsShortMovies(JSON.parse(localStorage.getItem(namelocalStorageFilter)).short)
+    checkLocalFilters()
+  }
+
+  useEffect(() => {
+    let filteredMovies = allMovies
+    if (isShortMovies) {
+      filteredMovies = filteredMovies.filter((movie) => (movie.duration <= 40))
     }
-  }, [isTimeSetFiltersMovies])
+    if (rowFilter !== '') {
+      filteredMovies = filteredMovies.filter((movie) => (movie.nameRU.includes(rowFilter)))
+    }
+    setAllowedMovies(filteredMovies)
+
+  }, [isShortMovies, rowFilter, allMovies])
 
   return (
     <div>
-      <MoviesPage movies={allMovies} isButtonVisible={true}
-        rowValue={rowValue} isShortMovies={isShortMovies}
-        handleLike={handleLike} handleDelete={handleDelete} />
+      <MoviesPage movies={allowedMovies} isButtonVisible={true}
+        rowValue={rowFilter} isShortMovies={isShortMovies}
+        handleLike={handleLike} handleDelete={handleDelete} onChangeFilter={onChangeFilter} />
     </div>
   );
 }

@@ -6,10 +6,8 @@ import { useContext, useEffect, useState } from 'react';
 import { MoviesContext } from '../../contexts/MoviesContext';
 
 function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
-  rowValue, isShortMovies }) {
+  rowValue, isShortMovies, onChangeFilter }) {
 
-
-  const { onChangeFilter } = useContext(MoviesContext);
 
   const [windowWidth, setWindowWidth] = useState(undefined);
 
@@ -86,15 +84,13 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
 
   const setMovies = (allMovies) => {
     if (!isSavedPage) {
-      if (windowWidth >= 1279) {
-        setMoviesVisible(allMovies.slice(0, 12))
-        setStepMoviesMore(3)
-      }
-      else if (windowWidth >= 768) {
+      setMoviesVisible(allMovies.slice(0, 12))
+      setStepMoviesMore(3)
+      if (windowWidth < 1279) {
         setMoviesVisible(allMovies.slice(0, 8))
         setStepMoviesMore(2)
       }
-      else {
+      else if (windowWidth < 768) {
         setMoviesVisible(allMovies.slice(0, 5))
         setStepMoviesMore(2)
       }
@@ -133,13 +129,13 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
 
   return (
     <section className="movies">
-      <SearchForm onChangeFilter={onSubmitSearch} rowValue={rowValue} isShortMovies={isShortMovies} />
+      <SearchForm onChangeFilter={onChangeFilter} rowValue={rowValue} isShortMovies={isShortMovies} isSavedPage={isSavedPage} />
       <MoviesCardList movies={moviesVisible} isSavedPage={isSavedPage}
         handleLike={handleLike} handleDelete={handleDelete} />
       <div className='movies__more'>
-        {/* {!isSavedPage && moviesVisible.length < moviesFiltered.length - 1 && */}
-        <button className='movies__more-button button' onClick={onAddMovies}>Ещё</button>
-        {/* } */}
+        {!isSavedPage && moviesVisible.length < moviesFiltered.length - 1 &&
+          <button className='movies__more-button button' onClick={onAddMovies}>Ещё</button>
+        }
       </div>
     </section>
   );
