@@ -1,0 +1,102 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
+
+:root {
+  --black: #000;
+  --white: #FFF;
+  --grey-text: #A0A0A0;
+  --grey-border: #AAAAAA;
+  --grey-fon: #E8E8E8;
+  --grey-bg-tehno: #F5F5F5;
+  --grey-bg-footer: #F9F9F9;
+  --grey-bg-card: #FDFDFD;
+  --bg-intro: #5C5C5C;
+  --green: #2BE080;
+  --red: #EE3465;
+
+}
+
+.page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: var(--black);
+  background-color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity .5s ease;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
+
+.button-container {
+  position: relative;
+}
+
+.span-error {
+  width: 100%;
+  position: absolute;
+  top: -33px;
+  font-size: 11px;
+  line-height: 13px;
+  color: #FF004C;
+  display: none;
+  justify-content: center;
+  text-align: center;
+}
+
+.span-error_active {
+  display: flex;
+}
+
+.button {
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity .5s ease;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.container {
+  max-width: 1140px;
+  padding: 0 calc(50/1280 *100%) 0 calc(70/1280 *100%);
+  margin: 0 auto;
+}
+
+.window {
+  text-align: center;
+  max-width: 410px;
+  width: 70%;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translate(0, -50%)
+}
+
+
+
+
+@media screen and (max-width: 1279px) {
+  .container {
+    padding: 0 calc(35/768 *100%) 0 calc(50/768 *100%);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0 calc(15/320 *100%) 0;
+  }
+}

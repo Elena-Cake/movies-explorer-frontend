@@ -1,0 +1,94 @@
+.search {
+    padding: 70px 0 11px;
+}
+
+.search__bottom {
+    height: 1px;
+    background-color: rgba(170, 170, 170, .2);
+}
+
+.search__row {
+    padding: 10px;
+    border: 1.5px solid rgb(170, 170, 170, .2);
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: auto 100px;
+}
+
+.search__input {
+    font-size: 18px;
+    line-height: 20px;
+    padding: 15px;
+    border: 0;
+}
+
+.search__button {
+    background: var(--green);
+    border-radius: 5px;
+    border: 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--white);
+}
+
+.search__filters {
+    display: flex;
+    margin: 26px 0 44px;
+    align-items: center;
+    gap: 14px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.search__filter {
+    display: flex;
+}
+
+.filter__text {
+    font-size: 13px;
+    line-height: 18px;
+    margin: 0 0 0 13px;
+    padding: 0;
+}
+
+.filter__icon {
+    width: 36px;
+    height: 20px;
+    background-image: url(../../images/smalltumboff.svg);
+    background-size: contain;
+    border: 0;
+    background-color: inherit;
+}
+
+.filter__icon_active {
+    background-image: url(../../images/smalltumbon.svg);
+}
+
+@media screen and (max-width: 767px) {
+    .search {
+        padding: 50px 0 11px;
+    }
+
+    .search__row {
+        padding: 6px;
+        grid-template-columns: auto 80px;
+    }
+
+    .search__input {
+        width: 100%;
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .filter__text {
+        font-size: 11px;
+        line-height: 18px;
+    }
+
+    .search__filters {
+        margin-bottom: 64px;
+        align-items: center;
+        gap: 14px;
+    }
+}

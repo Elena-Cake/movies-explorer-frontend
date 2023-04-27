@@ -1,0 +1,37 @@
+.portfolio {
+    padding: 0 0 105px 0;
+    margin: 0 auto;
+}
+
+.portfolio__items {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.portfolio__link {
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--grey-text);
+    text-decoration: none;
+}
+
+.portfolio__container-link {
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 1279px) {
+    .portfolio {
+        padding-bottom: 90px;
+    }
+}
+
+@media screen and (max-width: 1279px) {
+    .portfolio {
+        padding-bottom: 65px;
+    }
+
+    .portfolio__container-link {
+        margin-bottom: 19px;
+    }
+}

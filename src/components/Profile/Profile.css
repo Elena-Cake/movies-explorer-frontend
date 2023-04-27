@@ -1,0 +1,102 @@
+.profile {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+.profile__window {
+    display: grid;
+    grid-template-rows: 80px auto 50px;
+}
+
+.profile__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0;
+    padding: 0;
+    padding: 44px 0 57px;
+}
+
+.profile__rows {
+    padding: 50px 0 180px;
+    list-style-type: none;
+}
+
+.profile__row {
+    margin: 0 auto;
+    max-width: 410px;
+    display: flex;
+    justify-content: space-between;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--grey-fon);
+    height: 13px;
+    position: relative;
+}
+
+.profile__row .row__error {
+    justify-content: end;
+    text-align: end;
+    left: auto;
+    right: 0;
+}
+
+.profile__row:last-of-type {
+    border-bottom: 0;
+}
+
+.row__title {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    margin: 0;
+    padding: 0;
+}
+
+.row__data {
+    font-size: 11px;
+    line-height: 13px;
+    text-align: right;
+    margin: 0;
+    padding: 0 5px;
+    border: 0;
+}
+
+.profile__settings {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0 70px;
+}
+
+.profile__edit-button {
+    font-size: 13px;
+    line-height: 16px;
+    background-color: inherit;
+    border: 0;
+    margin-bottom: 16px;
+}
+
+.profile__exit-button {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--red);
+
+    background-color: inherit;
+    border: 0;
+}
+
+
+.profile__save-button {
+    min-width: 100%;
+    padding: 13px 10px;
+    background: #3456F3;
+    border-radius: 3px;
+    border: 0;
+    color: var(--white);
+}
+
+.profile__save-button_disable {
+    background: #F8F8F8;
+    color: #C2C2C2;
+}
