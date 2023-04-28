@@ -302,8 +302,6 @@ function App() {
       .finally(setIsPreloaderActive(false))
   }
 
-
-
   return (
     <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
       <MoviesContext.Provider value={{ allMovies, savedMovies, pullAllMovies }}>
