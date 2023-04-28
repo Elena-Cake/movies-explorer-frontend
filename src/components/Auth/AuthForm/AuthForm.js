@@ -4,7 +4,10 @@ import './AuthForm.css';
 import { endpoints } from '../../../constans/pathContent';
 import { useEffect } from 'react';
 
-function AuthForm({ texts, path, rowsElements, isValid, onSendForm, textErrorAuth, deleteErrorSubmit }) {
+function AuthForm({
+  texts, path, rowsElements,
+  isValid, onSendForm, textErrorAuth,
+  deleteErrorSubmit }) {
   const onSubmitForm = (e) => {
     e.preventDefault()
     // достать значения формы

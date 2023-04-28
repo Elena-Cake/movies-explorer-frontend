@@ -6,28 +6,34 @@ import { MoviesContext } from '../../contexts/MoviesContext';
 
 function Movies({ handleLike, handleDelete }) {
 
-  const { allMovies } = useContext(MoviesContext);
+  const { allMovies, pullAllMovies } = useContext(MoviesContext);
   const [rowFilter, setRowFilter] = useState('')
   const [isShortMovies, setIsShortMovies] = useState(false)
   const [allowedMovies, setAllowedMovies] = useState([])
 
   const [isSerched, setIsSerched] = useState(false);
 
+  // назначить фильтры, если они есть
   const checkLocalFilters = () => {
     if (localStorage.getItem('filters-movie')) {
       setRowFilter(JSON.parse(localStorage.getItem('filters-movie')).row)
       setIsShortMovies(JSON.parse(localStorage.getItem('filters-movie')).short)
     }
   }
-
   useEffect(() => {
     checkLocalFilters()
   }, [])
 
+  // при изменении фильтров
   const onChangeFilter = () => {
     checkLocalFilters()
     setIsSerched(true)
   }
+
+  // первый запрос фильмов
+  useEffect(() => {
+    if (isSerched) { pullAllMovies() }
+  }, [isSerched])
 
   // фильтрация
   useEffect(() => {

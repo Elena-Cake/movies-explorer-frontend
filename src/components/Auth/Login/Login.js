@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 import FormRow from '../AuthForm/FormRow/FormRow';
 import './Login.css';

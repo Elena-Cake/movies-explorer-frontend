@@ -14,7 +14,6 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
   const [stepMoviesMore, setStepMoviesMore] = useState(0);
   const [isTimeAddMovies, setIsTimeAddMovies] = useState(false);
 
-
   const movieElements = [];
   movieElements.push(moviesVisible.map((movie, i) => {
     return < Movie key={i} dataMovie={movie} isSavedPage={isSavedPage} handleLike={handleLike} handleDelete={handleDelete} />
@@ -24,7 +23,6 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
   const onAddMovies = () => {
     setIsTimeAddMovies(true)
   }
-
   useEffect(() => {
     if (isTimeAddMovies) {
       setMoviesVisible(movies.slice(0, countMoviesVisible + stepMoviesMore))
@@ -32,6 +30,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
     }
   }, [isTimeAddMovies]);
 
+  // переназначение количества видимых фильмов
   useEffect(() => {
     setCountMoviesVisible(moviesVisible.length)
   }, [moviesVisible]);
@@ -42,7 +41,6 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
   }
   // прослушка изменения ширины экрана
   useEffect(() => {
-
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);

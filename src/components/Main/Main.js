@@ -17,13 +17,12 @@ import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import { endpoints } from '../../constans/pathContent';
 
 function Main({
-  isMenuOpen, closeMenu,
-  onSubmitLogin, onSubmitRegister, logOut,
-  isEditMode, handleEditMode,
-  textErrorAuth, deleteErrorSubmit,
-  handleLike, handleDelete, ...props
+  isSignIn, isMenuOpen, closeMenu,
+  onSubmitLogin, onSubmitRegister,
+  logOut, deleteErrorSubmit,
+  isEditMode, handleEditMode, textErrorAuth,
+  handleLike, handleDelete
 }) {
-  console.log(props.isSignIn)
 
   return (
     <main className='main'>
@@ -38,15 +37,15 @@ function Main({
           </div>
         } />
         <Route path={endpoints.MOVIES} element={
-          <ProtectedRoute component={Movies} isSignIn={props.isSignIn}
+          <ProtectedRoute component={Movies} isSignIn={isSignIn}
             handleLike={handleLike} handleDelete={handleDelete} />
         } />
         <Route path={endpoints.SAVED_MOVIES} element={
-          <ProtectedRoute component={SavedMovies} isSignIn={props.isSignIn}
+          <ProtectedRoute component={SavedMovies} isSignIn={isSignIn}
             handleLike={handleLike} handleDelete={handleDelete} />
         } />
         <Route path={endpoints.PROFILE} element={
-          <ProtectedRoute component={Profile} isSignIn={props.isSignIn}
+          <ProtectedRoute component={Profile} isSignIn={isSignIn}
             logOut={logOut} textErrorAuth={textErrorAuth}
             isEditMode={isEditMode} handleEditMode={handleEditMode} />
         } />

@@ -207,18 +207,35 @@ function App() {
   }
 
   // _____загрузка данных____
+  let idsSavedMovies = []
+
   const pullInitialData = () => {
     setIsPreloaderActive(true)
-    Promise.all([getMoviesAll(), getProfile(), getMovies()])
-      .then(([movies, user, savedMoves]) => {
+    Promise.all([getProfile(), getMovies()])
+      .then(([user, savedMoves]) => {
         setCurrentUser(user)
-        const idsSavedMovies = savedMoves.map((movie) => movie.movieId)
-        setAllMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
-        )
+        idsSavedMovies = savedMoves.map((movie) => movie.movieId);
         setSavedMovies(savedMoves.map((movie) => { return { ...movie, isSaved: true } }))
       })
       .catch((err) => {
-        console.log(err);
+        setInfoToolText(CONNECTION.MESSAGE_AGAIN)
+        setIsInfoTooltipOpen(true);
+        setTimeout(() => setIsInfoTooltipOpen(false), 1000);
+      })
+      .finally(() => setIsPreloaderActive(false))
+  }
+
+  const pullAllMovies = () => {
+    setIsPreloaderActive(true)
+    getMoviesAll()
+      .then((movies) => {
+        setAllMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
+        )
+      })
+      .catch((err) => {
+        setInfoToolText(CONNECTION.MESSAGE_AGAIN)
+        setIsInfoTooltipOpen(true);
+        setTimeout(() => setIsInfoTooltipOpen(false), 1000);
       })
       .finally(() => setIsPreloaderActive(false))
   }
@@ -282,25 +299,25 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
-      <MoviesContext.Provider value={{ allMovies, savedMovies }}>
+      <MoviesContext.Provider value={{ allMovies, savedMovies, pullAllMovies }}>
         <div className="page">
           <Header openMenu={openMenu} isSignIn={isSignIn} />
           <Main
-
             isSignIn={isSignIn}
-            isMenuOpen={isMenuOpen} closeMenu={closeMenu}
-            onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
-            textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}
+            isMenuOpen={isMenuOpen}
+            closeMenu={closeMenu}
 
-            // onUpdateUser={onUpdateUser}
-            isEditMode={isEditMode} handleEditMode={handleEditMode}
+            onSubmitLogin={onSubmitLogin}
+            onSubmitRegister={onSubmitRegister}
+            logOut={logOut}
+            deleteErrorSubmit={deleteErrorSubmit}
 
-            // movies={allMovies}
-            // moviesVisible={moviesVisible} 
-            savedMoviesVisible={savedMovies}
-            handleLike={handleLike} handleDelete={handleDeleteMovie}
+            textErrorAuth={textErrorAuth}
+            isEditMode={isEditMode}
+            handleEditMode={handleEditMode}
 
-            savedMovies={savedMovies}
+            handleLike={handleLike}
+            handleDelete={handleDeleteMovie}
           />
           <Footer />
 
