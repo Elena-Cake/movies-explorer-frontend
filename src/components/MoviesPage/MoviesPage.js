@@ -5,8 +5,7 @@ import { useEffect, useState } from 'react';
 import Movie from '../Movie/Movie';
 
 function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
-  rowValue, isShortMovies, onChangeFilter }) {
-
+  rowValue, isShortMovies, onChangeFilter, isSerched = true }) {
 
   const [windowWidth, setWindowWidth] = useState(undefined);
 
@@ -14,6 +13,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
   const [countMoviesVisible, setCountMoviesVisible] = useState(0);
   const [stepMoviesMore, setStepMoviesMore] = useState(0);
   const [isTimeAddMovies, setIsTimeAddMovies] = useState(false);
+
 
   const movieElements = [];
   movieElements.push(moviesVisible.map((movie, i) => {
@@ -89,10 +89,10 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
   }, [movies])
 
   return (
-    <section className="movies">
+    <div className='movies-page'>
       <SearchForm onChangeFilter={onChangeFilter} rowValue={rowValue} isShortMovies={isShortMovies} isSavedPage={isSavedPage} />
-      {moviesVisible.length === 0 ?
-        <p>Ничего не найдено</p>
+      {moviesVisible.length === 0 && isSerched ?
+        <p className='movies__error'>Ничего не найдено</p>
         :
         <ul className='movies-list'>
           {movieElements}
@@ -103,7 +103,7 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
           <button className='movies__more-button button' onClick={onAddMovies}>Ещё</button>
         }
       </div>
-    </section>
+    </div>
   );
 }
 

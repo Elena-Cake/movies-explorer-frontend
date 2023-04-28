@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 import { endpoints } from '../../../constans/pathContent';
 
-function Navigation({ activePath, openMenu }) {
+function Navigation({ openMenu, isDarkTheme = false }) {
 
-  const navlinkClassName = ({ isActive }) => `navigation__link link ${isActive ? 'navigation__link_active' : ''}`;
+  const navlinkClassName = ({ isActive }) => `navigation__link link ${isActive ? 'navigation__link_active' : ''} ${isDarkTheme ? 'navigation__link_theme_dark' : ''}`;
+  const buttonClassName = `navigation__button button`;
+  const lineClassName = `navigation__line ${isDarkTheme ? 'navigation__line_theme_dark' : ''}`;
 
   return (
     <div className='navigation'>
@@ -30,14 +32,14 @@ function Navigation({ activePath, openMenu }) {
       </div>
       <NavLink
         to={endpoints.PROFILE}
-        className='navigation__button button'>
+        className={buttonClassName}>
         Аккаунт
       </NavLink>
       <div className='navigation__burger button' onClick={openMenu}>
         <button className='navigation__button-menu button'>
-          <div className='navigation__line'></div>
-          <div className='navigation__line'></div>
-          <div className='navigation__line'></div>
+          <div className={lineClassName}></div>
+          <div className={lineClassName}></div>
+          <div className={lineClassName}></div>
         </button>
       </div >
 

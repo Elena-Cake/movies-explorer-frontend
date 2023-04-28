@@ -4,6 +4,10 @@
     padding: 0 calc(50/1280 *100%) 0 calc(70/1280 *100%);
 }
 
+.movies-page {
+    position: relative;
+}
+
 .movies__more {
     padding: 50px 0 80px;
     display: flex;
@@ -19,6 +23,14 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
+}
+
+.movies__error {
+    padding: 30px 0;
+    text-align: center;
+    margin: 0;
+    font-size: 16px;
+    line-height: 19px;
 }
 
 .movies-list {

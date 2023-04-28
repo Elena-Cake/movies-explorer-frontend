@@ -17,12 +17,13 @@ import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import { endpoints } from '../../constans/pathContent';
 
 function Main({
-  isMenuOpen, closeMenu, onSubmitLogin,
-  onSubmitRegister, textErrorAuth, deleteErrorSubmit,
-  logOut, onUpdateUser, isEditMode, handleEditMode,
-  movies, moviesVisible, savedMovies, savedMoviesVisible,
-  savedMoviesIds, handleLike, handleDelete
+  isMenuOpen, closeMenu,
+  onSubmitLogin, onSubmitRegister, logOut,
+  isEditMode, handleEditMode,
+  textErrorAuth, deleteErrorSubmit,
+  handleLike, handleDelete, ...props
 }) {
+  console.log(props.isSignIn)
 
   return (
     <main className='main'>
@@ -37,18 +38,16 @@ function Main({
           </div>
         } />
         <Route path={endpoints.MOVIES} element={
-          // <ProtectedRoute component={Movies} />
-          <Movies movies={movies}
+          <ProtectedRoute component={Movies} isSignIn={props.isSignIn}
             handleLike={handleLike} handleDelete={handleDelete} />
         } />
         <Route path={endpoints.SAVED_MOVIES} element={
-          // <ProtectedRoute component={SavedMovies} />
-          <SavedMovies movies={savedMoviesVisible}
+          <ProtectedRoute component={SavedMovies} isSignIn={props.isSignIn}
             handleLike={handleLike} handleDelete={handleDelete} />
         } />
         <Route path={endpoints.PROFILE} element={
-          // <ProtectedRoute component={Profile} />
-          <Profile logOut={logOut} textErrorAuth={textErrorAuth}
+          <ProtectedRoute component={Profile} isSignIn={props.isSignIn}
+            logOut={logOut} textErrorAuth={textErrorAuth}
             isEditMode={isEditMode} handleEditMode={handleEditMode} />
         } />
         <Route path={endpoints.LOGIN} element={

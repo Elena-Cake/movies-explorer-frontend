@@ -11,6 +11,8 @@ function Movies({ handleLike, handleDelete }) {
   const [isShortMovies, setIsShortMovies] = useState(false)
   const [allowedMovies, setAllowedMovies] = useState([])
 
+  const [isSerched, setIsSerched] = useState(false);
+
   const checkLocalFilters = () => {
     if (localStorage.getItem('filters-movie')) {
       setRowFilter(JSON.parse(localStorage.getItem('filters-movie')).row)
@@ -24,6 +26,7 @@ function Movies({ handleLike, handleDelete }) {
 
   const onChangeFilter = () => {
     checkLocalFilters()
+    setIsSerched(true)
   }
 
   // фильтрация
@@ -41,11 +44,11 @@ function Movies({ handleLike, handleDelete }) {
   }, [isShortMovies, rowFilter, allMovies])
 
   return (
-    <div>
+    <section className="movies">
       <MoviesPage movies={allowedMovies} isButtonVisible={true}
         rowValue={rowFilter} isShortMovies={isShortMovies}
-        handleLike={handleLike} handleDelete={handleDelete} onChangeFilter={onChangeFilter} />
-    </div>
+        handleLike={handleLike} handleDelete={handleDelete} onChangeFilter={onChangeFilter} isSerched={isSerched} />
+    </section>
   );
 }
 

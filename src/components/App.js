@@ -12,6 +12,7 @@ import { getMoviesAll } from '../utils/MoviesApi';
 import { CONFLICT, CONNECTION, CREATED, NO_VALIDATE, OK } from '../constans/statusData';
 import Preloader from './Preloader/Preloader';
 import { MoviesContext } from '../contexts/MoviesContext';
+import { UNAUTHORIZED } from '../constans/statusData';
 
 function App() {
 
@@ -31,42 +32,6 @@ function App() {
   // фильмы
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-
-  const [savedMoviesFilters, setSavedMoviesFilters] = useState({ row: '', short: false });
-  const [allMoviesFilters, setAllMoviesFilters] = useState({ row: '', short: false });
-
-  const [isTimeSetFiltersMovies, setIsTimeSetFiltersMovies] = useState(false);
-  const [isTimeSetFiltersSavedMovies, setIsTimeSetFiltersSavedMovies] = useState(false);
-
-  const [isShortMovie, setIsShortMovie] = useState(false);
-  const [valueSearchRow, setValueSearchRow] = useState('');
-  // const [moviesVisible, setMoviesVisible] = useState([]);
-  // const [savedMoviesVisible, setSavedMoviesVisible] = useState([]);
-
-  const onChangeFilter = (namePage, rowValue, isShortFilterActive) => {
-    setValueSearchRow(rowValue);
-    setIsShortMovie(isShortFilterActive);
-    if (namePage === 'movies') {
-      setIsTimeSetFiltersMovies(true)
-    }
-    if (namePage === 'saved-movies') {
-      setIsTimeSetFiltersSavedMovies(true)
-    }
-  }
-
-  useEffect(() => {
-    if (isTimeSetFiltersMovies) {
-      setAllMoviesFilters({ row: valueSearchRow, short: isShortMovie })
-      setIsTimeSetFiltersMovies(false)
-    }
-  }, [isTimeSetFiltersMovies])
-
-  useEffect(() => {
-    if (isTimeSetFiltersSavedMovies) {
-      setSavedMoviesFilters({ row: valueSearchRow, short: isShortMovie })
-      setIsTimeSetFiltersSavedMovies(false)
-    }
-  }, [isTimeSetFiltersSavedMovies])
 
   // фильм
   const [timeGetIdToDelete, setTimeGetIdToDelete] = useState(false)
@@ -89,12 +54,21 @@ function App() {
   }
 
   const [infoToolText, setInfoToolText] = useState("Info");
-  // ошибка для InfoTooltip
-  function appointErrInfoTool() {
-    setInfoToolText(CONNECTION.MESSAGE)
+
+
+  // успех для InfoPopup
+  function openSucsessInfoTooltip() {
+    setInfoToolText(OK.MESSAGE)
+    setIsInfoTooltipOpen(true);
+    setTimeout(() => setIsInfoTooltipOpen(false), 1000);
   }
 
   // ________AUTH___________
+
+  // ошибка соединения для ErrorSubmit
+  function appointErrorSubmit() {
+    setInfoToolText(CONNECTION.MESSAGE)
+  }
 
   // удалить ошибку в форме логина
   const deleteErrorSubmit = () => {
@@ -122,7 +96,7 @@ function App() {
         } else if (res === 409) {
           setTextErrorAuth(CONFLICT.MESSAGE)
         } else {
-          appointErrInfoTool()
+          appointErrorSubmit()
         }
         setIsSignIn(false)
       })
@@ -138,16 +112,21 @@ function App() {
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         setIsSignIn(true);
-        setInfoToolText(OK.MESSAGE)
         navigate('/movies', { replace: true });
-        setIsInfoTooltipOpen(true);
-        setTimeout(setIsInfoTooltipOpen(false), 3000);
+        openSucsessInfoTooltip();
       })
       .then(() => pullInitialData())
       .catch((res) => {
-        appointErrInfoTool()
-        setIsInfoTooltipOpen(true);
-        setIsSignIn(false);
+        if (res === 400) {
+          setTextErrorAuth(NO_VALIDATE.VALIDATION)
+        } else if (res === 401) {
+          setTextErrorAuth(UNAUTHORIZED.MESSAGE_AUTH)
+        } else if (res === 409) {
+          setTextErrorAuth(CONFLICT.MESSAGE)
+        } else {
+          appointErrorSubmit()
+        }
+        setIsSignIn(false)
       })
       .finally(() => setIsPreloaderActive(false))
   }
@@ -158,12 +137,14 @@ function App() {
       getProfile()
         .then((res) => {
           if (res) {
+            console.log('token')
             setIsSignIn(true);
             pullInitialData()
           }
         })
         .catch((err) => {
           console.log(err);
+          setIsSignIn(false);
           navigate("/", { replace: true })
         })
     }
@@ -172,10 +153,11 @@ function App() {
   // удаление токена при выходе из аккаунта
   function logOut(e) {
     e.preventDefault();
+    setIsSignIn(false);
     localStorage.removeItem("jwt");
     localStorage.removeItem("filters-movie-saved");
     localStorage.removeItem("filters-movie");
-    navigate("/", { replace: false })
+    navigate("/", { replace: false });
   }
 
   // ____Profile____
@@ -187,9 +169,10 @@ function App() {
     setIsPreloaderActive(true)
     updateProfile(values)
       .then((user) => {
-        setCurrentUser(user)
-        setTextErrorAuth('')
-        setIsEditMode(false)
+        setCurrentUser(user);
+        setTextErrorAuth('');
+        setIsEditMode(false);
+        openSucsessInfoTooltip();
       })
       .catch((res) => {
         console.log(res)
@@ -274,7 +257,7 @@ function App() {
     createMovie(dataMovie)
       .then((newMovie) => {
         setAllMovies(allMovies.map(movie => movie.movieId === newMovie.movieId ? { ...movie, isSaved: true } : movie))
-        setSavedMovies([...savedMovies, newMovie])
+        setSavedMovies([newMovie, ...savedMovies])
       })
       .catch((res) => {
         console.log(res)
@@ -289,6 +272,7 @@ function App() {
       .then(res => {
         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
         setAllMovies(allMovies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
+        openSucsessInfoTooltip()
       })
       .catch((res) => {
         console.log(res)
@@ -296,14 +280,14 @@ function App() {
       .finally(setIsPreloaderActive(false))
   }
 
-
-
   return (
     <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
-      <MoviesContext.Provider value={{ allMovies, savedMovies, onChangeFilter }}>
+      <MoviesContext.Provider value={{ allMovies, savedMovies }}>
         <div className="page">
-          <Header openMenu={openMenu} />
+          <Header openMenu={openMenu} isSignIn={isSignIn} />
           <Main
+
+            isSignIn={isSignIn}
             isMenuOpen={isMenuOpen} closeMenu={closeMenu}
             onSubmitLogin={onSubmitLogin} onSubmitRegister={onSubmitRegister}
             textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} logOut={logOut}

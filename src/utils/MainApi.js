@@ -4,9 +4,11 @@ const URL_BASE = MAIN_BASE_URL;
 // для локального тестирования
 // const URL_BASE = MAIN_BASE_LOCAL;
 
-const headers = {
-    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-    'Content-Type': 'application/json'
+const headers = () => {
+    return {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json'
+    }
 }
 
 function checkResponse(res) {
@@ -21,7 +23,7 @@ export const createUser = (dataUser) => {
 
     return fetch(`${URL_BASE}signup`, {
         method: 'POST',
-        headers: headers,
+        headers: headers(),
         body: JSON.stringify(dataUser)
     })
         .then((res) => {
@@ -33,7 +35,7 @@ export const createUser = (dataUser) => {
 export const login = (dataUser) => {
     return fetch(`${URL_BASE}signin`, {
         method: 'POST',
-        headers: headers,
+        headers: headers(),
         body: JSON.stringify(dataUser)
     })
         .then((res) => {
@@ -45,7 +47,7 @@ export const login = (dataUser) => {
 export const getProfile = () => {
     return fetch(`${URL_BASE}users/me`, {
         method: 'GET',
-        headers: headers,
+        headers: headers(),
     })
         .then((res) => {
             return checkResponse(res)
@@ -56,7 +58,7 @@ export const getProfile = () => {
 export const updateProfile = (dataUser) => {
     return fetch(`${URL_BASE}users/me`, {
         method: 'PATCH',
-        headers: headers,
+        headers: headers(),
         body: JSON.stringify(dataUser)
     })
         .then((res) => {
@@ -68,7 +70,7 @@ export const updateProfile = (dataUser) => {
 export const getMovies = () => {
     return fetch(`${URL_BASE}movies`, {
         method: 'GET',
-        headers: headers,
+        headers: headers(),
     })
         .then((res) => {
             return checkResponse(res)
@@ -81,7 +83,7 @@ export const getMovies = () => {
 export const createMovie = (dataCard) => {
     return fetch(`${URL_BASE}movies`, {
         method: 'POST',
-        headers: headers,
+        headers: headers(),
         body: JSON.stringify(dataCard)
     })
         .then((res) => {
@@ -93,10 +95,7 @@ export const createMovie = (dataCard) => {
 export const deleteMovie = (movieId) => {
     return fetch(`${URL_BASE}movies/${movieId}`, {
         method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-            'Content-Type': 'application/json'
-        }
+        headers: headers()
     })
         .then((res) => {
             return checkResponse(res)
