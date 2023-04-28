@@ -24,6 +24,8 @@ function Main({
   handleLike, handleDelete
 }) {
 
+
+
   return (
     <main className='main'>
       <Routes>
@@ -36,19 +38,21 @@ function Main({
             <Portfolio />
           </div>
         } />
-        <Route path={endpoints.MOVIES} element={
-          <ProtectedRoute component={Movies} isSignIn={isSignIn}
-            handleLike={handleLike} handleDelete={handleDelete} />
-        } />
-        <Route path={endpoints.SAVED_MOVIES} element={
-          <ProtectedRoute component={SavedMovies} isSignIn={isSignIn}
-            handleLike={handleLike} handleDelete={handleDelete} />
-        } />
-        <Route path={endpoints.PROFILE} element={
-          <ProtectedRoute component={Profile} isSignIn={isSignIn}
-            logOut={logOut} textErrorAuth={textErrorAuth}
-            isEditMode={isEditMode} handleEditMode={handleEditMode} />
-        } />
+        <>
+          <Route path={endpoints.MOVIES} element={
+            <ProtectedRoute component={Movies} isSignIn={isSignIn}
+              handleLike={handleLike} handleDelete={handleDelete} />
+          } />
+          <Route path={endpoints.SAVED_MOVIES} element={
+            <ProtectedRoute component={SavedMovies} isSignIn={isSignIn}
+              handleLike={handleLike} handleDelete={handleDelete} />
+          } />
+          <Route path={endpoints.PROFILE} element={
+            <ProtectedRoute component={Profile} isSignIn={isSignIn}
+              logOut={logOut} textErrorAuth={textErrorAuth}
+              isEditMode={isEditMode} handleEditMode={handleEditMode} />
+          } />
+        </>
         <Route path={endpoints.LOGIN} element={
           <Login onSubmitForm={onSubmitLogin} textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} />
         } />

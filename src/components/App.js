@@ -33,6 +33,8 @@ function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
 
+  const [isTimePullMovies, setIsTimePullMovies] = useState(false)
+
   // фильм
   const [timeGetIdToDelete, setTimeGetIdToDelete] = useState(false)
   const [currentMovie, setCurrentMovie] = useState({})
@@ -137,15 +139,14 @@ function App() {
       getProfile()
         .then((res) => {
           if (res) {
-            console.log('token')
             setIsSignIn(true);
-            pullInitialData()
+            pullInitialData();
+            navigate({ replace: false })
           }
         })
         .catch((err) => {
-          console.log(err);
           setIsSignIn(false);
-          navigate("/", { replace: true })
+          navigate("/", { replace: false })
         })
     }
   }, [])
@@ -207,14 +208,11 @@ function App() {
   }
 
   // _____загрузка данных____
-  let idsSavedMovies = []
-
   const pullInitialData = () => {
     setIsPreloaderActive(true)
     Promise.all([getProfile(), getMovies()])
       .then(([user, savedMoves]) => {
         setCurrentUser(user)
-        idsSavedMovies = savedMoves.map((movie) => movie.movieId);
         setSavedMovies(savedMoves.map((movie) => { return { ...movie, isSaved: true } }))
       })
       .catch((err) => {
@@ -226,19 +224,26 @@ function App() {
   }
 
   const pullAllMovies = () => {
-    setIsPreloaderActive(true)
-    getMoviesAll()
-      .then((movies) => {
-        setAllMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
-        )
-      })
-      .catch((err) => {
-        setInfoToolText(CONNECTION.MESSAGE_AGAIN)
-        setIsInfoTooltipOpen(true);
-        setTimeout(() => setIsInfoTooltipOpen(false), 1000);
-      })
-      .finally(() => setIsPreloaderActive(false))
+    setIsTimePullMovies(true)
   }
+  useEffect(() => {
+    if (isTimePullMovies) {
+      const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
+      setIsPreloaderActive(true)
+      getMoviesAll()
+        .then((movies) => {
+          setAllMovies(movies.map(movie => createMovieDTO(movie, idsSavedMovies))
+          )
+        })
+        .catch((err) => {
+          setInfoToolText(CONNECTION.MESSAGE_AGAIN)
+          setIsInfoTooltipOpen(true);
+          setTimeout(() => setIsInfoTooltipOpen(false), 1000);
+        })
+        .finally(() => setIsPreloaderActive(false))
+      setIsTimePullMovies(false)
+    }
+  }, [isTimePullMovies])
 
   // _____Ations (movies): like and delete_____
 
@@ -297,6 +302,8 @@ function App() {
       .finally(setIsPreloaderActive(false))
   }
 
+
+
   return (
     <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
       <MoviesContext.Provider value={{ allMovies, savedMovies, pullAllMovies }}>
@@ -310,9 +317,9 @@ function App() {
             onSubmitLogin={onSubmitLogin}
             onSubmitRegister={onSubmitRegister}
             logOut={logOut}
-            deleteErrorSubmit={deleteErrorSubmit}
 
             textErrorAuth={textErrorAuth}
+            deleteErrorSubmit={deleteErrorSubmit}
             isEditMode={isEditMode}
             handleEditMode={handleEditMode}
 
