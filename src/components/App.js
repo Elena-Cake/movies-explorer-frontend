@@ -294,7 +294,6 @@ function App() {
       .then(res => {
         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
         setAllMovies(allMovies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
-        openSucsessInfoTooltip()
       })
       .catch((res) => {
         console.log(res)
