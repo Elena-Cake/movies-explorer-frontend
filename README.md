@@ -4,3 +4,9 @@
 
 Ссылка на макет в Фигме:
 https://www.figma.com/file/7mJj9Lj2Xt6UJxnti6hkYI/DiplomaMaket?node-id=891-3857&t=WXQcIHW9AEu548lK-0
+
+Ссылка на пулреквест:
+https://github.com/Elena-Cake/movies-explorer-frontend/pull/2
+
+Cсылка на сайт:
+https://movie.svesha.nomoredomains.monster/
