@@ -1,5 +1,5 @@
 
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import AboutMe from './AboutMe/AboutMe';
 import AboutProject from './AboutProject/AboutProject';
 import './Main.css';
@@ -54,10 +54,12 @@ function Main({
           } />
         </>
         <Route path={endpoints.LOGIN} element={
-          <Login onSubmitForm={onSubmitLogin} textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} />
+          isSignIn ? <Navigate to="/" /> :
+            <Login onSubmitForm={onSubmitLogin} textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} />
         } />
         <Route path={endpoints.REGISTER} element={
-          <Register onSubmitForm={onSubmitRegister} textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} />
+          isSignIn ? <Navigate to="/" /> :
+            <Register onSubmitForm={onSubmitRegister} textErrorAuth={textErrorAuth} deleteErrorSubmit={deleteErrorSubmit} />
         } />
         <Route path='*' element={
           <NotFound />

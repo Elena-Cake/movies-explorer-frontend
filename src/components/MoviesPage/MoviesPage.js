@@ -3,6 +3,7 @@ import './MoviesPage.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { useEffect, useState } from 'react';
 import Movie from '../Movie/Movie';
+import { DEFAULT_VISIBLE_MOVIES } from '../../constans/movie';
 
 function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
   rowValue, isShortMovies, onChangeFilter, isSerched = true }) {
@@ -71,15 +72,15 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
   // первое отображение фильмов
   useEffect(() => {
     if (!isSavedPage) {
-      setMoviesVisible(movies.slice(0, 12))
-      setStepMoviesMore(3)
+      setMoviesVisible(movies.slice(0, DEFAULT_VISIBLE_MOVIES.LARGE_SIZE.COUNT_MOVIES_VISIBLE))
+      setStepMoviesMore(DEFAULT_VISIBLE_MOVIES.LARGE_SIZE.STEP_MOVIES_MORE)
       if (windowWidth < 1279) {
-        setMoviesVisible(movies.slice(0, 8))
-        setStepMoviesMore(2)
+        setMoviesVisible(movies.slice(0, DEFAULT_VISIBLE_MOVIES.LOWER_1279PX.COUNT_MOVIES_VISIBLE))
+        setStepMoviesMore(DEFAULT_VISIBLE_MOVIES.LOWER_1279PX.STEP_MOVIES_MORE)
       }
       else if (windowWidth < 768) {
-        setMoviesVisible(movies.slice(0, 5))
-        setStepMoviesMore(2)
+        setMoviesVisible(movies.slice(0, DEFAULT_VISIBLE_MOVIES.LOWER_768PX.COUNT_MOVIES_VISIBLE))
+        setStepMoviesMore(DEFAULT_VISIBLE_MOVIES.LOWER_768PX.STEP_MOVIES_MORE)
       }
     } else {
       setMoviesVisible(movies)

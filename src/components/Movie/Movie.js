@@ -1,13 +1,14 @@
 
-import { useEffect, useState } from 'react';
 import './Movie.css';
+import { GET_HOURS, GET_MINUTS } from '../../constans/movie';
 
 function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
 
-  const hours = Math.floor(dataMovie.duration / 60);
-  const min = dataMovie.duration % 60;
-  const duration = `${hours > 0 ? `${hours}ч ` : ''}${min === 0 ? '' : min + 'м'}`;
-
+  const castDuration = (duration) => {
+    const hours = GET_HOURS(duration);
+    const min = GET_MINUTS(duration);
+    return `${hours > 0 ? `${hours}ч ` : ''}${min === 0 ? '' : min + 'м'}`;
+  }
 
   const onClickLike = () => {
     handleLike(dataMovie)
@@ -25,7 +26,7 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
     <li className="movie" >
       <div className='movie__info'>
         <h3 className='movie__name'>{dataMovie.nameRU}</h3>
-        <p className='movie__duration'>{duration}</p>
+        <p className='movie__duration'>{castDuration(dataMovie.duration)}</p>
         {!isSavedPage ?
           <button className={`movie__flag-button button ${dataMovie.isSaved && 'movie__flag-button_active'}`} onClick={onClickLike}></button>
           :
