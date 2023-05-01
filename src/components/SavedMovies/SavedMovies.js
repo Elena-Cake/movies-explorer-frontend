@@ -18,7 +18,9 @@ function SavedMovies({ handleLike, handleDelete }) {
       setIsShortMovies(JSON.parse(localStorage.getItem('filters-movie-saved')).short)
     }
   }
+
   useEffect(() => {
+    localStorage.setItem('filters-movie-saved', JSON.stringify({ row: '', short: false }))
     checkLocalFilters()
   }, [])
 

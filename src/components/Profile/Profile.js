@@ -1,5 +1,5 @@
 
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Profile.css';
 import { useFormAndValidation } from '../../hooks/useValidationForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -8,6 +8,15 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode }) {
 
   const { currentUser, onUpdateUser } = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, setValues, setIsValid, resetForm } = useFormAndValidation();
+
+  const [defaultName, setDefaultName] = useState(currentUser.name);
+  const [defaultEmail, setDefaultEmail] = useState(currentUser.email);
+
+  const [isValidEditForm, setIsValidEditForm] = useState(false);
+
+  useEffect(() => {
+    setIsValidEditForm(isValid && (defaultEmail !== values.email || defaultName !== values.name))
+  }, [values]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,7 +33,9 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode }) {
   useEffect(() => {
     if (isEditMode) {
       setValues({ ...values, 'name': currentUser.name, 'email': currentUser.email })
-      setIsValid(false)
+      setIsValid(false);
+      setDefaultName(currentUser.name)
+      setDefaultEmail(currentUser.email)
     }
   }, [isEditMode]);
 
@@ -79,8 +90,8 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode }) {
           <div className='profile__button-container button-container'>
             <span className={`profile__span-error span-error ${textErrorAuth !== '' ? 'span-error_active' : ''}`}>{textErrorAuth}</span>
             <button
-              className={`profile__save-button button ${!isValid ? 'profile__save-button_disable' : ''}`}
-              disabled={!isValid}
+              className={`profile__save-button button ${!isValidEditForm ? 'profile__save-button_disable' : ''}`}
+              disabled={!isValidEditForm}
             >Сохранить</button>
           </div>
         </form>}

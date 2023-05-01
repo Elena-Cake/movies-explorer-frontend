@@ -28,6 +28,9 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
     if (isTimeAddMovies) {
       setMoviesVisible(movies.slice(0, countMoviesVisible + stepMoviesMore))
       setIsTimeAddMovies(false)
+      if (!isSavedPage) {
+        localStorage.setItem('visible-movies', JSON.stringify(moviesVisible))
+      }
     }
   }, [isTimeAddMovies]);
 
@@ -71,7 +74,9 @@ function MoviesPage({ movies, isSavedPage = false, handleLike, handleDelete,
 
   // первое отображение фильмов
   useEffect(() => {
-    if (!isSavedPage) {
+    if (localStorage.getItem('visible-movies') && !isSavedPage) {
+      setMoviesVisible(JSON.parse(localStorage.getItem('visible-movies')))
+    } else if (!isSavedPage) {
       setMoviesVisible(movies.slice(0, DEFAULT_VISIBLE_MOVIES.LARGE_SIZE.COUNT_MOVIES_VISIBLE))
       setStepMoviesMore(DEFAULT_VISIBLE_MOVIES.LARGE_SIZE.STEP_MOVIES_MORE)
       if (windowWidth < 1279) {

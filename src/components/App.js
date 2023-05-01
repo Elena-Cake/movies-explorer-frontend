@@ -155,9 +155,7 @@ function App() {
   function logOut(e) {
     e.preventDefault();
     setIsSignIn(false);
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("filters-movie-saved");
-    localStorage.removeItem("filters-movie");
+    localStorage.clear()
     navigate("/", { replace: false });
   }
 

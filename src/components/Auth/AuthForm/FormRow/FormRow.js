@@ -2,7 +2,7 @@
 import './FormRow.css';
 import { useFormAndValidation } from '../../../../hooks/useValidationForm'
 import { useEffect } from 'react';
-import { PATTERN_URL } from '../../../../constans/inputsData';
+import { PATTERN_EMAIL } from '../../../../constans/inputsData';
 
 function FormRow({ data, onChangeButtonActive }) {
 
@@ -23,7 +23,7 @@ function FormRow({ data, onChangeButtonActive }) {
           placeholder={`Введите ${data.title}`}
           value={values[nameInput] || ''}
           type={data.validation.type}
-          pattern={PATTERN_URL}
+          pattern={PATTERN_EMAIL}
           required={data.validation.required ? data.validation.required : false}
           onChange={handleChange}
         />

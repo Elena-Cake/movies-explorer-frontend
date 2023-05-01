@@ -47,7 +47,11 @@ function Movies({ handleLike, handleDelete }) {
       }
       setAllowedMovies(filteredMovies)
     }
-  }, [isShortMovies, rowFilter, allMovies])
+  }, [isShortMovies, rowFilter])
+
+  useEffect(() => {
+
+  }, [allMovies])
 
   return (
     <section className="movies">
