@@ -13,6 +13,7 @@ import { CONFLICT, CONNECTION, CREATED, NO_VALIDATE, OK } from '../constans/stat
 import Preloader from './Preloader/Preloader';
 import { MoviesContext } from '../contexts/MoviesContext';
 import { UNAUTHORIZED } from '../constans/statusData';
+import { createMovieDTO } from '../constans/movie';
 
 function App() {
 
@@ -187,24 +188,6 @@ function App() {
   }
 
   // _____Pull movies_____
-
-  const createMovieDTO = (movie, idsSavedMovies) => {
-    return {
-      country: movie.country || 'unknow',
-      director: movie.director || 'unknow',
-      duration: movie.duration,
-      year: movie.year,
-      description: movie.description || 'unknow',
-      image: 'https://api.nomoreparties.co' + movie.image.url,
-      trailerLink: movie.trailerLink,
-      thumbnail: 'https://api.nomoreparties.co' + movie.image.url,
-      movieId: movie.id,
-      nameRU: movie.nameRU || 'unknow',
-      nameEN: movie.nameEN || 'unknow',
-      isSaved: idsSavedMovies.includes(movie.id)
-    }
-  }
-
   // _____загрузка данных____
   const pullInitialData = () => {
     setIsPreloaderActive(true)
@@ -278,22 +261,6 @@ function App() {
       .finally(setIsPreloaderActive(false))
   }
 
-  // // достать айди для удаления лайка
-
-
-  //     setIsPreloaderActive(true)
-  //     deleteMovie(idSavedMovie)
-  //       .then(res => {
-  //         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
-  //         setAllMovies(allMovies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
-  //       })
-  //       .catch((res) => {
-  //         console.log(res)
-  //       })
-  //       .finally(setIsPreloaderActive(false))
-  //     setTimeGetIdToDelete(false)
-  //   }
-  // }, [timeGetIdToDelete])
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>

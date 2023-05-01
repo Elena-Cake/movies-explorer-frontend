@@ -1,6 +1,6 @@
 
 import './Movie.css';
-import { GET_HOURS, GET_MINUTS } from '../../constans/movie';
+import { getHours, getMinuts } from '../../constans/movie';
 import { useContext } from 'react';
 import { MoviesContext } from '../../contexts/MoviesContext';
 
@@ -9,8 +9,8 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
   const { savedMovies } = useContext(MoviesContext);
 
   const castDuration = (duration) => {
-    const hours = GET_HOURS(duration);
-    const min = GET_MINUTS(duration);
+    const hours = getHours(duration);
+    const min = getMinuts(duration);
     return `${hours > 0 ? `${hours}ч ` : ''}${min === 0 ? '' : min + 'м'}`;
   }
 
