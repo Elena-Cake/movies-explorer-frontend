@@ -245,59 +245,55 @@ function App() {
 
   // _____Ations (movies): like and delete_____
 
-  // нажатие лайка
-  const handleLike = (dataMovie) => {
-    if (dataMovie.isSaved) {
-      setCurrentMovie(dataMovie)
-      setTimeGetIdToDelete(true)
-    }
-    else {
-      handleAddMovie(dataMovie)
-    }
-  }
-
-  // достать айди для удаления лайка
-  useEffect(() => {
-    if (timeGetIdToDelete) {
-      let idSavedMovie = 0
-      savedMovies.forEach((movie) => {
-        if (currentMovie.movieId === movie.movieId) {
-          idSavedMovie = movie.coumovieId
-        }
-      })
-      handleDeleteMovie(idSavedMovie)
-      setTimeGetIdToDelete(false)
-    }
-  }, [timeGetIdToDelete])
-
   // добавление фильма в сохраненные
-  const handleAddMovie = (dataMovie) => {
+  const handleLike = (dataMovie, callback) => {
     delete dataMovie.isSaved
     setIsPreloaderActive(true)
     createMovie(dataMovie)
       .then((newMovie) => {
         setAllMovies(allMovies.map(movie => movie.movieId === newMovie.movieId ? { ...movie, isSaved: true } : movie))
         setSavedMovies([newMovie, ...savedMovies])
+        callback(true)
       })
       .catch((res) => {
         console.log(res)
+        callback(false)
       })
       .finally(setIsPreloaderActive(false))
   }
 
   // удаление фильма из сохраненных
-  const handleDeleteMovie = (movieId) => {
+  const handleDelete = (movieId, callback) => {
     setIsPreloaderActive(true)
     deleteMovie(movieId)
       .then(res => {
         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
         setAllMovies(allMovies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
+        callback(true)
       })
       .catch((res) => {
         console.log(res)
+        callback(false)
       })
       .finally(setIsPreloaderActive(false))
   }
+
+  // // достать айди для удаления лайка
+
+
+  //     setIsPreloaderActive(true)
+  //     deleteMovie(idSavedMovie)
+  //       .then(res => {
+  //         setSavedMovies(savedMovies.filter((movie) => movie.movieId !== res.movie.movieId))
+  //         setAllMovies(allMovies.map(movie => movie.movieId === res.movie.movieId ? { ...movie, isSaved: false } : movie))
+  //       })
+  //       .catch((res) => {
+  //         console.log(res)
+  //       })
+  //       .finally(setIsPreloaderActive(false))
+  //     setTimeGetIdToDelete(false)
+  //   }
+  // }, [timeGetIdToDelete])
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
@@ -319,7 +315,7 @@ function App() {
             handleEditMode={handleEditMode}
 
             handleLike={handleLike}
-            handleDelete={handleDeleteMovie}
+            handleDelete={handleDelete}
           />
           <Footer />
 

@@ -1,8 +1,12 @@
 
 import './Movie.css';
 import { GET_HOURS, GET_MINUTS } from '../../constans/movie';
+import { useContext } from 'react';
+import { MoviesContext } from '../../contexts/MoviesContext';
 
 function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
+
+  const { savedMovies } = useContext(MoviesContext);
 
   const castDuration = (duration) => {
     const hours = GET_HOURS(duration);
@@ -11,11 +15,30 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
   }
 
   const onClickLike = () => {
-    handleLike(dataMovie)
+    if (!dataMovie.isSaved) {
+      // handleLike(dataMovie)
+      handleLike(dataMovie, (isSuccess) => {
+        if (isSuccess) {
+          dataMovie.isSaved = true
+        }
+      })
+    } else {
+      let idSavedMovie
+      savedMovies.forEach((movie) => {
+        if (dataMovie.movieId === movie.movieId) {
+          idSavedMovie = movie.coumovieId
+        }
+      })
+      handleDelete(idSavedMovie, (isSuccess) => {
+        if (isSuccess) {
+          dataMovie.isSaved = false
+        }
+      })
+    }
   }
 
   const onDeleteMovie = () => {
-    handleDelete(dataMovie.coumovieId)
+    handleDelete(dataMovie.coumovieId, (isSuccess) => { })
   }
 
   const handleCardClick = () => {
