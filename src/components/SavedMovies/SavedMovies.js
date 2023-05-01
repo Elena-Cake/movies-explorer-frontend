@@ -43,7 +43,7 @@ function SavedMovies({ handleLike, handleDelete }) {
 
   return (
     <section className="movies movies-saved">
-      <MoviesPage movies={allowedMovies} isButtonVisible={false} isSavedPage={true}
+      <MoviesPage movies={allowedMovies} moviesVisible={allowedMovies} isButtonVisible={false} isSavedPage={true}
         rowValue={rowFilter} isShortMovies={isShortMovies}
         handleLike={handleLike} handleDelete={handleDelete} onChangeFilter={onChangeFilter} />
     </section>
