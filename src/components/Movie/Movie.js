@@ -4,7 +4,7 @@ import { getHours, getMinuts } from '../../constans/movie';
 import { useContext } from 'react';
 import { MoviesContext } from '../../contexts/MoviesContext';
 
-function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
+function Movie({ dataMovie, isSavedPage, handleLike, handleDelete, onChangeSave }) {
 
   const { savedMovies } = useContext(MoviesContext);
 
@@ -20,6 +20,7 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
       handleLike(dataMovie, (isSuccess) => {
         if (isSuccess) {
           dataMovie.isSaved = true
+          onChangeSave(dataMovie.movieId, true)
         }
       })
     } else {
@@ -32,6 +33,7 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete }) {
       handleDelete(idSavedMovie, (isSuccess) => {
         if (isSuccess) {
           dataMovie.isSaved = false
+          onChangeSave(dataMovie.movieId, false)
         }
       })
     }

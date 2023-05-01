@@ -15,6 +15,7 @@ function Movies({ handleLike, handleDelete }) {
   const [defCountMoviesVisible, setDefCountMoviesVisible] = useState(8);
   const [countMoviesVisible, setCountMoviesVisible] = useState(0);
 
+  const [currentMovieId, setCurrentMovieId] = useState(0);
 
   const [isSerched, setIsSerched] = useState(false);
   const [rowFilter, setRowFilter] = useState('')
@@ -106,7 +107,7 @@ function Movies({ handleLike, handleDelete }) {
   // первое отображение фильмов
   useEffect(() => {
     if (localStorage.getItem('visible-movies')) {
-      setMoviesVisible(allowedMovies.slice(0, countMoviesVisible))
+      setMoviesVisible(allowedMovies.slice(0, JSON.parse(localStorage.getItem('visible-movies')).count))
     } else {
       checkWindowWidth()
     }
@@ -132,11 +133,24 @@ function Movies({ handleLike, handleDelete }) {
     }
   }, [isTimeAddMovies]);
 
+  const onChangeSave = (movieId) => {
+    setCurrentMovieId(movieId)
+  }
+  useEffect(() => {
+    if (currentMovieId !== 0) {
+      setAllowedMovies(allowedMovies.map(movie => {
+        return movie.movieId === currentMovieId ?
+          { ...movie, isSaved: !movie.isSaved } : movie
+      }
+      ))
+    }
+    setCurrentMovieId(0)
+  }, [currentMovieId]);
 
   return (
     <section className="movies">
       <MoviesPage movies={allowedMovies} moviesVisible={moviesVisible} isButtonVisible={true}
-        rowValue={rowFilter} isShortMovies={isShortMovies}
+        rowValue={rowFilter} isShortMovies={isShortMovies} onChangeSave={onChangeSave}
         handleLike={handleLike} handleDelete={handleDelete} onChangeFilter={onChangeFilter} isSerched={isSerched} onAddMovies={onAddMovies} />
     </section>
   );
