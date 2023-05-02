@@ -69,7 +69,7 @@ function Movies({ handleLike, handleDelete }) {
 
   // назначить фильтры, если они есть
   const checkLocalFilters = () => {
-    if (localStorage.getItem('filters-movie') && isSerched) {
+    if (localStorage.getItem('filters-movie')) {
       setRowFilter(JSON.parse(localStorage.getItem('filters-movie')).row)
       setIsShortMovies(JSON.parse(localStorage.getItem('filters-movie')).short)
     }
@@ -96,6 +96,7 @@ function Movies({ handleLike, handleDelete }) {
 
   useEffect(() => {
     if (allMovies.length !== 0) {
+      checkLocalFilters()
       startFilterMovies()
     }
   }, [allMovies])
@@ -108,6 +109,7 @@ function Movies({ handleLike, handleDelete }) {
   // фильтрация
   useEffect(() => {
     if (isTimeFilterMovies) {
+      console.log(isShortMovies, rowFilter)
       let filteredMovies = isNewSerched ? allMovies : moviesNeedFilter
       if (filteredMovies.length !== 0) {
         if (isShortMovies) {
@@ -120,7 +122,7 @@ function Movies({ handleLike, handleDelete }) {
       }
       setIsTimeFilterMovies(false)
     }
-  }, [isTimeFilterMovies])
+  }, [isTimeFilterMovies, isShortMovies, rowFilter])
 
 
   // первое отображение фильмов

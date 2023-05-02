@@ -21,6 +21,7 @@ function SearchForm({ onChangeFilter, isSavedPage }) {
     checkLocalFilters()
   }, [])
 
+
   const toggleShortFilm = () => {
     setIsShortFilmsActive(!isShortFilmsActive)
     setIsShortFilmsChanged(true)
@@ -32,7 +33,8 @@ function SearchForm({ onChangeFilter, isSavedPage }) {
 
   const onSubmitForm = (e) => {
     e.preventDefault()
-    localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: valueSearchRow, short: isShortFilmsActive }))
+    setIsTimeSubmit(true)
+    // localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: valueSearchRow, short: isShortFilmsActive }))
     onChangeFilter()
   }
 
