@@ -24,8 +24,6 @@ function Main({
   handleLike, handleDelete, handleEditModeOff
 }) {
 
-
-
   return (
     <main className='main'>
       <Routes>
