@@ -163,6 +163,7 @@ function App() {
   // ____Profile____
 
   const handleEditMode = () => setIsEditMode(true)
+  const handleEditModeOff = () => setIsEditMode(false)
 
   // обновление профиля
   function onUpdateUser({ values }) {
@@ -280,6 +281,7 @@ function App() {
             deleteErrorSubmit={deleteErrorSubmit}
             isEditMode={isEditMode}
             handleEditMode={handleEditMode}
+            handleEditModeOff={handleEditModeOff}
 
             handleLike={handleLike}
             handleDelete={handleDelete}

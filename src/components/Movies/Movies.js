@@ -9,7 +9,8 @@ function Movies({ handleLike, handleDelete }) {
 
   const { allMovies, pullAllMovies } = useContext(MoviesContext);
 
-  // const [allowedMovies, setAllowedMovies] = useState([]);
+  const [isTimeFilterMovies, setIsTimeFilterMovies] = useState(false);
+  const [moviesNeedFilter, setMoviesNeedFilter] = useState([]);
   const [allowedMovies, setAllowedMovies] = useState([]);
   const [moviesVisible, setMoviesVisible] = useState([]);
   const [defCountMoviesVisible, setDefCountMoviesVisible] = useState(8);
@@ -18,6 +19,7 @@ function Movies({ handleLike, handleDelete }) {
   const [currentMovieId, setCurrentMovieId] = useState(0);
 
   const [isSerched, setIsSerched] = useState(false);
+  const [isNewSerched, setIsNewSerched] = useState(false);
   const [rowFilter, setRowFilter] = useState('')
   const [isShortMovies, setIsShortMovies] = useState(false);
 
@@ -29,15 +31,15 @@ function Movies({ handleLike, handleDelete }) {
   // ________WindowWidth___________
   // проверить ширину и назначить шаг и дефолтное количество фильмов
   const checkWindowWidth = () => {
-    setMoviesVisible(allowedMovies.slice(DEFAULT_VISIBLE_MOVIES.LARGE_SIZE.COUNT_MOVIES_VISIBLE))
+    setDefCountMoviesVisible(DEFAULT_VISIBLE_MOVIES.LARGE_SIZE.COUNT_MOVIES_VISIBLE)
     setStepMoviesMore(DEFAULT_VISIBLE_MOVIES.LARGE_SIZE.STEP_MOVIES_MORE)
-    if (windowWidth < 1279) {
-      setMoviesVisible(allowedMovies.slice(DEFAULT_VISIBLE_MOVIES.LOWER_1279PX.COUNT_MOVIES_VISIBLE))
-      setStepMoviesMore(DEFAULT_VISIBLE_MOVIES.LOWER_1279PX.STEP_MOVIES_MORE)
-    }
-    else if (windowWidth < 768) {
-      setMoviesVisible(allowedMovies.slice(DEFAULT_VISIBLE_MOVIES.LOWER_768PX.COUNT_MOVIES_VISIBLE))
+    if (windowWidth < 768) {
+      setDefCountMoviesVisible(DEFAULT_VISIBLE_MOVIES.LOWER_768PX.COUNT_MOVIES_VISIBLE)
       setStepMoviesMore(DEFAULT_VISIBLE_MOVIES.LOWER_768PX.STEP_MOVIES_MORE)
+    }
+    else if (windowWidth < 1279) {
+      setDefCountMoviesVisible(DEFAULT_VISIBLE_MOVIES.LOWER_1279PX.COUNT_MOVIES_VISIBLE)
+      setStepMoviesMore(DEFAULT_VISIBLE_MOVIES.LOWER_1279PX.STEP_MOVIES_MORE)
     }
   }
   // прослушка изменения ширины экрана
@@ -59,57 +61,80 @@ function Movies({ handleLike, handleDelete }) {
       checkLocalFilters()
       const movies = JSON.parse(localStorage.getItem('visible-movies')).movies;
       const count = JSON.parse(localStorage.getItem('visible-movies')).count;
-      setAllowedMovies(movies)
+      setMoviesNeedFilter(movies)
+      startFilterMovies()
       setCountMoviesVisible(count)
     }
   }, [])
 
   // назначить фильтры, если они есть
   const checkLocalFilters = () => {
-    if (localStorage.getItem('filters-movie')) {
+    if (localStorage.getItem('filters-movie') && isSerched) {
       setRowFilter(JSON.parse(localStorage.getItem('filters-movie')).row)
       setIsShortMovies(JSON.parse(localStorage.getItem('filters-movie')).short)
     }
   }
-
-  useEffect(() => {
-    checkLocalFilters()
-  }, [])
 
   // ________Filters
   // при изменении фильтров
   const onChangeFilter = () => {
     checkWindowWidth()
     checkLocalFilters()
+    // для загрузки фильмов с сайта
     setIsSerched(true)
+    // для отделения возвращения от фильтрации
+    setIsNewSerched(true)
+    startFilterMovies()
   }
 
   // при первой фильтрации запрос
   useEffect(() => {
-    if (allMovies.length === 0 && isSerched) { pullAllMovies() }
+    if (allMovies.length === 0 && isSerched) {
+      pullAllMovies()
+    }
   }, [isSerched])
+
+  useEffect(() => {
+    if (allMovies.length !== 0) {
+      startFilterMovies()
+    }
+  }, [allMovies])
+
+  // для запуска фильтрации
+  const startFilterMovies = () => {
+    setIsTimeFilterMovies(true)
+  }
 
   // фильтрация
   useEffect(() => {
-    if (allMovies.length !== 0) {
-      let filteredMovies = allMovies
-      if (isShortMovies) {
-        filteredMovies = filteredMovies.filter((movie) => (movie.duration <= 40))
+    if (isTimeFilterMovies) {
+      let filteredMovies = isNewSerched ? allMovies : moviesNeedFilter
+      if (filteredMovies.length !== 0) {
+        if (isShortMovies) {
+          filteredMovies = filteredMovies.filter((movie) => (movie.duration <= 40))
+        }
+        if (rowFilter !== '') {
+          filteredMovies = filteredMovies.filter((movie) => (movie.nameRU.toLowerCase().includes(rowFilter.toLowerCase())))
+        }
+        setAllowedMovies(filteredMovies)
       }
-      if (rowFilter !== '') {
-        filteredMovies = filteredMovies.filter((movie) => (movie.nameRU.toLowerCase().includes(rowFilter.toLowerCase())))
-      }
-      setAllowedMovies(filteredMovies)
+      setIsTimeFilterMovies(false)
     }
-  }, [isShortMovies, rowFilter, allMovies])
+  }, [isTimeFilterMovies])
 
 
   // первое отображение фильмов
   useEffect(() => {
-    if (localStorage.getItem('visible-movies')) {
-      setMoviesVisible(allowedMovies.slice(0, JSON.parse(localStorage.getItem('visible-movies')).count))
-    } else {
-      checkWindowWidth()
+    if (allowedMovies.length !== 0) {
+      if (isNewSerched) {
+        // новый поиск по фильтру
+        setMoviesVisible(allowedMovies.slice(0, defCountMoviesVisible))
+        setIsNewSerched(false)
+      } else {
+        // возвращение на страницу
+        checkLocalFilters()
+        setMoviesVisible(allowedMovies.slice(0, JSON.parse(localStorage.getItem('visible-movies')).count))
+      }
     }
   }, [allowedMovies])
 

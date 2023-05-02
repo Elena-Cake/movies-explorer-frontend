@@ -4,7 +4,7 @@ import './Profile.css';
 import { useFormAndValidation } from '../../hooks/useValidationForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode }) {
+function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode, handleEditModeOff }) {
 
   const { currentUser, onUpdateUser } = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, setValues, setIsValid, resetForm } = useFormAndValidation();
@@ -20,7 +20,6 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     onUpdateUser(
       {
         values: values,
@@ -38,6 +37,10 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode }) {
       setDefaultEmail(currentUser.email)
     }
   }, [isEditMode]);
+
+  useEffect(() => {
+    return () => handleEditModeOff()
+  }, []);
 
   return (
     <div className="profile">

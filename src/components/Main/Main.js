@@ -21,7 +21,7 @@ function Main({
   onSubmitLogin, onSubmitRegister,
   logOut, deleteErrorSubmit,
   isEditMode, handleEditMode, textErrorAuth,
-  handleLike, handleDelete
+  handleLike, handleDelete, handleEditModeOff
 }) {
 
 
@@ -50,7 +50,8 @@ function Main({
           <Route path={endpoints.PROFILE} element={
             <ProtectedRoute component={Profile} isSignIn={isSignIn}
               logOut={logOut} textErrorAuth={textErrorAuth}
-              isEditMode={isEditMode} handleEditMode={handleEditMode} />
+              isEditMode={isEditMode} handleEditMode={handleEditMode}
+              handleEditModeOff={handleEditModeOff} />
           } />
         </>
         <Route path={endpoints.LOGIN} element={
