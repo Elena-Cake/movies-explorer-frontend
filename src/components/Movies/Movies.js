@@ -3,7 +3,7 @@ import './Movies.css';
 import MoviesPage from '../MoviesPage/MoviesPage';
 import { useState, useContext, useEffect } from 'react';
 import { MoviesContext } from '../../contexts/MoviesContext';
-import { DEFAULT_VISIBLE_MOVIES } from '../../constans/movie';
+import { DEFAULT_VISIBLE_MOVIES, DURATION_SHORT_MOVIE_MAX } from '../../constans/movie';
 
 function Movies({ handleLike, handleDelete }) {
 
@@ -113,7 +113,7 @@ function Movies({ handleLike, handleDelete }) {
       let filteredMovies = isNewSerched ? allMovies : moviesNeedFilter
       if (filteredMovies.length !== 0) {
         if (isShortMovies) {
-          filteredMovies = filteredMovies.filter((movie) => (movie.duration <= 40))
+          filteredMovies = filteredMovies.filter((movie) => (movie.duration <= DURATION_SHORT_MOVIE_MAX))
         }
         if (rowFilter !== '') {
           filteredMovies = filteredMovies.filter((movie) => (movie.nameRU.toLowerCase().includes(rowFilter.toLowerCase())))

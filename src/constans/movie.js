@@ -1,6 +1,8 @@
 export const getHours = (duration) => Math.floor(duration / 60);
 export const getMinuts = (duration) => duration % 60;
 
+export const DURATION_SHORT_MOVIE_MAX = 40;
+
 export const DEFAULT_VISIBLE_MOVIES = {
     LARGE_SIZE: {
         COUNT_MOVIES_VISIBLE: 12,

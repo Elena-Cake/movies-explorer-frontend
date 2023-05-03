@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { MoviesContext } from '../../contexts/MoviesContext';
 import MoviesPage from '../MoviesPage/MoviesPage';
 import './SavedMovies.css';
+import { DURATION_SHORT_MOVIE_MAX } from '../../constans/movie';
 
 function SavedMovies({ handleLike, handleDelete }) {
 
@@ -33,7 +34,7 @@ function SavedMovies({ handleLike, handleDelete }) {
   useEffect(() => {
     let filteredMovies = savedMovies
     if (isShortMovies) {
-      filteredMovies = filteredMovies.filter((movie) => (movie.duration <= 40))
+      filteredMovies = filteredMovies.filter((movie) => (movie.duration <= DURATION_SHORT_MOVIE_MAX))
     }
     if (rowFilter !== '') {
       filteredMovies = filteredMovies.filter((movie) => (movie.nameRU.toLowerCase().includes(rowFilter.toLowerCase())))
