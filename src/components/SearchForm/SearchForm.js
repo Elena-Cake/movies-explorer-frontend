@@ -6,9 +6,7 @@ function SearchForm({ onChangeFilter, isSavedPage }) {
 
   const nameLocalStorigeFilters = isSavedPage ? 'filters-movie-saved' : 'filters-movie'
   const [valueSearchRow, setValueSearchRow] = useState('')
-  const [isShortFilmsActive, setIsShortFilmsActive] = useState(false)
-  const [isShortFilmsChanged, setIsShortFilmsChanged] = useState(false);
-  const [isTimeSubmit, setIsTimeSubmit] = useState(false);
+  const [isShortFilmsActive, setIsShortFilmsActive] = useState(false);
 
   const checkLocalFilters = () => {
     if (localStorage.getItem(nameLocalStorigeFilters)) {
@@ -23,36 +21,20 @@ function SearchForm({ onChangeFilter, isSavedPage }) {
 
 
   const toggleShortFilm = () => {
+    localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: valueSearchRow, short: !isShortFilmsActive }))
     setIsShortFilmsActive(!isShortFilmsActive)
-    setIsShortFilmsChanged(true)
+    onChangeFilter(nameLocalStorigeFilters)
   }
 
   const changeInputSearch = (e) => {
     setValueSearchRow(e.target.value)
+    localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: e.target.value, short: isShortFilmsActive }))
   }
 
   const onSubmitForm = (e) => {
     e.preventDefault()
-    setIsTimeSubmit(true)
-    // localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: valueSearchRow, short: isShortFilmsActive }))
-    onChangeFilter()
+    onChangeFilter(nameLocalStorigeFilters)
   }
-
-  useEffect(() => {
-    if (isTimeSubmit) {
-      localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: valueSearchRow, short: isShortFilmsActive }))
-      onChangeFilter(nameLocalStorigeFilters)
-      setIsTimeSubmit(false)
-    }
-  }, [isTimeSubmit])
-
-  useEffect(() => {
-    if (isShortFilmsChanged) {
-      localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: valueSearchRow, short: isShortFilmsActive }))
-      onChangeFilter(nameLocalStorigeFilters)
-      setIsShortFilmsChanged(false)
-    }
-  }, [isShortFilmsChanged])
 
   return (
     <div className="search" >
