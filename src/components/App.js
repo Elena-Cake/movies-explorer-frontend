@@ -207,7 +207,7 @@ function App() {
       .finally(() => setIsPreloaderActive(false))
   }
 
-  // нужно поменять перебор всех фильмов при изменении сохраненок...
+  // первая загрузка фильмов
   const pullAllMovies = () => {
     setIsTimePullMovies(true)
   }
@@ -230,8 +230,8 @@ function App() {
     }
   }, [isTimePullMovies])
 
+  // обновление лайков при изменении юзера без перезагрузки
   useEffect(() => {
-    console.log(isTimeUpdateAllMovies, allMovies.length !== 0)
     if (isTimeUpdateAllMovies && allMovies.length !== 0) {
       const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
       setAllMovies(allMovies.map(movie => {
@@ -240,6 +240,7 @@ function App() {
       setIsTimeUpdateAllMovies(false)
     }
   }, [isTimeUpdateAllMovies])
+
 
   // _____Ations (movies): like and delete_____
 
@@ -275,7 +276,6 @@ function App() {
       })
       .finally(setIsPreloaderActive(false))
   }
-
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
