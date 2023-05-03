@@ -19,7 +19,6 @@ function SearchForm({ onChangeFilter, isSavedPage }) {
     checkLocalFilters()
   }, [])
 
-
   const toggleShortFilm = () => {
     localStorage.setItem(nameLocalStorigeFilters, JSON.stringify({ row: valueSearchRow, short: !isShortFilmsActive }))
     setIsShortFilmsActive(!isShortFilmsActive)

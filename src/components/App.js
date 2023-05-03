@@ -35,6 +35,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
 
   const [isTimePullMovies, setIsTimePullMovies] = useState(false)
+  const [isTimeUpdateAllMovies, setIsTimeUpdateAllMovies] = useState(false)
 
   // фильм
   const [timeGetIdToDelete, setTimeGetIdToDelete] = useState(false)
@@ -196,6 +197,7 @@ function App() {
       .then(([user, savedMoves]) => {
         setCurrentUser(user)
         setSavedMovies(savedMoves.map((movie) => { return { ...movie, isSaved: true } }))
+        setIsTimeUpdateAllMovies(true)
       })
       .catch((err) => {
         setInfoToolText(CONNECTION.MESSAGE_AGAIN)
@@ -205,6 +207,7 @@ function App() {
       .finally(() => setIsPreloaderActive(false))
   }
 
+  // нужно поменять перебор всех фильмов при изменении сохраненок...
   const pullAllMovies = () => {
     setIsTimePullMovies(true)
   }
@@ -226,6 +229,17 @@ function App() {
       setIsTimePullMovies(false)
     }
   }, [isTimePullMovies])
+
+  useEffect(() => {
+    console.log(isTimeUpdateAllMovies, allMovies.length !== 0)
+    if (isTimeUpdateAllMovies && allMovies.length !== 0) {
+      const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
+      setAllMovies(allMovies.map(movie => {
+        return { ...movie, isSaved: idsSavedMovies.includes(movie.movieId) }
+      }))
+      setIsTimeUpdateAllMovies(false)
+    }
+  }, [isTimeUpdateAllMovies])
 
   // _____Ations (movies): like and delete_____
 

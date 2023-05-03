@@ -109,7 +109,6 @@ function Movies({ handleLike, handleDelete }) {
   // фильтрация
   useEffect(() => {
     if (isTimeFilterMovies) {
-      console.log(isShortMovies, rowFilter)
       let filteredMovies = isNewSerched ? allMovies : moviesNeedFilter
       if (filteredMovies.length !== 0) {
         if (isShortMovies) {
