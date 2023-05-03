@@ -16,11 +16,12 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete, onChangeSave 
 
   const onClickLike = () => {
     if (!dataMovie.isSaved) {
-      // handleLike(dataMovie)
       handleLike(dataMovie, (isSuccess) => {
         if (isSuccess) {
           dataMovie.isSaved = true
-          onChangeSave(dataMovie.movieId, true)
+          onChangeSave(dataMovie.movieId)
+        } else {
+          dataMovie.isSaved = false
         }
       })
     } else {
@@ -33,14 +34,16 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete, onChangeSave 
       handleDelete(idSavedMovie, (isSuccess) => {
         if (isSuccess) {
           dataMovie.isSaved = false
-          onChangeSave(dataMovie.movieId, false)
+          onChangeSave(dataMovie.movieId)
+        } else {
+          dataMovie.isSaved = true
         }
       })
     }
   }
 
   const onDeleteMovie = () => {
-    handleDelete(dataMovie.coumovieId, (isSuccess) => { })
+    handleDelete(dataMovie.coumovieId, () => { })
   }
 
   const handleCardClick = () => {
