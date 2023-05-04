@@ -1,12 +1,13 @@
 
 import './Movie.css';
 import { getHours, getMinuts } from '../../constans/movie';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MoviesContext } from '../../contexts/MoviesContext';
 
 function Movie({ dataMovie, isSavedPage, handleLike, handleDelete, onChangeSave }) {
 
   const { savedMovies } = useContext(MoviesContext);
+  const [idMovieChangeSave, setIdMovieChangeSave] = useState(0)
 
   const castDuration = (duration) => {
     const hours = getHours(duration);
@@ -18,13 +19,11 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete, onChangeSave 
     if (!dataMovie.isSaved) {
       handleLike(dataMovie, (isSuccess) => {
         if (isSuccess) {
-          dataMovie.isSaved = true
-          onChangeSave(dataMovie.movieId)
-        } else {
-          dataMovie.isSaved = false
+          setIdMovieChangeSave(dataMovie.movieId)
         }
       })
-    } else {
+    }
+    else {
       let idSavedMovie
       savedMovies.forEach((movie) => {
         if (dataMovie.movieId === movie.movieId) {
@@ -33,17 +32,25 @@ function Movie({ dataMovie, isSavedPage, handleLike, handleDelete, onChangeSave 
       })
       handleDelete(idSavedMovie, (isSuccess) => {
         if (isSuccess) {
-          dataMovie.isSaved = false
-          onChangeSave(dataMovie.movieId)
-        } else {
-          dataMovie.isSaved = true
+          setIdMovieChangeSave(dataMovie.movieId)
         }
       })
     }
   }
 
+  useEffect(() => {
+    if (idMovieChangeSave !== 0) {
+      onChangeSave(idMovieChangeSave)
+      setIdMovieChangeSave(0)
+    }
+  }, [idMovieChangeSave])
+
   const onDeleteMovie = () => {
-    handleDelete(dataMovie.coumovieId, () => { })
+    handleDelete(dataMovie.coumovieId, (isSuccess) => {
+      if (isSuccess) {
+        setIdMovieChangeSave(dataMovie.movieId)
+      }
+    })
   }
 
   const handleCardClick = () => {

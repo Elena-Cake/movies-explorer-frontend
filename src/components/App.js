@@ -271,7 +271,6 @@ function App() {
         callback(true)
       })
       .catch((res) => {
-        console.log(res)
         callback(false)
       })
       .finally(setIsPreloaderActive(false))

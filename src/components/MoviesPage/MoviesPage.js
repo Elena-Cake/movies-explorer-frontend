@@ -4,7 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import Movie from '../Movie/Movie';
 
 function MoviesPage({ movies, moviesVisible, isSavedPage = false, handleLike, handleDelete,
-  rowValue, isShortMovies, onChangeFilter, isSerched = true, onAddMovies = () => { } }, onChangeSave) {
+  rowValue, isShortMovies, onChangeFilter, isSerched = true, onAddMovies = () => { }, onChangeSave }) {
 
   const movieElements = [];
   movieElements.push(moviesVisible.map((movie, i) => {

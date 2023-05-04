@@ -42,10 +42,16 @@ function SavedMovies({ handleLike, handleDelete }) {
     setAllowedMovies(filteredMovies)
   }, [isShortMovies, rowFilter, savedMovies])
 
+  const onChangeSave = (movieId) => {
+    const visibleMovies = JSON.parse(localStorage.getItem('visible-movies'))
+    visibleMovies.movies = visibleMovies.movies.map((movie) => movie.movieId === movieId ? { ...movie, isSaved: !movie.isSaved } : movie)
+    localStorage.setItem('visible-movies', JSON.stringify(visibleMovies))
+  }
+
   return (
     <section className="movies movies-saved">
       <MoviesPage movies={allowedMovies} moviesVisible={allowedMovies} isButtonVisible={false} isSavedPage={true}
-        rowValue={rowFilter} isShortMovies={isShortMovies}
+        rowValue={rowFilter} isShortMovies={isShortMovies} onChangeSave={onChangeSave}
         handleLike={handleLike} handleDelete={handleDelete} onChangeFilter={onChangeFilter} />
     </section>
   );
