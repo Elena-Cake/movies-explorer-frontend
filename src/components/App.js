@@ -193,13 +193,15 @@ function App() {
   // _____Pull movies_____
   // _____загрузка данных____
   const pullInitialData = () => {
+    console.log("pullInitialData")
     setIsPreloaderActive(true)
     Promise.all([getProfile(), getMovies()])
-      .then(([user, savedMoves]) => {
+      .then(([user, savedMovies]) => {
         setCurrentUser(user)
-        setSavedMovies(savedMoves.map((movie) => { return { ...movie, isSaved: true } }))
+        setSavedMovies(savedMovies.map((movie) => { return { ...movie, isSaved: true } }))
         setIsTimeUpdateAllMovies(true)
       })
+      .then(() => setIsTimeUpdateAllMovies(true))
       .catch((err) => {
         setInfoToolText(CONNECTION.MESSAGE_AGAIN)
         setIsInfoTooltipOpen(true);
@@ -207,6 +209,18 @@ function App() {
       })
       .finally(() => setIsPreloaderActive(false))
   }
+
+  // обновление лайков при изменении юзера без перезагрузки
+  useEffect(() => {
+    console.log('isTimeUpdateAllMovies', isTimeUpdateAllMovies && allMovies.length !== 0)
+    if (isTimeUpdateAllMovies && allMovies.length !== 0) {
+      const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
+      setAllMovies(allMovies.map(movie => {
+        return { ...movie, isSaved: idsSavedMovies.includes(movie.movieId) }
+      }))
+      setIsTimeUpdateAllMovies(false)
+    }
+  }, [isTimeUpdateAllMovies])
 
   // первая загрузка фильмов
   const pullAllMovies = () => {
@@ -231,18 +245,6 @@ function App() {
       setIsTimePullMovies(false)
     }
   }, [isTimePullMovies])
-
-  // обновление лайков при изменении юзера без перезагрузки
-  useEffect(() => {
-    console.log('isTimeUpdateAllMovies', isTimeUpdateAllMovies && allMovies.length !== 0)
-    if (isTimeUpdateAllMovies && allMovies.length !== 0) {
-      const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
-      setAllMovies(allMovies.map(movie => {
-        return { ...movie, isSaved: idsSavedMovies.includes(movie.movieId) }
-      }))
-      setIsTimeUpdateAllMovies(false)
-    }
-  }, [isTimeUpdateAllMovies])
 
 
   // _____Ations (movies): like and delete_____
