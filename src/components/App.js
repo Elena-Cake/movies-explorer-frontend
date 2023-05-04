@@ -118,8 +118,8 @@ function App() {
         setIsSignIn(true);
         navigate('/movies', { replace: true });
         openSucsessInfoTooltip();
+        pullInitialData()
       })
-      .then(() => pullInitialData())
       .catch((res) => {
         if (res === 400) {
           setTextErrorAuth(NO_VALIDATE.VALIDATION)
@@ -157,7 +157,8 @@ function App() {
   function logOut(e) {
     e.preventDefault();
     setIsSignIn(false);
-    localStorage.clear()
+    localStorage.clear();
+    setSavedMovies([])
     navigate("/", { replace: false });
   }
 
@@ -213,6 +214,7 @@ function App() {
   }
   useEffect(() => {
     if (isTimePullMovies) {
+      console.log('isTimePullMovies')
       const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
       setIsPreloaderActive(true)
       getMoviesAll()
@@ -232,6 +234,7 @@ function App() {
 
   // обновление лайков при изменении юзера без перезагрузки
   useEffect(() => {
+    console.log('isTimeUpdateAllMovies', isTimeUpdateAllMovies && allMovies.length !== 0)
     if (isTimeUpdateAllMovies && allMovies.length !== 0) {
       const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
       setAllMovies(allMovies.map(movie => {
