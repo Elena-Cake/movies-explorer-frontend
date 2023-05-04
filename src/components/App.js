@@ -193,15 +193,15 @@ function App() {
   // _____Pull movies_____
   // _____загрузка данных____
   const pullInitialData = () => {
-    console.log("pullInitialData")
     setIsPreloaderActive(true)
     Promise.all([getProfile(), getMovies()])
       .then(([user, savedMovies]) => {
         setCurrentUser(user)
         setSavedMovies(savedMovies.map((movie) => { return { ...movie, isSaved: true } }))
+      })
+      .then(() => {
         setIsTimeUpdateAllMovies(true)
       })
-      .then(() => setIsTimeUpdateAllMovies(true))
       .catch((err) => {
         setInfoToolText(CONNECTION.MESSAGE_AGAIN)
         setIsInfoTooltipOpen(true);
@@ -212,7 +212,6 @@ function App() {
 
   // обновление лайков при изменении юзера без перезагрузки
   useEffect(() => {
-    console.log('isTimeUpdateAllMovies', isTimeUpdateAllMovies && allMovies.length !== 0)
     if (isTimeUpdateAllMovies && allMovies.length !== 0) {
       const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
       setAllMovies(allMovies.map(movie => {
@@ -228,7 +227,6 @@ function App() {
   }
   useEffect(() => {
     if (isTimePullMovies) {
-      console.log('isTimePullMovies')
       const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
       setIsPreloaderActive(true)
       getMoviesAll()

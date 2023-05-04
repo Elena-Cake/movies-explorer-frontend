@@ -24,6 +24,7 @@ function FormRow({ data, onChangeButtonActive }) {
           value={values[nameInput] || ''}
           type={data.validation.type}
           pattern={PATTERN_EMAIL}
+          // pattern='^[-a-z0-9!#$%&*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&*+/=?^_`{|}~]+)*@(?:[a-z0-9](?:[-a-z0-9]*[a-z0-9])?\.)+[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$'
           required={data.validation.required ? data.validation.required : false}
           onChange={handleChange}
         />
