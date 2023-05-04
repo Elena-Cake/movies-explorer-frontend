@@ -13,6 +13,7 @@ function FormRow({ data, onChangeButtonActive }) {
     onChangeButtonActive(isValid)
   }, [isValid])
 
+
   return (
     <li className="row">
       <p className='row__title'>{data.title}</p>
