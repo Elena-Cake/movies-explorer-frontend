@@ -158,7 +158,8 @@ function App() {
     e.preventDefault();
     setIsSignIn(false);
     localStorage.clear();
-    setSavedMovies([])
+    setSavedMovies([]);
+    setAllMovies([]);
     navigate("/", { replace: false });
   }
 
@@ -199,9 +200,6 @@ function App() {
         setCurrentUser(user)
         setSavedMovies(savedMovies.map((movie) => { return { ...movie, isSaved: true } }))
       })
-      .then(() => {
-        setIsTimeUpdateAllMovies(true)
-      })
       .catch((err) => {
         setInfoToolText(CONNECTION.MESSAGE_AGAIN)
         setIsInfoTooltipOpen(true);
@@ -210,18 +208,7 @@ function App() {
       .finally(() => setIsPreloaderActive(false))
   }
 
-  // обновление лайков при изменении юзера без перезагрузки
-  useEffect(() => {
-    if (isTimeUpdateAllMovies && allMovies.length !== 0) {
-      const idsSavedMovies = savedMovies.map((movie) => movie.movieId);
-      setAllMovies(allMovies.map(movie => {
-        return { ...movie, isSaved: idsSavedMovies.includes(movie.movieId) }
-      }))
-      setIsTimeUpdateAllMovies(false)
-    }
-  }, [isTimeUpdateAllMovies])
-
-  // первая загрузка фильмов
+  // загрузка фильмов при первом поиске
   const pullAllMovies = () => {
     setIsTimePullMovies(true)
   }
