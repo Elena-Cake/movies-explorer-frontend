@@ -169,7 +169,7 @@ function App() {
   const handleEditModeOff = () => setIsEditMode(false)
 
   // обновление профиля
-  function onUpdateUser({ values }) {
+  function onUpdateUser({ values }, callback) {
     setIsPreloaderActive(true)
     updateProfile(values)
       .then((user) => {
@@ -177,9 +177,10 @@ function App() {
         setTextErrorAuth('');
         setIsEditMode(false);
         openSucsessInfoTooltip();
+        callback(true);
       })
       .catch((res) => {
-        console.log(res)
+        callback(false)
         if (res === 400) {
           setTextErrorAuth(NO_VALIDATE.VALIDATION)
         } else if (res === 409) {

@@ -24,81 +24,67 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode, handleEdit
       {
         values: values,
         resetForm: resetForm,
-      }
+      },
+      (isSuccess => {
+        if (isSuccess) {
+          setDefaultName(values.name)
+          setDefaultEmail(values.email)
+        }
+      })
     );
   }
 
   //заполненные поля при открытии
   useEffect(() => {
-    if (isEditMode) {
-      setValues({ ...values, 'name': currentUser.name, 'email': currentUser.email })
-      setIsValid(false);
-      setDefaultName(currentUser.name)
-      setDefaultEmail(currentUser.email)
-    }
-  }, [isEditMode]);
-
-  useEffect(() => {
-    return () => handleEditModeOff()
+    setValues({ ...values, 'name': currentUser.name, 'email': currentUser.email })
+    setIsValid(false);
+    setDefaultName(currentUser.name)
+    setDefaultEmail(currentUser.email)
   }, []);
 
+
   return (
+
     <div className="profile">
-      {!isEditMode ?
-        <div className='profile__window window'>
-          <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
-          <ul className='profile__rows'>
-            <li className='profile__row' key={0}>
-              <p className='row__title'>Имя</p>
-              <p className='row__data'>{currentUser.name}</p>
-            </li>
-            <li className='profile__row' key={1}>
-              <p className='row__title'>E-mail</p>
-              <p className='row__data'>{currentUser.email}</p>
-            </li>
-          </ul>
-          <div className='profile__settings'>
-            <button className='profile__edit-button button' onClick={handleEditMode}>Редактировать</button>
-            <button className='profile__exit-button button' onClick={logOut}>Выйти из аккаунта</button>
-          </div>
-        </div>
-        :
-        <form className='profile__window window' onSubmit={handleSubmit}>
-          <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
-          <ul className='profile__rows'>
-            <li className='profile__row' key={0}>
-              <p className='row__title'>Имя</p>
-              <input
-                className='row__data'
-                placeholder='Введите имя'
-                name="name"
-                value={values.name || ''}
-                onChange={handleChange}
-                required />
-              <span className={`row__error ${errors.name ? 'row__error_active' : ''}`}>{errors.name}</span>
-            </li>
-            <li className='profile__row' key={1}>
-              <p className='row__title'>E-mail</p>
-              <input
-                className='row__data'
-                placeholder='Введите почту'
-                name="email"
-                value={values.email || ''}
-                onChange={handleChange}
-                type='email'
-                required />
-              <span className={`row__error ${errors.email ? 'row__error_active' : ''}`}>{errors.email}</span>
-            </li>
-          </ul>
+      <form className='profile__window window' onSubmit={handleSubmit}>
+        <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
+        <ul className='profile__rows'>
+          <li className='profile__row' key={0}>
+            <p className='row__title'>Имя</p>
+            <input
+              className='row__data'
+              placeholder='Введите имя'
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+              required />
+            <span className={`row__error ${errors.name ? 'row__error_active' : ''}`}>{errors.name}</span>
+          </li>
+          <li className='profile__row' key={1}>
+            <p className='row__title'>E-mail</p>
+            <input
+              className='row__data'
+              placeholder='Введите почту'
+              name="email"
+              value={values.email || ''}
+              onChange={handleChange}
+              type='email'
+              required />
+            <span className={`row__error ${errors.email ? 'row__error_active' : ''}`}>{errors.email}</span>
+          </li>
+        </ul>
+        <div className='profile__settings'>
           <div className='profile__button-container button-container'>
             <span className={`profile__span-error span-error ${textErrorAuth !== '' ? 'span-error_active' : ''}`}>{textErrorAuth}</span>
             <button
-              className={`profile__save-button button ${!isValidEditForm ? 'profile__save-button_disable' : ''}`}
+              className={`profile__edit-button button ${!isValidEditForm ? 'profile__save-button_disable' : ''}`}
               disabled={!isValidEditForm}
-            >Сохранить</button>
+            >Редактировать</button>
           </div>
-        </form>}
-    </div >
+          <button className='profile__exit-button button' onClick={logOut}>Выйти из аккаунта</button>
+        </div>
+      </form >
+    </div>
   );
 }
 
