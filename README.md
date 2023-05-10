@@ -8,7 +8,7 @@
 
 * [Ссылка на макет в Фигме](https://www.figma.com/file/7mJj9Lj2Xt6UJxnti6hkYI/DiplomaMaket?node-id=891-3857&t=WXQcIHW9AEu548lK-0)
 * [Cсылка на сайт](https://movie.svesha.nomoredomains.monster/) 
-* [Или эта ссылка на сайт](https://elena-cake.github.io/movies-explorer-frontend/)
+* [Или эта ссылка на Github Pages](https://elena-cake.github.io/movies-explorer-frontend/)
 
 -----
 
