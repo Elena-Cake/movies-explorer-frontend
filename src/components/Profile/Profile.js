@@ -17,7 +17,7 @@ function Profile() {
 
   useEffect(() => {
     setIsValidEditForm(isValid && (defaultEmail !== values.email || defaultName !== values.name))
-  }, [values]);
+  }, [values, isValid]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -28,11 +28,12 @@ function Profile() {
       },
       (res => {
         if (res.isOkey) {
-          setDefaultName(values.name)
-          setDefaultEmail(values.email)
-          setTextErrorAuth('')
+          setDefaultName(values.name);
+          setDefaultEmail(values.email);
+          setTextErrorAuth('');
+          setIsValid(false);
         } else {
-          setTextErrorAuth(res.message)
+          setTextErrorAuth(res.message);
         }
       })
     );

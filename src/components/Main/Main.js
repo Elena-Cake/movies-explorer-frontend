@@ -19,9 +19,8 @@ import { endpoints } from '../../constans/pathContent';
 function Main({
   isSignIn, isMenuOpen, closeMenu,
   onSubmitLogin, onSubmitRegister,
-  logOut, deleteErrorSubmit,
-  isEditMode, handleEditMode, textErrorAuth,
-  handleLike, handleDelete, handleEditModeOff
+  deleteErrorSubmit, textErrorAuth,
+  handleLike, handleDelete,
 }) {
 
   return (
@@ -46,10 +45,7 @@ function Main({
               handleLike={handleLike} handleDelete={handleDelete} />
           } />
           <Route path={endpoints.PROFILE} element={
-            <ProtectedRoute component={Profile} isSignIn={isSignIn}
-              logOut={logOut} textErrorAuth={textErrorAuth}
-              isEditMode={isEditMode} handleEditMode={handleEditMode}
-              handleEditModeOff={handleEditModeOff} />
+            <ProtectedRoute component={Profile} isSignIn={isSignIn} />
           } />
         </>
         <Route path={endpoints.LOGIN} element={

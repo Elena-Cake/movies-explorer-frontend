@@ -280,12 +280,6 @@ function App() {
             onSubmitRegister={onSubmitRegister}
             logOut={logOut}
 
-            textErrorAuth={textErrorAuth}
-            deleteErrorSubmit={deleteErrorSubmit}
-            isEditMode={isEditMode}
-            handleEditMode={handleEditMode}
-            handleEditModeOff={handleEditModeOff}
-
             handleLike={handleLike}
             handleDelete={handleDelete}
           />
