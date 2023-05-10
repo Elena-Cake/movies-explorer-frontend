@@ -1,4 +1,4 @@
-export const PATTERN_EMAIL = '^[-a-z0-9!#$%&*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&*+/=?^_`{|}~]+)*@(?:[a-z0-9](?:[-a-z0-9]*[a-z0-9])?\.)+[a-z0-9]{2,4}?$';
+export const PATTERN_EMAIL = '[A-z0-9-]+@[A-z]{2,}[.][A-z]{2,}';
 
 export const textsRegister = {
     title: "Добро пожаловать!",
