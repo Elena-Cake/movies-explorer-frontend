@@ -280,6 +280,9 @@ function App() {
             onSubmitRegister={onSubmitRegister}
             logOut={logOut}
 
+            textErrorAuth={textErrorAuth}
+            deleteErrorSubmit={deleteErrorSubmit}
+
             handleLike={handleLike}
             handleDelete={handleDelete}
           />

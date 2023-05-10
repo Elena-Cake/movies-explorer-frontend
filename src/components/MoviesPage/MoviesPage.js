@@ -15,8 +15,13 @@ function MoviesPage({ movies, moviesVisible, isSavedPage = false, handleLike, ha
   return (
     <div className='movies-page'>
       <SearchForm onChangeFilter={onChangeFilter} rowValue={rowValue} isShortMovies={isShortMovies} isSavedPage={isSavedPage} />
-      {movies.length === 0 && isSerched ?
-        <p className='movies__error'>Ничего не найдено</p>
+      {movies.length === 0 ?
+        isSerched ?
+          <p className='movies__error'>Ничего не найдено</p>
+          :
+          <div className='movies__more'>
+            <button className='movies__more-button button' onClick={onChangeFilter}>Все фильмы</button>
+          </div>
         :
         <ul className='movies-list'>
           {movieElements}
