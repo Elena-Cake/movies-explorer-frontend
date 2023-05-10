@@ -1,11 +1,11 @@
 
-import { portfolioLinks } from '../../../constans/testConstans';
+import { portfolioLinks } from '../../../constans/mainPageData';
 import './Portfolio.css';
 import PortfolioLink from './PortfolioLink/PortfolioLink';
 
 function Portfolio() {
 
-  const portfolioElements = portfolioLinks.map(elem => <PortfolioLink data={elem} />)
+  const portfolioElements = portfolioLinks.map((elem, i) => <PortfolioLink key={i} data={elem} />)
 
   return (
     <section className="portfolio">

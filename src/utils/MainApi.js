@@ -1,22 +1,29 @@
+import { MAIN_BASE_LOCAL, MAIN_BASE_URL } from "../constans/apiConstans";
+const URL_BASE = MAIN_BASE_URL;
 
-const BASE_URL = 'http://localhost:3000/';
-const headers = {
-    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-    'Content-Type': 'application/json'
+// для локального тестирования
+// const URL_BASE = MAIN_BASE_LOCAL;
+
+const headers = () => {
+    return {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json'
+    }
 }
 
 function checkResponse(res) {
     if (res.ok) {
         return res.json();
     }
-    return Promise.reject(`Ошибка ${res.status}`);
+    return Promise.reject(res.status);
 }
 
-// запрос регистрации
-export const register = (dataUser) => {
-    return fetch(`${BASE_URL}signup`, {
+// запрос регистрации (name, email, password)
+export const createUser = (dataUser) => {
+
+    return fetch(`${URL_BASE}signup`, {
         method: 'POST',
-        headers: headers,
+        headers: headers(),
         body: JSON.stringify(dataUser)
     })
         .then((res) => {
@@ -24,11 +31,11 @@ export const register = (dataUser) => {
         })
 };
 
-// запрос авторизации
+// запрос авторизации (email, password)
 export const login = (dataUser) => {
-    return fetch(`${BASE_URL}signin`, {
+    return fetch(`${URL_BASE}signin`, {
         method: 'POST',
-        headers: headers,
+        headers: headers(),
         body: JSON.stringify(dataUser)
     })
         .then((res) => {
@@ -36,32 +43,22 @@ export const login = (dataUser) => {
         })
 };
 
-// проверка токена при загрузке страницы
-export const checkToken = (token) => {
-    return fetch(`${BASE_URL}users/me`, {
+// получение данных пользователя 
+export const getProfile = () => {
+    return fetch(`${URL_BASE}users/me`, {
         method: 'GET',
-        headers: headers,
+        headers: headers(),
     })
         .then((res) => {
             return checkResponse(res)
         })
 }
 
-// загрузка данных пользователя
-export const startPageProfile = () => {
-    return fetch(`${this._startRequest}users/me`, {
-        headers: this._headers,
-    })
-        .then((res) => {
-            return checkResponse(res)
-        })
-}
-
-// изменение профайла
-export const editUserInfo = (dataUser) => {
-    return fetch(`${this._startRequest}users/me`, {
+// изменение профайла (name, email)
+export const updateProfile = (dataUser) => {
+    return fetch(`${URL_BASE}users/me`, {
         method: 'PATCH',
-        headers: this._headers,
+        headers: headers(),
         body: JSON.stringify(dataUser)
     })
         .then((res) => {
@@ -69,22 +66,36 @@ export const editUserInfo = (dataUser) => {
         })
 }
 
-// поставить лайк
-export const sendLike = (idCard) => {
-    return fetch(`${this._startRequest}cards/${idCard}/likes`, {
-        method: 'PUT',
-        headers: this._headers
+// получение сохраненных фильмов
+export const getMovies = () => {
+    return fetch(`${URL_BASE}movies`, {
+        method: 'GET',
+        headers: headers(),
     })
         .then((res) => {
             return checkResponse(res)
         })
 }
 
-// удалить лайк
-export const deleteLike = (idCard) => {
-    return fetch(`${this._startRequest}cards/${idCard}/likes`, {
+// сохранить фильм 
+// (country, director, duration, year, description, image, 
+//  trailerLink, thumbnail, coumovieId, movieId, nameRU, nameEN)
+export const createMovie = (dataCard) => {
+    return fetch(`${URL_BASE}movies`, {
+        method: 'POST',
+        headers: headers(),
+        body: JSON.stringify(dataCard)
+    })
+        .then((res) => {
+            return checkResponse(res)
+        })
+}
+
+// удалить фильм (movieId)
+export const deleteMovie = (movieId) => {
+    return fetch(`${URL_BASE}movies/${movieId}`, {
         method: 'DELETE',
-        headers: this._headers
+        headers: headers()
     })
         .then((res) => {
             return checkResponse(res)

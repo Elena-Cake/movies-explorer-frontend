@@ -1,4 +1,7 @@
-const BASE_URL = 'http://localhost:3000/';
+import { MOVIES_BASE_URL } from "../constans/apiConstans";
+const headers = {
+    'Content-Type': 'application/json',
+};
 
 function checkResponse(res) {
     if (res.ok) {
@@ -8,12 +11,10 @@ function checkResponse(res) {
 }
 
 // запрос карточек с сервера
-export const getMovies = () => {
-    return fetch(`${BASE_URL}`, {
+export const getMoviesAll = () => {
+    return fetch(`${MOVIES_BASE_URL}`, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }
+        headers: headers
     })
         .then((res) => {
             return checkResponse(res)

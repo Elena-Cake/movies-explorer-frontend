@@ -4,6 +4,10 @@
     padding: 0 calc(50/1280 *100%) 0 calc(70/1280 *100%);
 }
 
+.movies-page {
+    position: relative;
+}
+
 .movies__more {
     padding: 50px 0 80px;
     display: flex;
@@ -19,6 +23,41 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
+}
+
+.movies__error {
+    padding: 30px 0;
+    text-align: center;
+    margin: 0;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.movies-list {
+    padding: 70px 0 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 30px;
+    column-gap: 24px;
+    list-style-type: none;
+    margin: 0;
+}
+
+@media screen and (max-width: 1279px) {
+    .movies-list {
+        grid-template-columns: repeat(2, 1fr);
+
+        row-gap: 36px;
+        column-gap: 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .movies-list {
+        grid-template-columns: 100%;
+        padding: 40px 0 30px;
+        row-gap: 17px;
+    }
 }
 
 @media screen and (max-width: 1279px) {

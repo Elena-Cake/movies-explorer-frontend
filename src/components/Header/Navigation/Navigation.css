@@ -31,19 +31,27 @@
     margin-top: 6px;
 }
 
+.navigation__line_theme_dark {
+    border: 2.5px solid var(--white);
+}
+
 .navigation__links {
     width: 100%;
     display: flex;
-
+    list-style-type: none;
 }
 
 .navigation__link {
     text-decoration: none;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 18px;
     padding: 8px;
     color: var(--black);
+}
+
+.navigation__link_theme_dark {
+    color: var(--white);
 }
 
 .navigation__link_active {

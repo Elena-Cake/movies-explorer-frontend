@@ -18,6 +18,7 @@
 
 .page {
   width: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   color: var(--black);
@@ -86,8 +87,66 @@
   transform: translate(0, -50%)
 }
 
+.popup-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background: rgba(0, 0, 0, .3);
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.2s, opacity ease 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.popup-wrapper_open {
+  visibility: visible;
+  opacity: 1;
+}
 
+.popup__container {
+  max-width: 80%;
+  width: 500px;
+  min-height: 150px;
+  position: relative;
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup__button-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: opacity 1s ease;
+  background-image: url(../images/x-popup.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: transparent;
+  border: 0;
+}
+
+.popup__form {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
+.popup__status-text {
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 25px;
+  text-align: center;
+}
 
 @media screen and (max-width: 1279px) {
   .container {
