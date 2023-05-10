@@ -177,16 +177,15 @@ function App() {
         setTextErrorAuth('');
         setIsEditMode(false);
         openSucsessInfoTooltip();
-        callback(true);
+        callback({ isOkey: true });
       })
       .catch((res) => {
-        callback(false)
         if (res === 400) {
-          setTextErrorAuth(NO_VALIDATE.VALIDATION)
+          callback({ isOkey: false, message: NO_VALIDATE.VALIDATION });
         } else if (res === 409) {
-          setTextErrorAuth(CONFLICT.MESSAGE)
+          callback({ isOkey: false, message: CONFLICT.MESSAGE });
         } else {
-          setTextErrorAuth(CONNECTION.MESSAGE)
+          callback({ isOkey: false, message: CONNECTION.MESSAGE });
         }
       })
       .finally(() => setIsPreloaderActive(false))
@@ -268,7 +267,7 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, onUpdateUser }}>
+    <CurrentUserContext.Provider value={{ currentUser, onUpdateUser, logOut }}>
       <MoviesContext.Provider value={{ allMovies, savedMovies, pullAllMovies }}>
         <div className="page">
           <Header openMenu={openMenu} isSignIn={isSignIn} />

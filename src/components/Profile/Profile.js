@@ -4,14 +4,15 @@ import './Profile.css';
 import { useFormAndValidation } from '../../hooks/useValidationForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode, handleEditModeOff }) {
+function Profile() {
 
-  const { currentUser, onUpdateUser } = useContext(CurrentUserContext);
+  const { currentUser, onUpdateUser, logOut } = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, setValues, setIsValid, resetForm } = useFormAndValidation();
 
   const [defaultName, setDefaultName] = useState(currentUser.name);
   const [defaultEmail, setDefaultEmail] = useState(currentUser.email);
 
+  const [textErrorAuth, setTextErrorAuth] = useState('')
   const [isValidEditForm, setIsValidEditForm] = useState(false);
 
   useEffect(() => {
@@ -25,10 +26,13 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode, handleEdit
         values: values,
         resetForm: resetForm,
       },
-      (isSuccess => {
-        if (isSuccess) {
+      (res => {
+        if (res.isOkey) {
           setDefaultName(values.name)
           setDefaultEmail(values.email)
+          setTextErrorAuth('')
+        } else {
+          setTextErrorAuth(res.message)
         }
       })
     );
@@ -44,7 +48,6 @@ function Profile({ logOut, textErrorAuth, isEditMode, handleEditMode, handleEdit
 
 
   return (
-
     <div className="profile">
       <form className='profile__window window' onSubmit={handleSubmit}>
         <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
