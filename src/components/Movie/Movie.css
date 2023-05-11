@@ -12,19 +12,23 @@
     grid-template-areas:
         'name flag'
         'time flag';
-    grid-template-columns: auto 30px;
+    grid-template-columns: minmax(220px, 330px) 30px;
     row-gap: 9px;
     column-gap: 26px;
     align-items: center;
 }
 
 .movie__name {
+    max-width: 100%;
     grid-area: name;
     margin: 0;
     padding: 0;
     font-weight: 500;
     font-size: 15px;
     line-height: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .movie__duration {
